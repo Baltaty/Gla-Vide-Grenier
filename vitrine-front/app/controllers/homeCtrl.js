@@ -1,5 +1,4 @@
 app.controller("homeCtrl", function ($scope) {
-
     try{
         // countdown
         HomecompteARebour();
