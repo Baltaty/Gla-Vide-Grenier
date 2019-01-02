@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="public/css/typography.css">
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/responsive.css">
+    <!-- plugins ajouter-->
+    <link rel="stylesheet" href="public/plugins/toaster/toaster.min.css">
+
+
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="public/img/favicon.ico">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,18 +42,23 @@
     <script src="public/js/angular_1.5/angular.min.js"></script>
     <script src="public/js/angular_1.5/angular-route.min.js"></script>
     <script src="public/js/angular_1.5/angular-animate.min.js"></script>
+    <!--<script src="https://code.angularjs.org/1.2.0/angular-animate.min.js" ></script>-->
+    <script src="public/plugins/toaster/toaster.min.js"></script>
     <script src="app/routes.js"></script>
 
-    <!-- Factories AngularJS-->
 
 
 </head>
 
 <body data-spy="scroll" data-target="#scroll-menu" data-offset="100">
+
+<toaster-container toaster-options="{'close-button': true,'animation-class': 'toast-top-center'}"></toaster-container>
+
     <!-- preloader -->
     <div id="preloader"></div>
     <!-- header-start -->
-    <header>
+
+    <header ng-controller="navbarCtrl">
         <div class="header-top">
             <div class="container">
                 <div class="row">
@@ -66,19 +76,19 @@
                         <div class="header-top-right">
                             <div class="single-htr">
                                 <i class="fa fa-key"></i>
-                                <span id="sign_in">Se connecter</span>
+                                <span id="sign_in">Sign in</span>
                                 <div id="sign_in_form" class="signin-form-area">
                                     <div class="signin-form-area-top">
-                                        <h3>Gla'Vide <span class="h-light">Grenier</span></h3>
-                                        <h6>Le vide grenier par Glazik Gym</h6>
+                                        <h3>Glazik <span class="h-light">GYM</span></h3>
+                                        <h6>BEST GYM ASSOCIATE CLUB</h6>
                                         <div class="signin-form">
-                                            <form action="#">
+                                            <form role="form" name="Login_form">
                                                 <div class="signin-inputs">
                                                     <div class="input-email">
-                                                        <input class="femail" type="text" placeholder="Email" required="">
+                                                        <input class="femail" type="text" ng-model="login.email" placeholder="Email" required="">
                                                     </div>
                                                     <div class="input-password">
-                                                        <input class="fpass type_password" type="password" placeholder="Password" required="">
+                                                        <input class="fpass type_password"  ng-model="login.password" type="password" placeholder="Password" required="">
                                                         <span class="show-pass">Show</span>
                                                     </div>
                                                 </div>
@@ -91,26 +101,26 @@
                                                         <a href="#">Recover password</a>
                                                     </div>
                                                 </div>
-                                                <button class="sign-in-btn hover-bs">SIGN IN</button>
+                                                <button class="sign-in-btn hover-bs" ng-disabled="Login_form.$invalid" ng-click="setLogin(login)" >SIGN IN</button>
                                                 <div class="signin-or">
                                                     <span>OR</span>
                                                 </div>
                                             </form>
-                                            <button class="reg-by-fb-btn hover-bs">REGISTER WITH FACEBOOK</button>
+                                            <!--<button class="reg-by-fb-btn hover-bs">REGISTER WITH FACEBOOK</button>-->
                                         </div>
                                     </div>
                                     <div class="reg-account">
-                                        <p>Don’t have an account?<a href="#">Register</a></p>
+                                        <p>Je n'ai pas encore de compte ?<a href="#">Je vous rejoins !</a></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="single-htr">
                                 <i class="fa fa-user-times"></i>
-                                <span id="top_reg">Créer un compte</span>
+                                <span id="top_reg">Register</span>
                                 <div class="register-form-area" id="top_reg_form">
                                     <div class="rf-head">
                                         <span class="rfa-close" id="rfa_close"><i class="fa fa-times"></i></span>
-                                        <img src="public/img/logo-reg.png" alt="">
+                                        <img src="img/logo-reg.png" alt="">
                                         <p>Join a community of over 4000 people</p>
                                     </div>
                                     <div class="rf-body clearfix">
@@ -158,7 +168,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="logo">
-                            <a href="index.html"><img src="public/img/logo.png" alt=""></a>
+                            <a href="index.html"><img src="../public/img/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-md-7">
@@ -299,35 +309,35 @@
 
     <!--subscribe section start-->
     <div class="subscribe-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-5 col-xs-12">
-                    <div class="row">
-                        <div class="ht-newsletter">
-                            <h5>Ne manquez plus rien !</h5>
-                            <h2>Inscrivez-vous à notre  <b>newsletter</b></h2>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-xs-12">
+                <div class="row">
+                    <div class="ht-newsletter">
+                        <h5>Ne manquez plus rien !</h5>
+                        <h2>Inscrivez-vous à notre  <b>newsletter</b></h2>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-7 col-xs-12">
-                    <div class="row">
-                        <form class="form-inline newsletter-forn-in">
-                            <div class="col-md-9  col-sm-9 col-xs-12">
-                                <div class="form-group">
-                                    <input class="form-control newsletter-input" type="text" placeholder="entrez votre addresse email">
-                                </div>
+            </div>
+            <div class="col-md-8 col-sm-7 col-xs-12">
+                <div class="row">
+                    <form class="form-inline newsletter-forn-in">
+                        <div class="col-md-9  col-sm-9 col-xs-12">
+                            <div class="form-group">
+                                <input class="form-control newsletter-input" type="text" placeholder="entrez votre addresse email">
                             </div>
-                            <div class="col-md-3  col-sm-3 col-xs-12">
-                                <div class="row text-center">
-                                    <button type="submit" class="subscribe-btn">S'inscrire<i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
-                                </div>
+                        </div>
+                        <div class="col-md-3  col-sm-3 col-xs-12">
+                            <div class="row text-center">
+                                <button type="submit" class="subscribe-btn">S'inscrire<i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!--subscribe section end-->
 
 
@@ -436,12 +446,19 @@
     <script src="public/js/theme.js"></script>
 
 
+    <!--Config-->
+    <script src="app/config/config.js"></script>
+
+    <!-- Factories AngularJS-->
+    <script src="app/factories/LoginFactory.js"></script>
+
     <!-- AngularController-->
     <script src="app/controllers/homeCtrl.js"></script>
     <script src="app/controllers/contactCtrl.js"></script>
     <script src="app/controllers/aboutCtrl.js"></script>
     <script src="app/controllers/eventCtrl.js"></script>
     <script src="app/controllers/blogsCtrl.js"></script>
+    <script src="app/controllers/navbarCtrl.js"></script>
 
 </body>
 
