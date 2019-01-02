@@ -28,7 +28,7 @@ app.controller("contactCtrl", function ($scope) {
     //         });
     //         var marker = new google.maps.Marker({
     //             position: map.getCenter(),
-    //             icon: '..vitrine-front/public/img/icon/maplock.png',
+    //             icon: '..public/img/icon/maplock.png',
     //             map: map
     //         });
     //     }
