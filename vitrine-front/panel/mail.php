@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 //Taking all values
@@ -13,3 +14,20 @@ $headers	= 'FROM: "'.$email.'"';
 $send		= mail($to, $fname, $output."\n\n***This message has been sent from Fitness", $headers);
 
 
+=======
+<?php
+
+//Taking all values
+$fname 		= $_POST['fname'];
+$email 		= $_POST['email'];
+$subject 	= $_POST['subject'];
+$msg 		= $_POST['msg'];
+$output 	= "Name: ".$fname."\n\nSubject: ".$subject."\n\nMessage: ".$msg;
+
+$to 		= 'saikatahmed420@gmail.com';
+$headers	= 'FROM: "'.$email.'"';
+
+$send		= mail($to, $fname, $output."\n\n***This message has been sent from Fitness", $headers);
+
+
+>>>>>>> 93beccbc6a36fdac68cae845463c403d19d21f5a

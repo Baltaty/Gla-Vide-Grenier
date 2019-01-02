@@ -7,5 +7,4 @@ app.controller("blogsCtrl", function ($scope) {
     }catch (error){
         console.error(error);
     };
-
 });

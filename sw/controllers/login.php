@@ -27,5 +27,4 @@ if(isset($_POST)){
         ];
     }
     echo json_encode($response);
-
 }

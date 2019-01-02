@@ -43,4 +43,5 @@ app.config(function ($routeProvider, $httpProvider) {
         return result.join("&");
     });
 
+>>>>>>> 93beccbc6a36fdac68cae845463c403d19d21f5a
 });
