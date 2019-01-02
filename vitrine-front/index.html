@@ -39,7 +39,7 @@
     <script src="public/js/angular_1.5/angular-animate.min.js"></script>
     <script src="app/routes.js"></script>
 
-    <!-- Factories AngularJS-->
+
 
 
 </head>
@@ -48,7 +48,8 @@
     <!-- preloader -->
     <div id="preloader"></div>
     <!-- header-start -->
-    <header>
+
+    <header ng-controller="navbarCtrl">
         <div class="header-top">
             <div class="container">
                 <div class="row">
@@ -69,21 +70,21 @@
                                 <span id="sign_in">Sign in</span>
                                 <div id="sign_in_form" class="signin-form-area">
                                     <div class="signin-form-area-top">
-                                        <h3>Fitness <span class="h-light">Trainer</span></h3>
-                                        <h6>BEST FITNESS CLUB</h6>
+                                        <h3>Glazik <span class="h-light">GYM</span></h3>
+                                        <h6>BEST GYM ASSOCIATE CLUB</h6>
                                         <div class="signin-form">
-                                            <form action="#">
+                                            <form role="form" name="Login_form">
                                                 <div class="signin-inputs">
                                                     <div class="input-email">
-                                                        <input class="femail" type="text" placeholder="Email" required="">
+                                                        <input class="femail" type="text" ng-model="login.email" placeholder="Email" required="">
                                                     </div>
                                                     <div class="input-password">
-                                                        <input class="fpass type_password" type="password" placeholder="Password" required="">
+                                                        <input class="fpass type_password"  ng-model="login.password" type="password" placeholder="Password" required="">
                                                         <span class="show-pass">Show</span>
                                                     </div>
                                                 </div>
                                                 <div class="remember-recover clearfix">
-                                                    <div class="remember">
+                                                    <div class="remember" ng-model="login.always">
                                                         <input type="checkbox">
                                                         <span>Remember me</span>
                                                     </div>
@@ -91,16 +92,16 @@
                                                         <a href="#">Recover password</a>
                                                     </div>
                                                 </div>
-                                                <button class="sign-in-btn hover-bs">SIGN IN</button>
+                                                <button class="sign-in-btn hover-bs" ng-click="setLogin(login)" >SIGN IN</button>
                                                 <div class="signin-or">
                                                     <span>OR</span>
                                                 </div>
                                             </form>
-                                            <button class="reg-by-fb-btn hover-bs">REGISTER WITH FACEBOOK</button>
+                                            <!--<button class="reg-by-fb-btn hover-bs">REGISTER WITH FACEBOOK</button>-->
                                         </div>
                                     </div>
                                     <div class="reg-account">
-                                        <p>Don’t have an account?<a href="#">Register</a></p>
+                                        <p>Je n'ai pas encore de compte ?<a href="#">Je vous rejoins !</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -439,12 +440,19 @@
     <script src="public/js/theme.js"></script>
 
 
+    <!--Config-->
+    <script src="app/config/config.js"></script>
+
+    <!-- Factories AngularJS-->
+    <script src="app/factories/LoginFactory.js"></script>
+
     <!-- AngularController-->
     <script src="app/controllers/homeCtrl.js"></script>
     <script src="app/controllers/contactCtrl.js"></script>
     <script src="app/controllers/aboutCtrl.js"></script>
     <script src="app/controllers/eventCtrl.js"></script>
     <script src="app/controllers/blogsCtrl.js"></script>
+    <script src="app/controllers/navbarCtrl.js"></script>
 
 </body>
 
