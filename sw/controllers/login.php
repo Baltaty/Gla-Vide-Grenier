@@ -15,7 +15,7 @@ if(isset($_POST)){
     $user_password =$_POST['password'];
 
 
-    if($user_login!=""){
+    if(isset($user_login)){
 
             $bdconnect = connectionToBD();
 
@@ -59,6 +59,12 @@ if(isset($_POST)){
                             "autorize"=>false
                         ];
                     }
+                } else {
+                    $response = [
+                        "status" => "failed",
+                        "message"=> " Mot de passe ou login Incorrect",
+                        "autorize"=>false
+                    ];
                 }
 
 
@@ -66,7 +72,7 @@ if(isset($_POST)){
                 echo $ex->getMessage();
                 die();
             }
-    } else{
+    } else {
         $response = [
             "status" => "failed",
             "message"=> " un vilain message",
