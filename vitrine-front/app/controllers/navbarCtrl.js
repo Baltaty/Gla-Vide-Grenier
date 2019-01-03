@@ -9,7 +9,7 @@ app.controller("navbarCtrl", function ($scope, Login, $http,toaster) {
         console.log(login);
         try{
             Login.userLogin(login).then(function (response) {
-                   console.log(response.data);
+                   //console.log(response.data);
                    if(response.data.autorize){
                        toaster.pop({
                            type: 'sucess',

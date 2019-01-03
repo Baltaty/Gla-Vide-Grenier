@@ -21,7 +21,7 @@ app.config(function ($routeProvider, $httpProvider) {
         })
         .when('/blog', {
             templateUrl: 'panel/blogs.html',
-            controller: 'blogsCtrl'
+            controller: 'blogCtrl'
         })
         .when('/contact', {
             templateUrl: 'panel/contacts.html',
