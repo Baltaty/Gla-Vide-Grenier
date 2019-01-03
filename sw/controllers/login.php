@@ -15,12 +15,22 @@ if(isset($_POST)){
     $user_password =$_POST['password'];
 
 
-    if($user_login== "Admin" && $user_password == "glazik"){
+    if(!empty($user_login)){
 
             $bdconnect = connectionToBD();
+
             $data = [];
             try{
-                $sql = "SELECT *FROM user;";
+                $sql = "SELECT *FROM user WHERE email =:login";
+                $prepareReq = $bdconnect->prepare($sql);
+                $prepareReq->bindValue('login', $user_login);
+                $prepareReq->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                print_r($user);
+                die();
+
+
                 $result = $bdconnect->query($sql);
                 $result->setFetchMode(PDO::FETCH_ASSOC);
 
