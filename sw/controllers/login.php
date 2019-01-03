@@ -15,48 +15,57 @@ if(isset($_POST)){
     $user_password =$_POST['password'];
 
 
-    if(!empty($user_login)){
+    if($user_login!=""){
 
             $bdconnect = connectionToBD();
 
             $data = [];
             try{
-                $sql = "SELECT *FROM user WHERE email =:login";
-                $prepareReq = $bdconnect->prepare($sql);
-                $prepareReq->bindValue('login', $user_login);
-                $prepareReq->execute();
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                print_r($user);
-                die();
-
-
+                $sql = "SELECT *FROM user WHERE  user.email= '$user_login' ";
                 $result = $bdconnect->query($sql);
                 $result->setFetchMode(PDO::FETCH_ASSOC);
 
                 foreach ($result as $item){
                     $data [] = [
-                     "name"=>$item['name'],
-                     "prenom"=>$item['prenom'],
-                     "dateNaissance"=>$item['dateNaissance'],
-                     "civilite"=>$item['civilite'],
-                     "email"=>$item['email'],
-                     "password"=>$item['type'],
-                     "numero"=>$item['numero'],
+                        "name"=>$item['name'],
+                        "prenom"=>$item['prenom'],
+                        "dateNaissance"=>$item['dateNaissance'],
+                        "civilite"=>$item['civilite'],
+                        "email"=>$item['email'],
+                        "password"=>$item['password'],
+                        "numero"=>$item['numero'],
+
                     ] ;
                 }
+
+                // si on retrouve des donnees correspondant au user alors on verifie son mot de passe
+                if(!empty($data)){
+                    // si le password est correcte alors;
+                    if($user_password == $data[0]['password']){
+                        $response = [
+                            "data"=>$data,
+                            "status" => "loggedin",
+                            "name" =>"nameOfuser",
+                            "prenom"=>"prenomOfuser",
+                            "TokenSeesion"=> "a generer",
+                            "dernier connection"=>"a gerer si possible",
+                            "message"=> "Bienvenue à toi Glazik Member",
+                            "autorize"=>true
+                        ];
+                    } else{
+                        $response = [
+                            "status" => "failed",
+                            "message"=> " Mot de passe ou login Incorrect",
+                            "autorize"=>false
+                        ];
+                    }
+                }
+
+
             }catch (PDOException $ex){
                 echo $ex->getMessage();
                 die();
             }
-
-            $response = [
-              "data"=>$data,
-              "status" => "loggedin",
-              "user" =>"nameOfuser",
-              "message"=> " un mignon message",
-              "autorize"=>true
-            ];
     } else{
         $response = [
             "status" => "failed",
