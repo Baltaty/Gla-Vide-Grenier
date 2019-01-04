@@ -7,9 +7,21 @@ app.controller("blogCtrl", function ($scope, BlogFactory) {
         
         try{
             BlogFactory.LatestArticles().then(function (response) {
-                   //console.log(response.data);
-                   //$scope.articles= response.data;
+                   
+                   $scope.articles= response.data;
+                   console.log(response.data);
+            });
+        }catch (ex){
+         console.error(ex)
+         }
 
+         try{
+            BlogFactory.AllArticles().then(function (response) {
+                   
+                   $scope.all= response.data;
+
+                  // console.log(response.data);
+                   //console.log("data ok");
             });
         }catch (ex){
          console.error(ex)
@@ -17,8 +29,3 @@ app.controller("blogCtrl", function ($scope, BlogFactory) {
 
    
 });
- //sloution 2
-//  app.controller('blogCtrl', function($scope, $http) {
-//     $http.get(BASE_URL+"blog.php")
-//     .then(function (response) {$scope.articles = response.data;});
-// });

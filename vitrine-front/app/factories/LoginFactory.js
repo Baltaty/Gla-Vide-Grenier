@@ -6,7 +6,7 @@ app.factory("Login", function($q, $http){
         userLogin: function(login){
             // login = JSON.parse(login);
             // login = JSON.stringify(login);
-            // console.log(login);
+             console.log(login);
             var deferred = $q.defer();
             $http.post(BASE_URL+ "login.php", login).then(function(data, status){
                 deferred.resolve(data);

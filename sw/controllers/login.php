@@ -13,7 +13,7 @@ $response = [];
 if(isset($_POST)){
     $user_login=$_POST['email'];
     $user_password =$_POST['password'];
-
+    print_r($_POST);
 
     if(!empty($user_login)){
 
@@ -57,12 +57,13 @@ if(isset($_POST)){
               "message"=> " un mignon message",
               "autorize"=>true
             ];
-    } else{
-        $response = [
-            "status" => "failed",
-            "message"=> " un vilain message",
-            "autorize"=>false
-        ];
-    }
+    } 
+    // else{
+    //     $response = [
+    //         "status" => "failed",
+    //         "message"=> " un vilain message",
+    //         "autorize"=>false
+    //     ];
+    // }
     echo json_encode($response);
 }

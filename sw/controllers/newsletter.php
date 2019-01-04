@@ -10,43 +10,44 @@ header('Content-Type:application/json');
 $response = [];
 if(isset($_POST)){
 
-        //include('dbconnexion.php');
-        // $servername = "localhost";
-        // $username = "root";
-        // $password = "root";
-        
-        // try {
-        //     $conn = new PDO("mysql:host=$servername;dbname=glazik", $username, $password);
-        //     // set the PDO error mode to exception
-        //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //     }
-        // catch(PDOException $e)
-        //     {
-        //     echo "Connection failed: " . $e->getMessage();
-        //     }
+        include'../dbconnexion.php';
+        $bdconnect = connectionToBD();
 
-        // $email=$_POST['newsletteremail'];
-        // $reqmail = $conn->prepare("SELECT * FROM newsletter WHERE email = ?");
-        // $reqmail->execute(array($email));
+         //$data = json_decode($_POST, true);
+
+         //$email=$_POST['newsletter'];
+         $mail=$_GET['mail'];
+        print_r($mail);
+
+
+        // $reqmail = $bdconnect->query("SELECT * FROM newsletter WHERE email='$email'");
+        // $reqmail->setFetchMode(PDO::FETCH_ASSOC);
         // $mailexist = $reqmail->rowCount();
-        $mailexist=0;
-        if($mailexist == 0){
+        // foreach ($reqmail as $item){
+        //     $response [] = [
+        //     "id"=>$item['id'],
+        //     "email"=>$item['email'],
+        //     "dates"=>$item['dates'],
+        //     ] ;
+        // }
+        //  if($mailexist == 0){
 
-            // $sql = $conn->prepare('INSERT INTO newsletter(email,dates) VALUES (?,NOW())');
-            // $sql->execute(array($email));
+        //     $sql = $bdconnect->prepare("INSERT INTO newsletter(email,dates) VALUES (?,NOW())");
+        //     $sql->bindParam(1, $email);
+        //     $sql->execute();
 
-            $response = [
-                "message"=> "Merci pour votre inscription !",
-                "erreur"=>false
-                ];
+        //     $response = [
+        //         "message"=> "Merci pour votre inscription !",
+        //         "erreur"=>false
+        //         ];
 
-        } else {
+        // } else {
 
-            $response = [
-                "message"=> "Vous êtes déjà inscrit à la Newsletter..",
-                "erreur"=>true
-          ];
-        }
+        //     $response = [
+        //         "message"=> "Vous êtes déjà inscrit à la Newsletter..",
+        //         "erreur"=>true
+        //   ];
+        //  }
      
     echo json_encode($response);
 }

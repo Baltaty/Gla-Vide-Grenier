@@ -26,17 +26,17 @@
 <div class="three-clm-section" ng-controller="blogCtrl">
     <div class="container">
         <div class="category-clm col-md-2">
-            <h1 class="bdr-top-title">Category</h1>
+            <h1 class="bdr-top-title">Categories</h1>
             <div class="category-list">
                 <nav>
                     <ul class="ctg-list-area">
                         <div class="panel-group" id="accordion">
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Health & Lifestyle<i class="fa fa-angle-down"></i></a>
+                            <li class="panel" ng-repeat="x in all"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">{{x.nom_cat}}<i class="fa fa-angle-down"></i></a>
                                 <div id="collapse1" class="category-item panel-collapse collapse">
                                     <a href="#">Link</a>
                                 </div>
                             </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Real Results<i class="fa fa-angle-down"></i></a>
+                            <!-- <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Real Results<i class="fa fa-angle-down"></i></a>
                                 <div id="collapse2" class="category-item panel-collapse collapse">
                                     <a href="#">Link</a>
                                 </div>
@@ -75,7 +75,7 @@
                                 <div id="collapse9" class="category-list panel-collapse collapse">
                                     <a href="#">Link</a>
                                 </div>
-                            </li>
+                            </li> -->
                         </div>
                     </ul>
                 </nav>
@@ -120,14 +120,14 @@
                             <div class="article-thumb">
                                 <img src="public/img/blog/grid-blog1.jpg" alt="" />
                                 <div class="article-tag">
-                                    <p>{{a.categorie}}}</p>
+                                    <p>{{a.nom_cat}}</p>
                                 </div>
                             </div>
                             <div class="th-info-area">
                                 <div class="article-info">
                                     <div class="single-inf">
                                         <i class="fa fa-clock-o"></i>
-                                        <span>{{a.date}}}</span>
+                                        <span>{{a.date}}</span>
                                     </div>
                                     <!-- <div class="single-inf">
                                         <i class="fa fa-eye"></i>
@@ -138,7 +138,7 @@
                                         <span></span>
                                     </div> -->
                                 </div>
-                                <h1><a href="blog-details.html">{{a.contenu}}}</a></h1>
+                                <h1><a ng-href="#/blog/{{a.id}}">{{a.contenu}}</a></h1>
                             </div>
                         </div>
                     </div>
@@ -279,16 +279,6 @@
             <div class="populer-item">
                 <h2><a href="#">What Happened When...I Went Vegan For 7 Days</a></h2>
                 <p class="p-t-cat">Nutrition</p>
-            </div>
-            <div class="newsletter-section">
-                <h1 class="bdr-top-title">Newsletter</h1>
-                <p>Receive exclusive offers and the latest news on our products and services </p>
-                <div class="ltl-subscribe">
-                    <form action="">
-                        <input type="text" placeholder="Enter your e-mail" required/>
-                        <button class="subs-btn"><i class="fa fa-arrow-right"></i></button>
-                    </form>
-                </div>
             </div>
             <div class="banner-ad">
                 <img src="public/img/banner/banner.jpg" alt="banner" />
