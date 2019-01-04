@@ -18,7 +18,7 @@ if(isset($_POST)){
     $bdconnect = connectionToBD();
     try{
         $preapreREq = $bdconnect->prepare($sql);
-        $preapreREq->execute($_POST);
+//        $preapreREq->execute($_POST);
         sendMail("devops.integrale@gmail.com", "REGISTER GLAZIK GYM", "bienvenu".$_POST['nom']);
 
         $response =[
