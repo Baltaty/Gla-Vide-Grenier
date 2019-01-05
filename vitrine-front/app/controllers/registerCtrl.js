@@ -18,6 +18,7 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
 
         console.log("---- data for format ----");
         console.log(data);
+        $scope.readTerms=false;
 
     };
 

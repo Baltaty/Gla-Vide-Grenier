@@ -27,7 +27,7 @@ if(isset($_POST)){
 
                 foreach ($result as $item){
                     $data [] = [
-                        "name"=>$item['name'],
+                        "name"=>$item['nom'],
                         "prenom"=>$item['prenom'],
                         "dateNaissance"=>$item['dateNaissance'],
                         "civilite"=>$item['civilite'],

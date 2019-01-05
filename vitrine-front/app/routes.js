@@ -27,6 +27,10 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'panel/register.html',
             controller: 'registerCtrl'
         })
+        .when('/register-active/:token', {
+            templateUrl: 'panel/register.html',
+            controller: 'registerActiveCtrl'
+        })
         .when('/contact', {
             templateUrl: 'panel/contacts.html',
             controller: 'contactCtrl'
