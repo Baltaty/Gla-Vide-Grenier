@@ -22,7 +22,7 @@ app.controller("blogdetailsCtrl", function ($scope, $routeParams,toaster,Blogdet
             BlogdetailsFactory.GetComment(id_article).then(function (response) {
                    
                 $scope.commentaires= response.data;
-                   console.log("commentaire a afficher");
+                   console.log("commentaires a afficher");
                    console.log($scope.commentaires);
             });
         }catch (ex){
@@ -45,6 +45,7 @@ app.controller("blogdetailsCtrl", function ($scope, $routeParams,toaster,Blogdet
                             });
                         }
                     });
+                    $scope.name=" ";$scope.email=" ";$scope.texte=" ";
             }catch (ex){
              console.error(ex)
              }

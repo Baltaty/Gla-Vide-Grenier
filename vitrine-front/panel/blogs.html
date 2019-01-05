@@ -12,7 +12,7 @@
         <div class="crumbs">
             <nav>
                 <ul class="crumb">
-                    <li><a class="crumb-home" href="index.html"><i class="fa fa-home"></i></a></li>
+                    <li><a class="crumb-home" href="#/"><i class="fa fa-home"></i></a></li>
                     <li><a href="#/">Accueil<i class="fa fa-angle-right"></i></a></li>
                     <li><a class="active" href="#/blog">GlaZik'Actu</a></li>
                 </ul>
@@ -25,86 +25,33 @@
 <div class="three-clm-section" ng-controller="blogCtrl">
     <div class="container">
         <div class="category-clm col-md-2">
-            <h1 class="bdr-top-title">Categories</h1>
-            <div class="category-list">
-                <nav>
-                    <ul class="ctg-list-area">
-                        <div class="panel-group" id="accordion">
-                            <li class="panel" ng-repeat="x in all"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">{{x.nom_cat}}<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse1" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <!-- <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Real Results<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse2" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Fat Loss<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse3" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Education<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse4" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Food & Nutrition<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse5" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Bodybuilding<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse6" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse7">Be a Personal Trainer<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse7" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse8">Working Out<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse8" class="category-item panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li>
-                            <li class="panel"><a data-toggle="collapse" data-parent="#accordion" href="#collapse9">Diet<i class="fa fa-angle-down"></i></a>
-                                <div id="collapse9" class="category-list panel-collapse collapse">
-                                    <a href="#">Link</a>
-                                </div>
-                            </li> -->
-                        </div>
-                    </ul>
-                </nav>
+            <div class="banner-ad">
+                    <img src="public/img/banner/banner.jpg" alt="banner" />
+            </div>
+            <div class="banner-ad">
+                    <img src="public/img/banner/banner.jpg" alt="banner" />
+            </div>
+            <div class="banner-ad">
+                    <img src="public/img/banner/banner.jpg" alt="banner" />
             </div>
         </div>
         <div class="articles-area col-md-7 col-sm-8">
             <div class="latest-articles">
-                <h1>Latest articles</h1>
+                <h1>Le tout nouveau</h1>
                 <div class="lts-item">
                     <img src="public/img/article/letest_article.jpg" alt="" />
                     <div class="article-info-area">
                         <div class="article-info">
                             <div class="single-inf">
                                 <i class="fa fa-clock-o"></i>
-                                <span>Nov 1,2017</span>
+                                <span>{{latest.date}}</span>
                             </div>
                             <div class="single-inf">
                                 <i class="fa fa-eye"></i>
-                                <span>15k</span>
-                            </div>
-                            <div class="single-inf">
-                                <i class="fa fa-heart-o"></i>
-                                <span>278</span>
-                            </div>
-                            <div class="single-inf">
-                                <i class="fa fa-comment-o"></i>
-                                <span>189</span>
+                                <span>{{latest.vue}}</span>
                             </div>
                         </div>
-                        <h1><a href="blog-details.html">The 20 Moments In Sports That Tried To Break The Internet in <br /> 2017</a></h1>
+                        <h1><a href="#/blog/{{latest.id}}">{{latest.contenu|limitTo:100}}</a></h1>
                     </div>
                     <div class="article-tag">
                         <p>SPORTS</p>
@@ -114,7 +61,7 @@
             <!--gride item start-->
             <div class="grid-three">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6" ng-repeat="a in articles" >
+                    <div class="col-md-4 col-sm-6" ng-repeat="a in all" >
                         <div class="grid-th-item">
                             <div class="article-thumb">
                                 <img src="public/img/blog/grid-blog1.jpg" alt="" />
@@ -268,18 +215,6 @@
                 <h2><a href="#/blog/{{mp.id}}">{{mp.titre}}</a></h2>
                 <p class="p-t-cat">{{mp.nom_cat}}</p>
             </div>
-            <!-- <div class="populer-item">
-                <h2><a href="#">Women and the Stigma of Weight Training</a></h2>
-                <p class="p-t-cat">Training</p>
-            </div>
-            <div class="populer-item">
-                <h2><a href="#">5 Detox Drinks to Beat The Bulge</a></h2>
-                <p class="p-t-cat">Recipes</p>
-            </div>
-            <div class="populer-item">
-                <h2><a href="#">What Happened When...I Went Vegan For 7 Days</a></h2>
-                <p class="p-t-cat">Nutrition</p>
-            </div> -->
             <div class="banner-ad">
                 <img src="public/img/banner/banner.jpg" alt="banner" />
             </div>
