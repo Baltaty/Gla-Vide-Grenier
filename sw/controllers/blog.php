@@ -169,9 +169,9 @@ if(isset($_GET)){
         $response = [];
         $bdconnect = connectionToBD();
         $selectedid=$_GET['id'];
-        // EXECUTION DE LA REQUETE DE SELECTION DE L'ARTICLE CHOISI
+        // EXECUTION DE LA REQUETE DE SELECTION DES 4 COMMENTAIRES LES PLUS RECENTS DE L'ARTICLE
         try{
-            $sql="SELECT * FROM commentaire WHERE commentaire.id_article='$selectedid' ";
+            $sql="SELECT * FROM commentaire WHERE commentaire.id_article='$selectedid' ORDER BY date DESC LIMIT 0, 4";
             $result = $bdconnect->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $nbcommentaires = $result->rowCount();

@@ -23,7 +23,7 @@ app.controller("newsletterCtrl", function ($scope,NewsletterFactory,toaster,$htt
                            timeout: 4000
                        });
                    }
-                $scope.email=" ";
+                
             });
 
         }catch (ex){
