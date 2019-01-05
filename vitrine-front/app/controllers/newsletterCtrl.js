@@ -20,10 +20,10 @@ app.controller("newsletterCtrl", function ($scope,NewsletterFactory,toaster,$htt
                            type: 'error',
                            title: 'Echec !',
                            body: response.data.message,
-                           timeout: 2000
+                           timeout: 4000
                        });
                    }
-
+                $scope.email=" ";
             });
 
         }catch (ex){

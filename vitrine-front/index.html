@@ -187,39 +187,10 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="#/events/all">Nos évènements</a></li>
+                                    <!-- <li><a href="#/events/all">Nos évènements</a></li> -->
                                     <li><a href="#/blog">GlaZik'Actu </a></li>
                                     <li><a href="#/contact">Contactez-nous</a>
                                     </li>
-                                    <!-- <li><a href="index.html">PAGES</a>
-                                        <div class="single-megamenu">
-                                            <span>
-                                                <a href="index.html">Home</a>
-                                                <a href="about-us.html">About Us</a>
-                                                <a href="blog.html">Blog</a>
-                                                <a href="blog-details.html">Blog Details</a>
-                                                <a href="event.html">Event</a>
-                                                <a href="event-details.html">Event Details</a>
-                                                <a href="pricing-table.html">Pricing Table</a>
-                                            </span>
-                                            <span>
-                                                <a href="shop.html">Shop</a>
-                                                <a href="product-single-page.html">Product Single</a>
-                                                <a href="success-story.html">Success Story</a>
-                                                <a href="success-story-details.html">Success Story Details</a>
-                                                <a href="about-trainer.html">About Trainer</a>
-                                                <a href="#/contact">Contact</a>
-                                                <a href="my-account.html">My Account</a>
-                                            </span>
-                                            <span>
-                                                <a href="exercise-plan.html">Exercise Plan</a>
-                                                <a href="exercise-plan-details.html">Exercise Plan Details</a>
-                                                <a href="forgot-password.html">Forgot Password</a>
-                                                <a href="login.html">Login</a>
-                                                <a href="registration.html">Registration</a>
-                                            </span>
-                                        </div>
-                                    </li> -->
                                 </ul>
                             </nav>
                         </div>
@@ -243,53 +214,21 @@
                         <div class="mobile_menu">
                             <nav id="mobile_menu_active">
                                 <ul>
-                                    <li><a href="index.html">HOME</a></li>
-                                    <li><a href="about-us.html">ABOUT US</a>
-                                        <ul>
-                                            <li><a href="#">Dropdown Demo</a></li>
-                                            <li><a href="#">Dropdown Demo</a></li>
-                                            <li><a href="#">Dropdown Demo</a></li>
-                                            <li><a href="#">Dropdown Demo</a></li>
-                                            <li><a href="#">Dropdown Demo</a>
-                                                <ul>
-                                                    <li><a href="#">Thirdlevel Menu Demo</a></li>
-                                                    <li><a href="#">Thirdlevel Menu Demo</a></li>
-                                                    <li><a href="#">Thirdlevel Menu Demo</a></li>
-                                                    <li><a href="#">Thirdlevel Menu Demo</a></li>
+                                    <li><a href="#/">Accueil</a></li>
+                                    <li><a href="#/about/us">A propos de nous</a>
+                                        <ul class="singel-dropdown">
+                                            <li><a href="#/about/us">QUI NOUS SOMMES</a></li>
+                                            <li><a href="#">NOS SEANCES</a>
+                                                <ul class="single-thirdlevel-menu">
                                                     <li><a href="#">Thirdlevel Menu Demo</a></li>
                                                     <li><a href="#">Thirdlevel Menu Demo</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="success-story.html">SUCCESS STORY</a></li>
-                                    <li><a href="event.html">EVENT</a></li>
-                                    <li><a href="blog.html">BLOG</a></li>
-                                    <li><a href="shop.html">SHOP</a></li>
-                                    <li><a href="contact.html">CONTACT</a>
-                                    </li>
-                                    <li><a href="index.html">PAGES</a>
-                                        <ul>
-                                            <a href="index.html">Home</a>
-                                            <a href="about-us.html">About Us</a>
-                                            <a href="blog.html">Blog</a>
-                                            <a href="blog-details.html">Blog Details</a>
-                                            <a href="event.html">Event</a>
-                                            <a href="event-details.html">Event Details</a>
-                                            <a href="pricing-table.html">Pricing Table</a>
-                                            <a href="shop.html">Shop</a>
-                                            <a href="product-single-page.html">Product Single</a>
-                                            <a href="success-story.html">Success Story</a>
-                                            <a href="success-story-details.html">Success Story Details</a>
-                                            <a href="about-trainer.html">About Trainer</a>
-                                            <a href="contact.html">Contact</a>
-                                            <a href="my-account.html">My Account</a>
-                                            <a href="exercise-plan.html">Exercise Plan</a>
-                                            <a href="exercise-plan-details.html">Exercise Plan Details</a>
-                                            <a href="forgot-password.html">Forgot Password</a>
-                                            <a href="login.html">Login</a>
-                                            <a href="registration.html">Registration</a>
-                                        </ul>
+                                    <!-- <li><a href="#/events/all">Nos évènements</a></li> -->
+                                    <li><a href="#/blog">GlaZik'Actu </a></li>
+                                    <li><a href="#/contact">Contactez-nous</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -321,15 +260,15 @@
             </div>
             <div class="col-md-8 col-sm-7 col-xs-12">
                 <div class="row">
-                    <form class="form-inline newsletter-forn-in">
+                    <form novalidate class="form-inline newsletter-forn-in">
                         <div class="col-md-9  col-sm-9 col-xs-12">
                             <div class="form-group">
-                                <input class="form-control newsletter-input" ng-model="newsletteremail" type="text"  placeholder="entrez votre addresse email">
+                                <input class="form-control newsletter-input" type="email"  ng-model="email" placeholder="entrez votre addresse email" required>
                             </div>
                         </div>
                         <div class="col-md-3  col-sm-3 col-xs-12">
                             <div class="row text-center">
-                                <button type="submit" class="subscribe-btn" ng-click="addNewsletter(newsletteremail)">S'inscrire<i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                                <button class="subscribe-btn" type="submit" ng-click="addNewsletter(email)">S'inscrire<i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </form>
@@ -365,9 +304,7 @@
                         <h2>Plan<span> du site</span></h2>
                         <ul>
                             <li><a href="#/"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Accueil</a></li>
-                            <li><a href="#/about/us"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>A propos de nous</a></li>
-                            <li><a href="#/events/all"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Nos Evènements</a></li>
-                            <li><a href="#/blog"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>GlaZik'Actu</a></li>
+                            <li><a href="#/about/us"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>A propos de nous</a></li>                            <li><a href="#/blog"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>GlaZik'Actu</a></li>
                             <li><a href="#/contact"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Contactez-nous</a></li>
                         </ul>
                     </div>
@@ -386,12 +323,12 @@
                 </div> -->
                 <div class="col-md-4 col-sm-8 col-xs-12">
                     <div class="banner">
-                        <h2>GET NEW OFFER </h2>
+                        <h2>PROFITEZ DES SOLDES !</h2>
                         <div class="banner-box">
-                            <h1>Fruits</h1>
-                            <h2><span>all</span> summer</h2>
-                            <p>35% off in june-july</p>
-                            <div class="shop-now"><a href="#">shop now</a>
+                            <h1>PROMO</h1>
+                            <h2><span>TOUT</span> L'ETE</h2>
+                            <p>50% de juin-juillet</p>
+                            <div class="shop-now"><a href="#/">Profitez</a>
                                 <div class="icon"><i class="fa fa-long-arrow-right"></i></div>
                             </div>
                             <img src="public/img/shop.png" alt="shop" />
@@ -414,8 +351,8 @@
                         <div class="fotter-link">
                             <nav>
                                 <ul class="link-list">
-                                    <li><a href="#">terms of use</a></li>
-                                    <li><a href="#">private policy</a></li>
+                                    <li><a href="#/">terms of use</a></li>
+                                    <li><a href="#/">private policy</a></li>
                                 </ul>
                             </nav>
                         </div>

@@ -4,9 +4,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="hero-content">
-                    <h1 class="hc-header">Online Personal Training</h1>
-                    <p class="hc-text">Maximum Results in Minimum Time, no matter your location</p>
-                    <a class="hc-link" href="#">SELECT YOUR PLAN</a>
+                    <h1 class="hc-header">GlaZik'Actu</h1>
+                    <p class="hc-text">Les infos et astuces par GlaZik Gym</p>
                 </div>
             </div>
         </div>
@@ -14,8 +13,8 @@
             <nav>
                 <ul class="crumb">
                     <li><a class="crumb-home" href="index.html"><i class="fa fa-home"></i></a></li>
-                    <li><a href="index.html">Home<i class="fa fa-angle-right"></i></a></li>
-                    <li><a class="active" href="#">News</a></li>
+                    <li><a href="#/">Accueil<i class="fa fa-angle-right"></i></a></li>
+                    <li><a class="active" href="#/blog">GlaZik'Actu</a></li>
                 </ul>
             </nav>
         </div>
@@ -129,16 +128,17 @@
                                         <i class="fa fa-clock-o"></i>
                                         <span>{{a.date}}</span>
                                     </div>
-                                    <!-- <div class="single-inf">
-                                        <i class="fa fa-eye"></i>
-                                        <span></span>
-                                    </div>
                                     <div class="single-inf">
+                                        <i class="fa fa-eye"></i>
+                                        <span>{{a.vue}}</span>
+                                    </div>
+                                    <!-- <div class="single-inf">
                                         <i class="fa fa-heart-o"></i>
                                         <span></span>
                                     </div> -->
                                 </div>
-                                <h1><a ng-href="#/blog/{{a.id}}">{{a.contenu}}</a></h1>
+                                <h1><a ng-href="#/blog/{{a.id}}">{{a.contenu|limitTo:100}}...</a></h1>
+                                <a class="read-more" ng-href="#/blog/{{a.id}}">Lire la suite <i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -263,12 +263,12 @@
             </div> -->
         </div>
         <div class="most-populer col-md-3">
-            <h1 class="bdr-top-title">MOST POPULAR</h1>
-            <div class="populer-item">
-                <h2><a href="#">5 Steps to Really Achieving Your New Year Fitness Goals</a></h2>
-                <p class="p-t-cat">Motivation</p>
+            <h1 class="bdr-top-title">Les plus consultés</h1>
+            <div class="populer-item" ng-repeat="mp in mostpopular">
+                <h2><a href="#/blog/{{mp.id}}">{{mp.titre}}</a></h2>
+                <p class="p-t-cat">{{mp.nom_cat}}</p>
             </div>
-            <div class="populer-item">
+            <!-- <div class="populer-item">
                 <h2><a href="#">Women and the Stigma of Weight Training</a></h2>
                 <p class="p-t-cat">Training</p>
             </div>
@@ -279,7 +279,7 @@
             <div class="populer-item">
                 <h2><a href="#">What Happened When...I Went Vegan For 7 Days</a></h2>
                 <p class="p-t-cat">Nutrition</p>
-            </div>
+            </div> -->
             <div class="banner-ad">
                 <img src="public/img/banner/banner.jpg" alt="banner" />
             </div>

@@ -1,4 +1,4 @@
-app.controller("blogdetailsCtrl", function ($scope, $routeParams,BlogdetailsFactory) {
+app.controller("blogdetailsCtrl", function ($scope, $routeParams,toaster,BlogdetailsFactory) {
 
     console.log(" helloContro");
 
@@ -18,15 +18,33 @@ app.controller("blogdetailsCtrl", function ($scope, $routeParams,BlogdetailsFact
          console.error(ex)
          }
 
-         $scope.AddComment= function(comment,id_article){
+         try{
+            BlogdetailsFactory.GetComment(id_article).then(function (response) {
+                   
+                $scope.commentaires= response.data;
+                   console.log("commentaire a afficher");
+                   console.log($scope.commentaires);
+            });
+        }catch (ex){
+         console.error(ex)
+         }
+
+         $scope.AddComment= function(name,email,texte){
             try{
-                BlogdetailsFactory.AddComment(comment,id_article).then(function (response) {
+                BlogdetailsFactory.AddComment(name,email,texte,id_article).then(function (response) {
                        
                     // $scope.article= response.data[0];
                     //    console.log("data a afficher");
-                        console.log(response.data);
-
-                });
+                        //console.log(response.data);
+                        if(response.data.valide){
+                            toaster.pop({
+                                type: 'sucess',
+                                title: 'Commentaire enregistré !',
+                                body: response.data.message,
+                                timeout: 1500
+                            });
+                        }
+                    });
             }catch (ex){
              console.error(ex)
              }
