@@ -21,7 +21,7 @@ if(isset($_POST)){
 
             $data = [];
             try{
-                $sql = "SELECT *FROM user WHERE  user.email= '$user_login' ";
+                $sql = "SELECT *FROM user WHERE  user.email= '$user_login' LIMIT 1 ";
                 $result = $bdconnect->query($sql);
                 $result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -34,6 +34,9 @@ if(isset($_POST)){
                         "email"=>$item['email'],
                         "password"=>$item['password'],
                         "numero"=>$item['numero'],
+                        "type"=>$item['typeUser'],
+                        "trigramme"=>$item['trigramme'],
+                        "actif"=>$item['actif'],
 
                     ] ;
                 }
@@ -41,15 +44,9 @@ if(isset($_POST)){
                 // si on retrouve des donnees correspondant au user alors on verifie son mot de passe
                 if(!empty($data)){
                     // si le password est correcte alors;
-                    if($user_password == $data[0]['password']){
+                    if(password_verify($user_password, $data[0]['password'])){
                         $response = [
                             "data"=>$data,
-                            "status" => "loggedin",
-                            "name" =>"nameOfuser",
-                            "prenom"=>"prenomOfuser",
-                            "TokenSeesion"=> "a generer",
-                            "dernier connection"=>"a gerer si possible",
-                            "message"=> "Bienvenue à toi Glazik Member",
                             "autorize"=>true
                         ];
                     } else{
