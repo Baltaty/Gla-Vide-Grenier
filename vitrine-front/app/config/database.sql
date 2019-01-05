@@ -1,23 +1,29 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le :  sam. 05 jan. 2019 à 04:51
--- Version du serveur :  5.6.38
--- Version de PHP :  7.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Jan 05, 2019 at 04:15 PM
+-- Server version: 5.7.14
+-- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de données :  `glazik_gym`
+-- Database: `glazik_gym`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -28,7 +34,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article`
+-- Table structure for table `article`
 --
 
 CREATE TABLE `article` (
@@ -46,7 +52,7 @@ CREATE TABLE `article` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `articles`
+-- Table structure for table `articles`
 --
 
 CREATE TABLE `articles` (
@@ -59,7 +65,7 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `articles`
+-- Dumping data for table `articles`
 --
 
 INSERT INTO `articles` (`id_article`, `id_cat`, `titre`, `date`, `contenu`, `vue`) VALUES
@@ -70,7 +76,7 @@ INSERT INTO `articles` (`id_article`, `id_cat`, `titre`, `date`, `contenu`, `vue
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie`
+-- Table structure for table `categorie`
 --
 
 CREATE TABLE `categorie` (
@@ -79,7 +85,7 @@ CREATE TABLE `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `categorie`
+-- Dumping data for table `categorie`
 --
 
 INSERT INTO `categorie` (`id_cat`, `nom_cat`) VALUES
@@ -89,7 +95,7 @@ INSERT INTO `categorie` (`id_cat`, `nom_cat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentaire`
+-- Table structure for table `commentaire`
 --
 
 CREATE TABLE `commentaire` (
@@ -103,7 +109,7 @@ CREATE TABLE `commentaire` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `detailvente`
+-- Table structure for table `detailvente`
 --
 
 CREATE TABLE `detailvente` (
@@ -115,7 +121,7 @@ CREATE TABLE `detailvente` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `liste`
+-- Table structure for table `liste`
 --
 
 CREATE TABLE `liste` (
@@ -127,7 +133,7 @@ CREATE TABLE `liste` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `newsletter`
+-- Table structure for table `newsletter`
 --
 
 CREATE TABLE `newsletter` (
@@ -137,7 +143,7 @@ CREATE TABLE `newsletter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `newsletter`
+-- Dumping data for table `newsletter`
 --
 
 INSERT INTO `newsletter` (`id`, `email`, `dates`) VALUES
@@ -146,7 +152,7 @@ INSERT INTO `newsletter` (`id`, `email`, `dates`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `page`
+-- Table structure for table `page`
 --
 
 CREATE TABLE `page` (
@@ -157,7 +163,7 @@ CREATE TABLE `page` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `parametre`
+-- Table structure for table `parametre`
 --
 
 CREATE TABLE `parametre` (
@@ -169,7 +175,7 @@ CREATE TABLE `parametre` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `texte`
+-- Table structure for table `texte`
 --
 
 CREATE TABLE `texte` (
@@ -181,7 +187,7 @@ CREATE TABLE `texte` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -193,25 +199,23 @@ CREATE TABLE `user` (
   `email` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `typeUser` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `numero` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `numero` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `trigramme` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `actif` tinyint(1) NOT NULL DEFAULT '0',
+  `cle` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nom`, `prenom`, `dateNaissance`, `civilite`, `email`, `password`, `typeUser`, `numero`) VALUES
-(1, 'Tra', 'Herve Fabrice', '2019-01-03', 'Mr', 'fabio@mail.com', 'admin', 'Vendeur', '09124467'),
-(2, 'KOKO', 'Jean Olivier', '2019-01-02', 'Mr', 'devops.integrale@gmail.com', 'admin', 'Je me cherche', '0761842926'),
-(3, 'TestPro', 'Marche', '1998-03-03', 'Monsieur', 'testpro@gmail.com', 'Kokoinfo321', 'Vendeur', '77971622'),
-(4, 'Sluty', 'delaSueur Du front', 'Tue Jan 08 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'testpro@gmail.com', 'Kokoinfo', 'Vendeur', '091283467'),
-(5, 'LaSueur', 'Dufron', 'Wed Jan 23 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'dufront@body.com', 'Koko', 'Vendeur', '091239486'),
-(6, 'LaSueur', 'Dufron', 'Wed Jan 23 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'dufront@body.com', 'Koko', 'Vendeur', '091239486');
+INSERT INTO `user` (`id`, `nom`, `prenom`, `dateNaissance`, `civilite`, `email`, `password`, `typeUser`, `numero`, `trigramme`, `actif`, `cle`) VALUES
+(10, 'KOKO', 'Yves Olivier', 'Thu Jan 03 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'devops.integrale@gmail.com', '$2y$10$.98KyNmsVbbOg95WjckSZeKp.McKS.77fE.bOmCP/yY1uuIbX1Li6', 'Vendeur', '02314458', 'YKO', 1, 'verified');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `vendeur`
+-- Table structure for table `vendeur`
 --
 
 CREATE TABLE `vendeur` (
@@ -222,7 +226,7 @@ CREATE TABLE `vendeur` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `vente`
+-- Table structure for table `vente`
 --
 
 CREATE TABLE `vente` (
@@ -233,17 +237,17 @@ CREATE TABLE `vente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`login`);
 
 --
--- Index pour la table `article`
+-- Indexes for table `article`
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`codeA`),
@@ -251,27 +255,27 @@ ALTER TABLE `article`
   ADD KEY `codeDV` (`codeDV`);
 
 --
--- Index pour la table `articles`
+-- Indexes for table `articles`
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id_article`),
   ADD KEY `index_cat` (`id_cat`);
 
 --
--- Index pour la table `categorie`
+-- Indexes for table `categorie`
 --
 ALTER TABLE `categorie`
   ADD PRIMARY KEY (`id_cat`);
 
 --
--- Index pour la table `commentaire`
+-- Indexes for table `commentaire`
 --
 ALTER TABLE `commentaire`
   ADD PRIMARY KEY (`id_commentaire`),
   ADD KEY `index_article_commentaire` (`id_article`);
 
 --
--- Index pour la table `detailvente`
+-- Indexes for table `detailvente`
 --
 ALTER TABLE `detailvente`
   ADD PRIMARY KEY (`codeDV`),
@@ -279,45 +283,45 @@ ALTER TABLE `detailvente`
   ADD KEY `codeA` (`codeA`);
 
 --
--- Index pour la table `liste`
+-- Indexes for table `liste`
 --
 ALTER TABLE `liste`
   ADD PRIMARY KEY (`numListe`),
   ADD KEY `trigramme` (`trigramme`);
 
 --
--- Index pour la table `newsletter`
+-- Indexes for table `newsletter`
 --
 ALTER TABLE `newsletter`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `page`
+-- Indexes for table `page`
 --
 ALTER TABLE `page`
   ADD PRIMARY KEY (`code`);
 
 --
--- Index pour la table `texte`
+-- Indexes for table `texte`
 --
 ALTER TABLE `texte`
   ADD PRIMARY KEY (`codetext`),
   ADD KEY `codepage` (`codepage`);
 
 --
--- Index pour la table `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `vendeur`
+-- Indexes for table `vendeur`
 --
 ALTER TABLE `vendeur`
   ADD PRIMARY KEY (`trigramme`);
 
 --
--- Index pour la table `vente`
+-- Indexes for table `vente`
 --
 ALTER TABLE `vente`
   ADD PRIMARY KEY (`codeV`),
@@ -325,106 +329,101 @@ ALTER TABLE `vente`
   ADD KEY `codeDV` (`codeDV`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `article`
+-- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
   MODIFY `codeA` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `articles`
+-- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
   MODIFY `id_article` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
--- AUTO_INCREMENT pour la table `categorie`
+-- AUTO_INCREMENT for table `categorie`
 --
 ALTER TABLE `categorie`
   MODIFY `id_cat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
--- AUTO_INCREMENT pour la table `commentaire`
+-- AUTO_INCREMENT for table `commentaire`
 --
 ALTER TABLE `commentaire`
   MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `detailvente`
+-- AUTO_INCREMENT for table `detailvente`
 --
 ALTER TABLE `detailvente`
   MODIFY `codeDV` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `page`
+-- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
   MODIFY `code` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `texte`
+-- AUTO_INCREMENT for table `texte`
 --
 ALTER TABLE `texte`
   MODIFY `codetext` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT pour la table `vente`
+-- AUTO_INCREMENT for table `vente`
 --
 ALTER TABLE `vente`
   MODIFY `codeV` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
 
 --
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `article`
+-- Constraints for table `article`
 --
 ALTER TABLE `article`
   ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`codeDV`) REFERENCES `detailvente` (`codeDV`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `articles`
+-- Constraints for table `articles`
 --
 ALTER TABLE `articles`
   ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`id_cat`) REFERENCES `categorie` (`id_cat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `commentaire`
+-- Constraints for table `commentaire`
 --
 ALTER TABLE `commentaire`
   ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `articles` (`id_article`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `detailvente`
+-- Constraints for table `detailvente`
 --
 ALTER TABLE `detailvente`
   ADD CONSTRAINT `detailvente_ibfk_1` FOREIGN KEY (`codeV`) REFERENCES `vente` (`codeV`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `liste`
+-- Constraints for table `liste`
 --
 ALTER TABLE `liste`
   ADD CONSTRAINT `liste_ibfk_1` FOREIGN KEY (`trigramme`) REFERENCES `vendeur` (`trigramme`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `texte`
+-- Constraints for table `texte`
 --
 ALTER TABLE `texte`
   ADD CONSTRAINT `texte_ibfk_1` FOREIGN KEY (`codepage`) REFERENCES `page` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `vente`
+-- Constraints for table `vente`
 --
 ALTER TABLE `vente`
   ADD CONSTRAINT `vente_ibfk_1` FOREIGN KEY (`codeA`) REFERENCES `article` (`codeA`),
   ADD CONSTRAINT `vente_ibfk_2` FOREIGN KEY (`codeDV`) REFERENCES `detailvente` (`codeDV`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
