@@ -1,7 +1,7 @@
 
 {
   "hostname":"localhost",
-  "dbname":"glazik",
+  "dbname":"glazik_gym",
   "user":"root",
   "password":""
 }

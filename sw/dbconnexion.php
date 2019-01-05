@@ -6,7 +6,7 @@
 
             $configs_env = file_get_contents('../config.json');
             $configs_env = json_decode($configs_env,true);
-            print_r($configs_env);
+//            print_r($configs_env);
 
             $USERS_db=  $configs_env['user'];
             $PASSWORD_db= $configs_env['password'];
