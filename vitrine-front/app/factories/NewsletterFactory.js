@@ -3,16 +3,12 @@ app.factory("NewsletterFactory", function($q, $http){
     var factory = {
 
 
-        addMail: function(newsletteremail){
-            // login = JSON.parse(login);
-            // login = JSON.stringify(login);
-            // console.log(login);
-            console.log("dans le factory");
-            console.log(newsletteremail);
+        addMail: function(datanewsletteremail){
+            
+            console.log(BASE_URL+ "newsletter.php");
             var deferred = $q.defer();
-            $http.post(BASE_URL+ "newsletter.php", newsletteremail).then(function(data, status){
+            $http.get(BASE_URL+ "newsletter.php?mail="+datanewsletteremail).then(function(data, status){
                 deferred.resolve(data);
-                console.log(data);
             }).catch(function(data, status){
                 deferred.reject("impossible de recevoir les data");
             });
@@ -22,3 +18,4 @@ app.factory("NewsletterFactory", function($q, $http){
 
     return factory;
 });
+
