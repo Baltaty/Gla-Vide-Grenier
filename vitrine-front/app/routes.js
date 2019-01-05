@@ -23,10 +23,6 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'panel/blogs.html',
             controller: 'blogCtrl'
         })
-        .when('/blog/:id', {
-            templateUrl: 'panel/blog-details.html',
-            controller: 'blogdetailsCtrl'
-        })
         .when('/contact', {
             templateUrl: 'panel/contacts.html',
             controller: 'contactCtrl'
