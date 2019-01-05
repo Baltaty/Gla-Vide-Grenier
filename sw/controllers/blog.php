@@ -212,33 +212,33 @@ if(isset($_GET)){
 }
 if(isset($_POST)){
 
-//    if($_POST['action']=="addcomment"){
-//
-//        $response = [];
-//        $bdconnect = connectionToBD();
-//        $id_art=$_POST['id_art'];
-//        $name=$_POST['name'];
-//        $email=$_POST['email'];
-//        $texte=$_POST['texte'];
-//        //print_r($comment);
-//        //$response []=["resultat"=>$_POST];
-//
-//        // EXECUTION DE LA REQUETE D'AJOUT DE COMMENTAIRE
-//        try{
-//            $sql = "INSERT INTO commentaire (id_article,auteur,commentaire,date)
-//            VALUES ('$id_art', '$name', '$texte',NOW())";
-//            // use exec() because no results are returned
-//            $bdconnect->exec($sql);
-//            $response = [
-//                        "message"=> "Merci pour ce commentaire !",
-//                        "valide"=>true
-//                  ];
-//        }catch(PDOException $ex){
-//            echo $ex->getMessage();
-//            die();
-//        }
-//        echo json_encode($response);
-//
-//
-//    }
+   if($_POST['action']=="addcomment"){
+
+       $response = [];
+       $bdconnect = connectionToBD();
+       $id_art=$_POST['id_art'];
+       $name=$_POST['name'];
+       $email=$_POST['email'];
+       $texte=$_POST['texte'];
+       //print_r($comment);
+       //$response []=["resultat"=>$_POST];
+
+       // EXECUTION DE LA REQUETE D'AJOUT DE COMMENTAIRE
+       try{
+           $sql = "INSERT INTO commentaire (id_article,auteur,commentaire,date)
+           VALUES ('$id_art', '$name', '$texte',NOW())";
+           // use exec() because no results are returned
+           $bdconnect->exec($sql);
+           $response = [
+                       "message"=> "Merci pour ce commentaire !",
+                       "valide"=>true
+                 ];
+       }catch(PDOException $ex){
+           echo $ex->getMessage();
+           die();
+       }
+       echo json_encode($response);
+
+
+   }
 }
