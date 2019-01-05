@@ -1,32 +1,35 @@
-app.factory("Login", function($q, $http){
+app.factory("BlogdetailsFactory", function($q, $http){
     "use strict";
     var factory = {
 
 
-        userLogin: function(login){
-            // login = JSON.parse(login);
-            // login = JSON.stringify(login);
-             console.log(login);
+        GetArticle: function(id_article){
+
+            console.log(BASE_URL+ "blog.php");
             var deferred = $q.defer();
-            $http.post(BASE_URL+ "login.php", login).then(function(data, status){
+            $http.get(BASE_URL+ "blog.php?action=selected&id="+id_article).then(function(data, status){
                 deferred.resolve(data);
             }).catch(function(data, status){
                 deferred.reject("impossible de recevoir les data");
             });
             return deferred.promise;
         },
-        userRegister: function(data){
+        AddComment: function(name,email,texte,id_article){
+
+            console.log(BASE_URL+ "blog.php");
             var deferred = $q.defer();
-            $http.post(BASE_URL+ "user.php", data).then(function(data, status){
+            $http.post(BASE_URL+ "blog.php", {action:"addcomment",id_art:id_article,name:name,email:email,texte:texte}).then(function(data, status){
                 deferred.resolve(data);
             }).catch(function(data, status){
                 deferred.reject("impossible de recevoir les data");
             });
             return deferred.promise;
         },
-        userActive: function(data){
+        GetComment: function(id_article){
+
+            console.log(BASE_URL+ "blog.php");
             var deferred = $q.defer();
-            $http.post(BASE_URL+ "user.php", data).then(function(data, status){
+            $http.get(BASE_URL+ "blog.php?action=selectedComment&id="+id_article).then(function(data, status){
                 deferred.resolve(data);
             }).catch(function(data, status){
                 deferred.reject("impossible de recevoir les data");
