@@ -63,24 +63,6 @@
        <script src="../public/js/angular_1.5/angular-route.min.js"></script>
     <!-- // -->
 
-
-        <!--Angular routes-->
-        <script src="../app/routes.js"></script>
-        <script src="../app/Config/config.js"></script>
-
-         <!--Angular App Controllers -->
-        <script src="../app/Controllers/NavbarCtrl.js"></script>
-        <script src="../app/Controllers/SidebarCtrl.js"></script>
-        <script src="../app/Controllers/SettingCtrl.js"></script>
-        <script src="../app/Controllers/HomeCtrl.js"></script>
-        <script src="../app/Controllers/WaitDemandeCtrl.js"></script>
-
-
-
-
-
-
-
 </head>
 
 
@@ -313,7 +295,7 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-folder-open"></i> <span> Listes Articles </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#/wait-demande">Listes</a></li>
+                                    <li><a href="#/listes">Mes Listes</a></li>
                                     <li><a href="#/">Créer une nouvelle liste</a></li>
                                 </ul>
                             </li>
@@ -502,6 +484,23 @@
 
         <!-- Tooltipster js -->
         <script src="../public/plugins/tooltipster/tooltipster.bundle.min.js"></script>
+
+        <!--Angular routes-->
+        <script src="../app/routes.js"></script>
+        <script src="../app/Config/config.js"></script>
+
+        <!-- Factories AngularJS-->
+        <script src="../app/factories/LoginFactory.js"></script>
+        <script src="../app/factories/ListesFactory.js"></script>
+
+            <!--Angular App Controllers -->
+        <script src="../app/Controllers/NavbarCtrl.js"></script>
+        <script src="../app/Controllers/SidebarCtrl.js"></script>
+        <script src="../app/Controllers/SettingCtrl.js"></script>
+        <script src="../app/Controllers/HomeCtrl.js"></script>
+        <script src="../app/Controllers/WaitDemandeCtrl.js"></script>
+        <script src="../app/Controllers/listesCtrl.js"></script>
+
     </body>
 
 </html>

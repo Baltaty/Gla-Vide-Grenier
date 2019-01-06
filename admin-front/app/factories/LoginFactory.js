@@ -1,4 +1,4 @@
-appLogin.factory("Login", function ($q, $http) {
+app.factory("Login", function ($q, $http) {
 
     var factory = {
         // list of services in an agency

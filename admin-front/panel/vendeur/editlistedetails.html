@@ -1,0 +1,40 @@
+<div class="content">
+        <div class="container" ng-controller="listesCtrl">
+                <br></br>
+            <h4 class="header-title m-t-0">MODIFIER UN ARTICLE</h4>
+            <div class="p-20">
+                    <form action="#" data-parsley-validate novalidate>
+                        <div class="form-group">
+                            <label for="userName">Nom de l'article<span class="text-danger">*</span></label>
+                            <input type="text"  parsley-trigger="change" required
+                                   placeholder="Entrer un nom" class="form-control" id="listename"  ng-model="thisarticle.description ">
+                        </div>
+                        <div class="form-group">
+                                <label for="userName">Prix<span class="text-danger">*</span></label>
+                                <input type="text"  parsley-trigger="change" required
+                                       placeholder="Entrer une somme" class="form-control" id="listename" ng-model="thisarticle.prix">
+                        </div>
+                        <div class="form-group">
+                                <label for="userName">Taille<span class="text-danger">*</span></label>
+                                <input type="text"  parsley-trigger="change" required
+                                       placeholder="soit XS,S,M,L,XL,XXL,XXXL" class="form-control" id="listename" ng-model="thisarticle.taille">
+                        </div>
+                        <div class="form-group">
+                                <label for="userName">Commentaire<span class="text-danger">*</span></label>
+                                <input type="text"  parsley-trigger="change" required
+                                       placeholder="plus d'infos sur l'article" class="form-control" id="listename" ng-model="thisarticle.commentaire">
+                        </div>
+                        <div class="form-group text-right m-b-0">
+                            <a class="btn btn-primary waves-effect waves-light" ng-click="EditListeDetails(thisarticle.description,thisarticle.prix,thisarticle.taille,thisarticle.commentaire)">
+                                Créer
+                            </a>
+                            <a href="#/listes" class="btn btn-default waves-effect m-l-5">
+                                Annuler
+                            </a>
+                        </div>
+        
+                    </form>
+                </div>
+
+        </div>
+    </div>
