@@ -16,8 +16,8 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
             $scope.DataLogin = false;
         }
 
-        console.log("---- data for format ----");
-        console.log(data);
+        // console.log("---- data for format ----");
+        // console.log(data);
         $scope.readTerms=false;
 
     };
@@ -36,10 +36,16 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
               data.typeUser= "Vendeur";
               data.action= "ADD";
               delete  data.passconfirm;
-              console.log(data);
+              // console.log(data);
               Login.userRegister(data).then(function (response) {
-                  console.log(" reponse recu apres la data");
-                  console.log(response);
+                  if(response.data.exist){
+                      toaster.pop({
+                          type: 'warning',
+                          title: 'Compte',
+                          body: 'cet email est déjà associé à un compte veuillez le changer ',
+                          timeout: 4000
+                      });
+                  }
               });
           }
 

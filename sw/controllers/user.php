@@ -32,7 +32,19 @@ if(isset($_POST)){
 // Ajout d'un utilisateur
 function addUser($data){
 
+
+
+
     $bdconnect = connectionToBD();
+    if(userExist($data['email'], $bdconnect)){
+        $response =[
+            "status"=>false,
+            "exist"=>true,
+            "message"=> " il existe deja ce mail",
+        ];
+        echo json_encode($response);
+        die();
+    }
     $trigram = trigrammeGenerate($data, $bdconnect);
     do {
         $isok =  false;
@@ -64,6 +76,10 @@ function addUser($data){
 
     try{
 
+
+
+
+
         $sql =" INSERT INTO user (nom, prenom, dateNaissance, civilite, numero, email, password, typeUser, trigramme, cle)
                 VALUES (:nom, :prenom, :dateNaissance, :civilite, :numero, :email, :password, :typeUser, :trigramme, :cle) ";
 
@@ -71,6 +87,8 @@ function addUser($data){
         $data['trigramme'] = $trigram;
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         $data['cle'] = md5(microtime(TRUE)*100000);
+
+
 
 
         $preapreREq = $bdconnect->prepare($sql);
@@ -176,7 +194,6 @@ function activeAccount($data){
 
     $response=[];
     $bdconnect = connectionToBD();
-//    print_r($data);
 
     try{
         $cle = $data['cle'];
@@ -215,4 +232,37 @@ function activeAccount($data){
 
 
 
+}
+
+function userExist($email ,  $bdconnect){
+    $data = [];
+    try{
+        $sql = "SELECT *FROM user WHERE  user.email= '$email' LIMIT 1 ";
+        $result = $bdconnect->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        foreach ($result as $item){
+            $data [] = [
+                "name"=>$item['nom'],
+                "prenom"=>$item['prenom'],
+                "dateNaissance"=>$item['dateNaissance'],
+                "civilite"=>$item['civilite'],
+                "email"=>$item['email'],
+                "password"=>$item['password'],
+                "numero"=>$item['numero'],
+                "type"=>$item['typeUser'],
+            ] ;
+        }
+
+        // si on retrouve des donnees correspondant au user alors on verifie
+        if(!empty($data)){
+            return true;
+        } else {
+            return false;
+        }
+
+    }catch (PDOException $ex){
+        echo $ex->getMessage();
+        die();
+    }
 }
