@@ -15,7 +15,6 @@ app.controller("createUserCtrl", function ($scope , $routeParams, $location, Log
                       notif('error','le Compte exist déjà','REGISTER','toast-top-full-width');
                   } else {
                       notif('success','le compte à été créer avec succès','Utilisateur','toast-top-full-width');
-
                   }
               });
           }
