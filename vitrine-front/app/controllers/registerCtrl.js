@@ -40,7 +40,15 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
               Login.userRegister(data).then(function (response) {
                   console.log(" reponse recu apres la data");
                   console.log(response);
+                  toaster.pop({
+                    type: 'success',
+                    title: 'Inscription',
+                    body: 'Votre inscription a bien été prise en compte, vous recevrez un mail de confirmation',
+                    timeout: 5000
+                });
+                
               });
+
           }
 
 
