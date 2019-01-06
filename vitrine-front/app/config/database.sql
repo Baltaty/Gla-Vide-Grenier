@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2019 at 04:15 PM
+-- Generation Time: Jan 06, 2019 at 11:57 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -39,6 +39,7 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `article` (
   `codeA` int(11) NOT NULL,
+  `numListe` int(11) NOT NULL,
   `prix` double NOT NULL,
   `taille` varchar(30) NOT NULL,
   `description` varchar(30) NOT NULL,
@@ -48,6 +49,15 @@ CREATE TABLE `article` (
   `codeV` int(11) NOT NULL,
   `codeDV` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`codeA`, `numListe`, `prix`, `taille`, `description`, `photo`, `statut`, `commentaire`, `codeV`, `codeDV`) VALUES
+(5, 3, 500, 'L', 'Sweat H&M', 0, 'NON FOURNI', 'sweet gris', 0, 0),
+(7, 3, 500, 'S', 'JEAN SLIM', 0, 'NON FOURNI', 'jean noir super pour les soire', 0, 0),
+(8, 1, 33, 'XS', 'test okay', 0, 'NON FOURNI', 'ok', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -126,9 +136,22 @@ CREATE TABLE `detailvente` (
 
 CREATE TABLE `liste` (
   `numListe` int(11) NOT NULL,
+  `nom_liste` varchar(255) NOT NULL,
   `statut` varchar(30) NOT NULL,
-  `trigramme` varchar(30) NOT NULL
+  `trigramme` varchar(30) NOT NULL,
+  `date_creation` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `liste`
+--
+
+INSERT INTO `liste` (`numListe`, `nom_liste`, `statut`, `trigramme`, `date_creation`) VALUES
+(1, 'test', 'en cours', 'YKO', '2019-01-06'),
+(2, 'liste pour delete', 'en cours', 'YKO', '2019-01-06'),
+(3, 'liste depuis lapp', 'en cours', 'YKO', '2019-01-06'),
+(4, 'liste depuis lappli', 'en cours', 'YKO', '2019-01-06'),
+(5, 'liste depuis lapplication', 'en cours', 'YKO', '2019-01-06');
 
 -- --------------------------------------------------------
 
@@ -202,26 +225,18 @@ CREATE TABLE `user` (
   `numero` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `trigramme` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `actif` tinyint(1) NOT NULL DEFAULT '0',
-  `cle` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `cle` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `adresse` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nom`, `prenom`, `dateNaissance`, `civilite`, `email`, `password`, `typeUser`, `numero`, `trigramme`, `actif`, `cle`) VALUES
-(10, 'KOKO', 'Yves Olivier', 'Thu Jan 03 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'devops.integrale@gmail.com', '$2y$10$.98KyNmsVbbOg95WjckSZeKp.McKS.77fE.bOmCP/yY1uuIbX1Li6', 'Vendeur', '02314458', 'YKO', 1, 'verified');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vendeur`
---
-
-CREATE TABLE `vendeur` (
-  `trigramme` varchar(30) NOT NULL,
-  `motdepasse` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `user` (`id`, `nom`, `prenom`, `dateNaissance`, `civilite`, `email`, `password`, `typeUser`, `numero`, `trigramme`, `actif`, `cle`, `adresse`) VALUES
+(10, 'KOKO', 'Yves Olivier', 'Thu Jan 03 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'devops.integrale@gmail.com', '$2y$10$1skRGOgqOs78OFvWKjQqNOpfqcGnKjEaxOE062e3N9jRKU6TA8MNW', 'vendeur', '77971622', 'YKO', 1, 'verified', 'xavier grall avenue'),
+(11, 'Mathieu', 'le Batharz', '20-12-2009', 'Monsieur', 'mathieu@lebarz.com', '109876543', 'organisateur', '0912836482', 'MBA', 0, '1098273', 'Xavier franz'),
+(13, 'Lavie', 'oka', 'Thu Jan 17 2019 00:00:00 GMT+0100 (heure normale d’Europe centrale)', 'Monsieur', 'cestbon@gmail.com', '$2y$10$UzlXryOjodNX834yrYjD3OsHNcoaGZUJtTdrj1WOt2W18EDk1OD6q', 'organisateur', '092w98393', 'OLA', 0, '1c3afe8fce7f1d484ce56ca0e54d8c8e', '2873878');
 
 -- --------------------------------------------------------
 
@@ -252,7 +267,8 @@ ALTER TABLE `admin`
 ALTER TABLE `article`
   ADD PRIMARY KEY (`codeA`),
   ADD KEY `codeV` (`codeV`),
-  ADD KEY `codeDV` (`codeDV`);
+  ADD KEY `codeDV` (`codeDV`),
+  ADD KEY `numListe` (`numListe`);
 
 --
 -- Indexes for table `articles`
@@ -315,12 +331,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `vendeur`
---
-ALTER TABLE `vendeur`
-  ADD PRIMARY KEY (`trigramme`);
-
---
 -- Indexes for table `vente`
 --
 ALTER TABLE `vente`
@@ -336,7 +346,7 @@ ALTER TABLE `vente`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `codeA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codeA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `articles`
 --
@@ -358,6 +368,11 @@ ALTER TABLE `commentaire`
 ALTER TABLE `detailvente`
   MODIFY `codeDV` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `liste`
+--
+ALTER TABLE `liste`
+  MODIFY `numListe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
@@ -371,7 +386,7 @@ ALTER TABLE `texte`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `vente`
 --
@@ -385,7 +400,7 @@ ALTER TABLE `vente`
 -- Constraints for table `article`
 --
 ALTER TABLE `article`
-  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`codeDV`) REFERENCES `detailvente` (`codeDV`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`numListe`) REFERENCES `liste` (`numListe`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `articles`
@@ -404,12 +419,6 @@ ALTER TABLE `commentaire`
 --
 ALTER TABLE `detailvente`
   ADD CONSTRAINT `detailvente_ibfk_1` FOREIGN KEY (`codeV`) REFERENCES `vente` (`codeV`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `liste`
---
-ALTER TABLE `liste`
-  ADD CONSTRAINT `liste_ibfk_1` FOREIGN KEY (`trigramme`) REFERENCES `vendeur` (`trigramme`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `texte`
