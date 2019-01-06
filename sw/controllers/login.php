@@ -37,6 +37,7 @@ if(isset($_POST)){
                         "type"=>$item['typeUser'],
                         "trigramme"=>$item['trigramme'],
                         "actif"=>$item['actif'],
+                        "adresse"=>$item['adresse'],
 
                     ] ;
                 }

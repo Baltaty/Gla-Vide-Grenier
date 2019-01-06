@@ -1,9 +1,9 @@
 
 
-  function notif (type, text , titre) {
+  function notif (type, text , titre, position) {
     var msg = text;
     var title = titre;
-    var showDuration = '300';
+    var showDuration = '2000';
     var hideDuration = '1000';
     var timeOut = '3000';
     var extendedTimeOut = '1000';
@@ -19,7 +19,8 @@
         debug: false,
         newestOnTop: false,
         progressBar: true,
-        positionClass: 'toast-top-full-width',
+        // positionClass: 'toast-top-full-width',
+        positionClass:position,
         preventDuplicates: false,
         onclick: null
     };

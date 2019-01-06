@@ -199,20 +199,20 @@
                   window.location = "panel/"
 
 
-                 //  $http.post(BASE_URL+"login/user", data).then(function (resp) {
-                 //     console.log(resp.data);
-                 //     if(resp.data.success){
-                 //         $scope.loader=false;
-                 //         notif('success',resp.data.msg,'Connexion');
-                 //         $timeout(function () {
-                 //             window.localStorage.setItem("user_session",JSON.stringify(resp.data.data));
-                 //             window.location = "panel/private/"
-                 //         }, 2400);
-                 //     }else{
-                 //         $scope.loader=false;
-                 //         notif('error',resp.data.msg,'Connexion');
-                 //     }
-                 // });
+                  $http.post(BASE_URL+"login/user", data).then(function (resp) {
+                     console.log(resp.data);
+                     if(resp.data.success){
+                         $scope.loader=false;
+                         notif('success',resp.data.msg,'Connexion');
+                         $timeout(function () {
+                             window.localStorage.setItem("user_session",JSON.stringify(resp.data.data));
+                             window.location = "panel/private/"
+                         }, 2400);
+                     }else{
+                         $scope.loader=false;
+                         notif('error',resp.data.msg,'Connexion');
+                     }
+                 });
 
               }; //end seconnecter
 

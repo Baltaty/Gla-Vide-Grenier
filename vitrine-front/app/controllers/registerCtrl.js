@@ -1,6 +1,6 @@
 app.controller("registerCtrl", function ($scope,toaster,Login) {
 
-    console.log(" hello RegisterContro");
+    // console.log(" hello RegisterContro");
 
 
     $scope.userInfo = true;

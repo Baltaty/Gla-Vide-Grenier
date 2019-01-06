@@ -22,7 +22,54 @@ if(isset($_POST)){
          $data = copyArray($_POST, "action");
          activeAccount($data);
     }
+    if($_POST['action']=="UPDATE"){
+        $data = copyArray($_POST, "action");
+        updateUser($data);
 
+    }
+
+
+
+
+}
+
+
+
+
+function updateUser($data){
+    $bdconnect = connectionToBD();
+
+    try{
+
+
+
+        $sql = "UPDATE user SET  nom=:nom , prenom=:prenom, adresse=:adresse , 
+             password =:password , numero = :numero  WHERE user.email=:email ;";
+//        print_r($sql);
+//        die();
+        $pst =  $bdconnect->prepare($sql);
+        $pst->execute(array(
+            "nom"=>$data['name'],
+            "prenom"=>$data['prenom'],
+            "adresse"=>$data['adresse'],
+            "password"=>password_hash($data['password'], PASSWORD_BCRYPT),
+            "numero"=>$data['numero'],
+            "email"=>$data['email'],
+        ));
+
+        $response= [
+            "success"=>true,
+            "message"=>"modification effectue avec sucess",
+        ];
+    }catch (PDOException $ex){
+        $response=[
+            "success"=>false,
+            "error"=>$ex->getMessage(),
+        ];
+        echo  json_encode($response);
+    }
+
+    echo json_encode($response);
 
 
 }
