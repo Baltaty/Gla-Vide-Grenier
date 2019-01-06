@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="container">
+
+        <div class="panel" ng-controller="listesCtrl">
+
+            <div class="panel-body">
+
+        
+                <div class="">
+                    <table class="table table-striped add-edit-table table-bordered" id="datatable-editable">
+                        <thead>
+                            <tr>
+                                <th>Nom de la liste</th>
+                                <th>date de creation</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="gradeX" ng-repeat="l in listes">
+                                <td>{{l.nom_liste}}</td>
+                                <td>{{l.date_creation}}
+                                </td>
+                                <td>{{l.statut}}</td>
+                                <td class="actions">
+                                    <a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+                                    <a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
+                                    <a href="#/listes/{{l.numListe}}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                    <button class="on-default remove-row" ng-click="DeleteListe(l.numListe)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end: page -->
+        
+        </div> <!-- end Panel -->
+
+    </div>
+</div>

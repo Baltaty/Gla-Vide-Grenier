@@ -23,6 +23,26 @@ app.config(function($routeProvider, $httpProvider) {
             controller: 'userDetailsCtrl'
         })
 
+        .when('/listes', {
+            templateUrl: 'vendeur/listes.html',
+            controller: 'listesCtrl'
+        })
+        .when('/addliste', {
+            templateUrl: 'vendeur/addliste.html',
+            controller: 'listesCtrl'
+        })
+        .when('/addlistedetails/:num', {
+            templateUrl: 'vendeur/addlistedetails.html',
+            controller: 'listesCtrl'
+        })
+        .when('/editlistedetails/:codeA', {
+            templateUrl: 'vendeur/editlistedetails.html',
+            controller: 'listesCtrl'
+        })
+        .when('/listes/:num', {
+            templateUrl: 'vendeur/liste_details.html',
+            controller: 'listesCtrl'
+        })
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

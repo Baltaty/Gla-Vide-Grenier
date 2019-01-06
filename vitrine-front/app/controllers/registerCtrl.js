@@ -46,6 +46,15 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
                           timeout: 4000
                       });
                   }
+                 else{
+                      toaster.pop({
+                          type: 'success',
+                          title: 'Inscription',
+                          body: 'Votre inscription a bien été prise en compte, vous recevrez un mail de confirmation',
+                          timeout: 5000
+                      });
+                  }
+
               });
           }
 

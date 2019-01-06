@@ -1,0 +1,87 @@
+app.factory("ListesFactory", function ($q, $http) {
+
+    var factory = {
+        // list of services in an agency
+        LoadListes: function (trigramme) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=all&tri="+trigramme).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        DeleteListe: function (num_liste) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=delete&num="+num_liste).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        DeleteListeDetails: function (codeA) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=deletedetails&num="+codeA).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        Addliste: function (trigramme,nom_liste) {
+            console.log(" Je suis dans la fonction add du factory et le nom de la liste et le trigramme sont: ");
+            console.log(nom_liste);
+            console.log(trigramme);
+            var deferred = $q.defer();
+            $http.post(BASE_URL + "listes.php",{action:"add",trigramme:trigramme,nom_liste:nom_liste,statut:"en cours"}).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        AddListeDetails: function (num_liste,description,prix,taille,commentaire) {
+            console.log(" Je suis dans la fonction POUR AJOUTER UN ARTICLE du factory ");
+            var deferred = $q.defer();
+            $http.post(BASE_URL + "listes.php",{action:"adddetail",num_liste:num_liste,description:description,prix:prix,taille:taille,commentaire:commentaire,statut:"NON FOURNI"}).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        EditListeDetails: function (codeA,description,prix,taille,commentaire) {
+            console.log(" Je suis dans la fonction POUR modifier UN ARTICLE du factory ");
+            var deferred = $q.defer();
+            $http.post(BASE_URL + "listes.php",{action:"editdetail",codeA:codeA,description:description,prix:prix,taille:taille,commentaire:commentaire,statut:"NON FOURNI"}).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        
+        LoadListeDetails: function (num_liste) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=listedetails&num="+num_liste).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        loadListeDetailsElement: function (codeA) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=listedetailselement&codeA="+codeA).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+    };
+
+
+    return factory;
+});
