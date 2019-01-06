@@ -97,13 +97,13 @@
     /*-----------------------
     hide-show-reg-form
     -----------------------*/
-    document.getElementById("top_reg_form").style.display = "none";
-    $("#top_reg").on('click', function() {
-        $("#top_reg_form").fadeToggle("slow");
-    });
-    $("#rfa_close").on('click', function() {
-        $("#top_reg_form").fadeToggle("slow");
-    });
+    // document.getElementById("top_reg_form").style.display = "none";
+    // $("#top_reg").on('click', function() {
+    //     $("#top_reg_form").fadeToggle("slow");
+    // });
+    // $("#rfa_close").on('click', function() {
+    //     $("#top_reg_form").fadeToggle("slow");
+    // });
 
 
     /*-----------------------

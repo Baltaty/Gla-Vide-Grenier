@@ -1,11 +1,7 @@
 app.controller("navbarCtrl", function ($scope, Login, $http,toaster) {
-    console.log("Hello navbarController");
 
-
-
+    window.localStorage.removeItem("user_session");
      $scope.setLogin = function (login){
-        console.log(" je write mon data as service ---");
-        console.log(login);
         try{
             Login.userLogin(login).then(function (response) {
                    //console.log(response.data);
@@ -16,13 +12,16 @@ app.controller("navbarCtrl", function ($scope, Login, $http,toaster) {
                            body: response.data.message,
                            timeout: 1500
                        });
-                       // TODO REDIRECTION A FAIRE
+                       // TODO REDIRECTION A
+                       window.localStorage.setItem("user_session",JSON.stringify(response.data.data));
+                       window.location = "/Gla-Vide-Grenier/admin-front/panel/#/"
+
                    } else{
                        toaster.pop({
                            type: 'error',
                            title: 'connexion failed',
                            body: response.data.message,
-                           timeout: 2000
+                           timeout: 3000
                        });
                    }
 
