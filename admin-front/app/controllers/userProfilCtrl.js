@@ -16,7 +16,7 @@ app.controller("userProfilCtrl", function ($scope,Login, $routeParams) {
 
             Login.userUpdate(data).then(function (response) {
                 if(response.data.success){
-                    delete $scope.session.password;
+                    $scope.session.password="";
                     window.localStorage.setItem("user_session",JSON.stringify($scope.session));
                     notif('success','Modified avec sucess','Compte','toast-top-full-width');
                 } else {

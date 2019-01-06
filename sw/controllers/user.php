@@ -10,8 +10,10 @@ include '../dbconnexion.php';
 
 #... verif iic apres on mettra des tockens de connexions de sessions mais actu boff pas trop le temps
 $response = [];
-if(isset($_POST)){
-
+//print_r($_POST);
+//print_r($_GET);
+//die();
+if(isset($_POST) && !empty($_POST)){
     // Ajouter un utilisateur // Vendeur en occurence
     if($_POST['action']=="ADD"){
         $data = copyArray($_POST, "action");
@@ -27,15 +29,95 @@ if(isset($_POST)){
         updateUser($data);
 
     }
-
-
-
-
+} elseif (isset($_GET)  && !empty($_GET)){
+    getAllUsers($_GET);
 }
 
 
 
 
+
+
+
+
+function deleteUser($data){
+    $bdconnect = connectionToBD();
+    $resuldata = [];
+
+    try{
+
+        $value=$data['value'];
+        $sql=" DELETE FROM user WHERE user.trigramme='$value'";
+//        $bdconnect->query($sql);
+        $resuldata= [
+            "success"=>true,
+            "message"=>"supprimer avec sucess",
+        ];
+
+    }catch (PDOException $ex){
+        $resuldata=[
+            "success"=>false,
+            "error"=>$ex->getMessage(),
+        ];
+        echo  json_encode($resuldata);
+    }
+
+    echo json_encode($resuldata);
+
+
+};
+
+
+//Tout les users
+function getAllUsers($data){
+    $bdconnect = connectionToBD();
+    $resuldata = [];
+
+    try{
+        $sql="";
+        if($data['action']=="ALL"){
+            $sql = "SELECT * FROM user ";
+        } else{
+            $critere = $data['critere'];
+            $value = $data['value'];
+            $sql = "SELECT * FROM user WHERE user.$critere = '$value' ;";
+        }
+
+
+        $result = $bdconnect->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        foreach ($result as $item) {
+            $resuldata [] = [
+                "nom" => $item['nom'],
+                "prenom" => $item['prenom'],
+                "trigramme" => $item['trigramme'],
+                "adresse" => $item['adresse'],
+                "civilite" => $item['civilite'],
+                "email" => $item['email'],
+                "actif" => $item['actif'],
+                "numero" => $item['numero'],
+                "type" => $item['typeUser'],
+                "dateNaissance" => $item['dateNaissance'],
+            ];
+        }
+
+    }catch (PDOException $ex){
+        $resuldata=[
+            "success"=>false,
+            "error"=>$ex->getMessage(),
+        ];
+        echo  json_encode($resuldata);
+    }
+
+    echo json_encode($resuldata);
+
+
+};
+
+
+
+
+// mise a jour  d'un utilisqteur
 function updateUser($data){
     $bdconnect = connectionToBD();
 
@@ -45,8 +127,7 @@ function updateUser($data){
 
         $sql = "UPDATE user SET  nom=:nom , prenom=:prenom, adresse=:adresse , 
              password =:password , numero = :numero  WHERE user.email=:email ;";
-//        print_r($sql);
-//        die();
+
         $pst =  $bdconnect->prepare($sql);
         $pst->execute(array(
             "nom"=>$data['name'],
@@ -73,8 +154,6 @@ function updateUser($data){
 
 
 }
-
-
 
 // Ajout d'un utilisateur
 function addUser($data){
@@ -235,8 +314,7 @@ function aleatoireTrigramme(){
 }
 
 
-//verification de confi
-
+//verification de confirmation de count
 function activeAccount($data){
 
     $response=[];

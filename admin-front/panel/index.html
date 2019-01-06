@@ -21,6 +21,9 @@
         <!-- Notification css (Toastr) -->
         <link href="../public/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
 
+        <!-- Custom box css -->
+        <link href="../public/plugins/custombox/css/custombox.min.css" rel="stylesheet">
+
 
 
     <!-- DataTable-->
@@ -282,8 +285,8 @@
 
                         <div class="dropdown" id="setting-dropdown">
                             <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0)"><i class="mdi mdi-face-profile m-r-5"></i> Mon profil </a></li>
-                                <li><a href="javascript:void(0)"><i class="mdi mdi-account-settings-variant m-r-5"></i>parametres</a></li>
+                                <li><a href="#/user-profile"><i class="mdi mdi-face-profile m-r-5"></i> Mon profil </a></li>
+                                <li><a href="#/user-profle"><i class="mdi mdi-account-settings-variant m-r-5"></i>parametres</a></li>
                                 <li><a href="javascript:void(0)"><i class="mdi mdi-logout m-r-5"></i> Logout</a></li>
                             </ul>
                         </div>
@@ -322,11 +325,12 @@
                                 </ul>
                             </li>
 
+                            <!--<li class="has_sub" ng-if="session.type=='organisateur'">-->
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-heart-outline"></i><span> Commandes </span> <span class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users"></i><span> Utilisateurs </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="icons-glyphicons.html"></a></li>
-                                    <li><a href="icons-colored.html">Bon de Commandes</a></li>
+                                    <li><a href="#/users-all">Liste</a></li>
+                                    <li><a href="#/">Bon de Commandes</a></li>
                                 </ul>
                             </li>
 
@@ -496,6 +500,10 @@
         <script src="../public/js/helpers/my-tools.js"></script>
 
 
+        <!-- Modal-Effect -->
+        <script src="../public/plugins/custombox/js/custombox.min.js"></script>
+        <script src="../public/plugins/custombox/js/legacy.min.js"></script>
+
 
         <!--Angular routes-->
         <script src="../app/routes.js"></script>
@@ -503,14 +511,16 @@
 
 
         <!-- Angular Factories-->
-        <script src="../app/Factory/LoginFactory.js"></script>
+        <script src="../app/factories/LoginFactory.js"></script>
 
         <!--Angular App Controllers -->
-        <script src="../app/Controllers/NavbarCtrl.js"></script>
-        <script src="../app/Controllers/SidebarCtrl.js"></script>
-        <script src="../app/Controllers/SettingCtrl.js"></script>
-        <script src="../app/Controllers/HomeCtrl.js"></script>
-        <script src="../app/Controllers/userProfilCtrl.js"></script>
+        <script src="../app/controllers/NavbarCtrl.js"></script>
+        <script src="../app/controllers/SidebarCtrl.js"></script>
+        <script src="../app/controllers/SettingCtrl.js"></script>
+        <script src="../app/controllers/HomeCtrl.js"></script>
+        <script src="../app/controllers/userProfilCtrl.js"></script>
+        <script src="../app/controllers/usersCtrl.js"></script>
+        <script src="../app/controllers/userDetails.js"></script>
 
 
 

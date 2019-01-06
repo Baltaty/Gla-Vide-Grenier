@@ -7,9 +7,18 @@ app.config(function($routeProvider, $httpProvider) {
             controller: 'HomeCtrl'
         })
         .when('/user-profile', {
-            templateUrl: 'admin/user-profile.html',
+            templateUrl: 'user-profile.html',
             controller: 'userProfilCtrl'
         })
+        .when('/users-all', {
+            templateUrl: 'admin/users-all.html',
+            controller: 'usersCtrl'
+        })
+        .when('/user-detail/:trigramme', {
+            templateUrl: 'admin/user-details.html',
+            controller: 'userDetailsCtrl'
+        })
+
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

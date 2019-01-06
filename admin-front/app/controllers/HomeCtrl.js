@@ -17,9 +17,6 @@ app.controller("HomeCtrl", function($scope) {
             }
     }
 
-    console.log('hello admin control');
-    console.log($scope.session);
-
 });
 
 

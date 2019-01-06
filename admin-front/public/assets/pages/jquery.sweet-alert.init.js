@@ -30,17 +30,18 @@
         });
 
         //Warning Message
-        $('#sa-warning').click(function () {
+        $('.sa-warning').click(function () {
+            console.log("bastars");
             swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
+                title: "Vous êtes sûre ?",
+                text: "Vous ne pourrez plus revenir en arrière !",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: 'btn-warning',
-                confirmButtonText: "Yes, delete it!",
+                confirmButtonText: "Oui, je supprime!",
                 closeOnConfirm: false
             }, function () {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                swal("Supprimé!", "Votre suppression à été éffectué.", "success");
             });
         });
 

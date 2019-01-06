@@ -20,6 +20,25 @@ app.factory("Login", function ($q, $http) {
             });
             return deferred.promise;
         },
+        getAllusers: function (data) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "user.php?action="+data).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        deleteUser: function (data) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "user.php?action=DELETE&value="+data).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+
     };
 
     return factory;
