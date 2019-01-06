@@ -5,8 +5,6 @@ app.controller('userDetailsCtrl' , function ($scope , $routeParams, Login) {
     var req = "only&critere=trigramme&value="+trigramme;
     // console.log(req);
 
-    console.log(" Hello userdetails");
-
     Login.getAllusers(req).then(function (resp) {
             if(resp.data[0]){
                 $scope.user = resp.data[0];
@@ -16,6 +14,18 @@ app.controller('userDetailsCtrl' , function ($scope , $routeParams, Login) {
             }
 
     });
+
+    $scope.confirmeDelete = function (data) {
+        $scope.toDelete = data;
+    };
+
+    $scope.delete = function(data){
+        Login.deleteUser(data.trigramme).then(function (response) {
+            if(response.data.success){
+                window.location.reload();
+            }
+        });
+    }
 
 
 

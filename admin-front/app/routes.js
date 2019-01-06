@@ -14,6 +14,10 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'admin/users-all.html',
             controller: 'usersCtrl'
         })
+        .when('/user-create', {
+            templateUrl: 'admin/user-create.html',
+            controller: 'createUserCtrl'
+        })
         .when('/user-detail/:trigramme', {
             templateUrl: 'admin/user-details.html',
             controller: 'userDetailsCtrl'

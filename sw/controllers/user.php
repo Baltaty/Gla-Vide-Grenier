@@ -30,7 +30,13 @@ if(isset($_POST) && !empty($_POST)){
 
     }
 } elseif (isset($_GET)  && !empty($_GET)){
-    getAllUsers($_GET);
+
+    if($_GET['action']=="DELETE"){
+        deleteUser($_GET);
+    }else {
+        getAllUsers($_GET);
+    }
+
 }
 
 
@@ -48,7 +54,7 @@ function deleteUser($data){
 
         $value=$data['value'];
         $sql=" DELETE FROM user WHERE user.trigramme='$value'";
-//        $bdconnect->query($sql);
+        $bdconnect->query($sql);
         $resuldata= [
             "success"=>true,
             "message"=>"supprimer avec sucess",
@@ -160,7 +166,7 @@ function addUser($data){
 
 
 
-
+    $response=[];
     $bdconnect = connectionToBD();
     if(userExist($data['email'], $bdconnect)){
         $response =[
@@ -206,15 +212,14 @@ function addUser($data){
 
 
 
-        $sql =" INSERT INTO user (nom, prenom, dateNaissance, civilite, numero, email, password, typeUser, trigramme, cle)
-                VALUES (:nom, :prenom, :dateNaissance, :civilite, :numero, :email, :password, :typeUser, :trigramme, :cle) ";
+
+        $sql =" INSERT INTO user (nom, prenom, dateNaissance, civilite, numero, email, password, typeUser, trigramme, cle, adresse)
+                VALUES (:nom, :prenom, :dateNaissance, :civilite, :numero, :email, :password, :typeUser, :trigramme, :cle, :adresse) ";
 
         // Ajouter un trigramme dans la data;
         $data['trigramme'] = $trigram;
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
         $data['cle'] = md5(microtime(TRUE)*100000);
-
-
 
 
         $preapreREq = $bdconnect->prepare($sql);
@@ -228,7 +233,8 @@ function addUser($data){
             "civilite"=>$data['civilite'],
             "username"=>$data['nom'] ." ". $data['prenom'] ,
             "message"=>" Votre insciption a ete prise en compte avec succes, un mail de confirmation vous à été envoyé merci !",
-            "token_confirm"=>$data['cle']
+            "token_confirm"=>$data['cle'],
+            "exist"=>false,
         ];
 
     }catch (PDOException $ex){
