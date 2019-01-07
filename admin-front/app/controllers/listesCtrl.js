@@ -37,9 +37,16 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login
                     } else {
                         $scope.burnOut=false;
                     }
+
+                    if($scope.listesdetails.length==0){
+                        $scope.empty = true;
+                    } else {
+                        $scope.empty = false;
+                    }
                 } else {
                     $scope.burnOut=false;
                 }
+
 
             });
         });

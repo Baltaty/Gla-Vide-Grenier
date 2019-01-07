@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le :  lun. 07 jan. 2019 à 00:48
--- Version du serveur :  5.6.38
--- Version de PHP :  7.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Jan 07, 2019 at 10:01 PM
+-- Server version: 5.7.14
+-- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `glazik_gym`
+-- Database: `glazik_gym`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article`
+-- Table structure for table `article`
 --
 
 CREATE TABLE `article` (
@@ -43,11 +43,11 @@ CREATE TABLE `article` (
   `prix` double NOT NULL,
   `taille` varchar(30) NOT NULL,
   `description` varchar(30) NOT NULL,
-  `photo` int(11) NOT NULL,
+  `photo` text,
   `statut` varchar(30) NOT NULL,
-  `commentaire` varchar(30) NOT NULL,
-  `codeV` int(11) NOT NULL,
-  `codeDV` int(11) NOT NULL
+  `commentaire` text NOT NULL,
+  `codeV` int(11) DEFAULT NULL,
+  `codeDV` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -55,14 +55,16 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`codeA`, `numListe`, `prix`, `taille`, `description`, `photo`, `statut`, `commentaire`, `codeV`, `codeDV`) VALUES
-(5, 3, 500, 'L', 'Sweat H&M', 0, 'NON FOURNI', 'sweet gris', 0, 0),
-(7, 3, 500, 'S', 'JEAN SLIM', 0, 'NON FOURNI', 'jean noir super pour les soire', 0, 0),
-(8, 1, 33, 'XS', 'test okay', 0, 'NON FOURNI', 'ok', 0, 0);
+(5, 3, 500, 'L', 'Sweat H&M', '0', 'NON FOURNI', 'sweet gris', 0, 0),
+(7, 3, 500, 'S', 'JEAN SLIM', '0', 'NON FOURNI', 'jean noir super pour les soire', 0, 0),
+(8, 1, 33, 'XS', 'test okay', '0', 'NON FOURNI', 'ok', 0, 0),
+(9, 4, 2, 'S', 'koflbjl', NULL, 'NON FOURNI', 'cccc', NULL, NULL),
+(10, 2, 12, 'FRG', 'sV', NULL, 'NON FOURNI', 'ZFFZEFZ', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `articles`
+-- Table structure for table `articles`
 --
 
 CREATE TABLE `articles` (
@@ -147,11 +149,10 @@ CREATE TABLE `liste` (
 --
 
 INSERT INTO `liste` (`numListe`, `nom_liste`, `statut`, `trigramme`, `date_creation`) VALUES
-(1, 'test', 'en cours', 'YKO', '2019-01-06'),
+(1, 'test', 'soumis', 'YKO', '2019-01-06'),
 (2, 'liste pour delete', 'en cours', 'YKO', '2019-01-06'),
 (3, 'liste depuis lapp', 'en cours', 'YKO', '2019-01-06'),
-(4, 'liste depuis lappli', 'en cours', 'YKO', '2019-01-06'),
-(5, 'liste depuis lapplication', 'en cours', 'YKO', '2019-01-06');
+(4, 'liste depuis lappli', 'soumis', 'YKO', '2019-01-06');
 
 -- --------------------------------------------------------
 
@@ -190,10 +191,18 @@ CREATE TABLE `page` (
 --
 
 CREATE TABLE `parametre` (
+  `id` int(11) NOT NULL,
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL,
   `z` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `parametre`
+--
+
+INSERT INTO `parametre` (`id`, `x`, `y`, `z`) VALUES
+(1, 9, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -318,6 +327,12 @@ ALTER TABLE `page`
   ADD PRIMARY KEY (`code`);
 
 --
+-- Indexes for table `parametre`
+--
+ALTER TABLE `parametre`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `texte`
 --
 ALTER TABLE `texte`
@@ -328,11 +343,10 @@ ALTER TABLE `texte`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`trigramme`),
-  ADD KEY `id` (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `vente`
+-- Indexes for table `vente`
 --
 ALTER TABLE `vente`
   ADD PRIMARY KEY (`codeV`),
@@ -347,55 +361,52 @@ ALTER TABLE `vente`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `codeA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+  MODIFY `codeA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
   MODIFY `id_article` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `categorie`
 --
 ALTER TABLE `categorie`
   MODIFY `id_cat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `commentaire`
 --
 ALTER TABLE `commentaire`
   MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `detailvente`
 --
 ALTER TABLE `detailvente`
   MODIFY `codeDV` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `liste`
+-- AUTO_INCREMENT for table `liste`
 --
 ALTER TABLE `liste`
   MODIFY `numListe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
--- AUTO_INCREMENT pour la table `page`
+-- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
   MODIFY `code` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `texte`
+-- AUTO_INCREMENT for table `parametre`
+--
+ALTER TABLE `parametre`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `texte`
 --
 ALTER TABLE `texte`
   MODIFY `codetext` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `vente`
 --
@@ -430,14 +441,18 @@ ALTER TABLE `detailvente`
   ADD CONSTRAINT `detailvente_ibfk_1` FOREIGN KEY (`codeV`) REFERENCES `vente` (`codeV`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `texte`
+-- Constraints for table `texte`
 --
 ALTER TABLE `texte`
   ADD CONSTRAINT `texte_ibfk_1` FOREIGN KEY (`codepage`) REFERENCES `page` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `vente`
+-- Constraints for table `vente`
 --
 ALTER TABLE `vente`
   ADD CONSTRAINT `vente_ibfk_1` FOREIGN KEY (`codeA`) REFERENCES `article` (`codeA`),
   ADD CONSTRAINT `vente_ibfk_2` FOREIGN KEY (`codeDV`) REFERENCES `detailvente` (`codeDV`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
