@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 06, 2019 at 11:57 PM
--- Server version: 5.7.14
--- PHP Version: 7.0.10
+-- Hôte : localhost:3306
+-- Généré le :  lun. 07 jan. 2019 à 00:48
+-- Version du serveur :  5.6.38
+-- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `glazik_gym`
+-- Base de données :  `glazik_gym`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Structure de la table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article`
+-- Structure de la table `article`
 --
 
 CREATE TABLE `article` (
@@ -62,7 +62,7 @@ INSERT INTO `article` (`codeA`, `numListe`, `prix`, `taille`, `description`, `ph
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articles`
+-- Structure de la table `articles`
 --
 
 CREATE TABLE `articles` (
@@ -328,10 +328,11 @@ ALTER TABLE `texte`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`trigramme`),
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
--- Indexes for table `vente`
+-- Index pour la table `vente`
 --
 ALTER TABLE `vente`
   ADD PRIMARY KEY (`codeV`),
@@ -347,46 +348,54 @@ ALTER TABLE `vente`
 --
 ALTER TABLE `article`
   MODIFY `codeA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
   MODIFY `id_article` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `categorie`
 --
 ALTER TABLE `categorie`
   MODIFY `id_cat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `commentaire`
 --
 ALTER TABLE `commentaire`
   MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `detailvente`
 --
 ALTER TABLE `detailvente`
   MODIFY `codeDV` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `liste`
+-- AUTO_INCREMENT pour la table `liste`
 --
 ALTER TABLE `liste`
   MODIFY `numListe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT for table `page`
+-- AUTO_INCREMENT pour la table `page`
 --
 ALTER TABLE `page`
   MODIFY `code` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `texte`
+-- AUTO_INCREMENT pour la table `texte`
 --
 ALTER TABLE `texte`
   MODIFY `codetext` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `vente`
 --
@@ -421,18 +430,14 @@ ALTER TABLE `detailvente`
   ADD CONSTRAINT `detailvente_ibfk_1` FOREIGN KEY (`codeV`) REFERENCES `vente` (`codeV`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `texte`
+-- Contraintes pour la table `texte`
 --
 ALTER TABLE `texte`
   ADD CONSTRAINT `texte_ibfk_1` FOREIGN KEY (`codepage`) REFERENCES `page` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `vente`
+-- Contraintes pour la table `vente`
 --
 ALTER TABLE `vente`
   ADD CONSTRAINT `vente_ibfk_1` FOREIGN KEY (`codeA`) REFERENCES `article` (`codeA`),
   ADD CONSTRAINT `vente_ibfk_2` FOREIGN KEY (`codeDV`) REFERENCES `detailvente` (`codeDV`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
