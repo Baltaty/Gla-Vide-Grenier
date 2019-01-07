@@ -105,7 +105,7 @@
                 </div>
 
                 <!-- Button mobile view to collapse sidebar menu -->
-                <div class="navbar navbar-default" role="navigation">
+                <div class="navbar navbar-default" role="navigation" ng-controller="NavbarCtrl">
                     <div class="container">
 
                         <!-- Navbar-left -->
@@ -243,18 +243,18 @@
                             </li>
 
                             <li class="dropdown user-box">
-                                <a href="#" class="dropdown-toggle waves-effect waves-light user-link" data-toggle="dropdown" aria-expanded="true">
+                                <a href="#" ng-click="$event.preventDefault();"  class="dropdown-toggle waves-effect waves-light user-link" data-toggle="dropdown" aria-expanded="true">
                                     <img src="../public/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle user-img">
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                                     <li>
-                                        <h5>Hi, John</h5>
+                                        <h5>Hi, {{session.prenom}} {{session.name | uppercase}} </h5>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                                    <li><a href="#/user-profile"><i class="ti-user m-r-5"></i> Profile</a></li>
+                                    <li><a href="#/parametres"><i class="ti-settings m-r-5"></i> Parametres</a></li>
+                                    <li><a href="#/parametres"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
+                                    <li><a href="javascript:void(0)" ng-click="logOut()"><i class="ti-power-off m-r-5"></i> Logout</a href="javascript:void(0)"></li>
                                 </ul>
                             </li>
 

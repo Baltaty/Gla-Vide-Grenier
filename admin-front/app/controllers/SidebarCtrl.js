@@ -1,4 +1,4 @@
-app.controller("SidebarCtrl", function ($scope) {
+app.controller("SidebarCtrl", function ($scope, $location) {
 
     try {
         $scope.session=JSON.parse(window.localStorage.getItem("user_session"));
@@ -12,9 +12,12 @@ app.controller("SidebarCtrl", function ($scope) {
         // window.location.href="../"
     }
 
-    console.log("hello sidebar");
-    console.log($scope.session);
+    $scope.logOut = function () {
+        notif('warning','Deconnexion en cours','Compte','toast-top-right');
 
+        // window.localStorage.removeItem("user_session");
+        // $location.path("/Gla-Vide-Grenier/vitrine-front/");
+    };
 
 });
 
