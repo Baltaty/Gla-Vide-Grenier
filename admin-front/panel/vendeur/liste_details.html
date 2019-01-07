@@ -29,9 +29,14 @@
                         <h4 class="header-title m-t-0 m-b-30 pull-right" >
 
                             <a href="#/addlistedetails/{{num_liste}}" ng-class="{'hidden':burnOut}"
-                               id="addToTable" class="btn btn-success waves-effect waves-light">
+                                class="btn btn-success waves-effect waves-light">
                                 Ajouter un article <i class="mdi mdi-plus-circle-outline"></i>
                             </a>
+                        </h4>
+                        <h4 class="header-title m-t-0 m-b-30 pull-right" >
+                            <div class="m-b-30 m-r-5">
+                                <button class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#myModal">Soummettre ma liste<i class="fa fa-send"></i></button>
+                            </div>
                         </h4>
 
 
@@ -166,10 +171,29 @@
 
         </div>
 
-
-
-
-
     </div>
 </div>
+
+<!-- sample modal content -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">SOUMISSION DE LISTE</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Condition de soumission</h4>
+                    <p>Après avoir soumis cette liste, vous ne pourrez plus la modifier.</p>
+                    <hr>
+                    </p>Voulez-vous continuer ?</p>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal" ng-click="MajListeStatut(num_liste)">Oui, je soumets</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 

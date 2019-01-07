@@ -21,6 +21,14 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="m-b-30">
+                    <a href="#/addliste" id="addToTable" class="btn btn-success waves-effect waves-light">  Ajouter une liste  <i class="mdi mdi-plus-circle-outline"></i></a>
+                </div>
+            </div>
+        </div>
+
 
 
         <div class="row">
@@ -74,8 +82,8 @@
                                                             <td class="actions">
                                                               <center>
                                                                   <a ng-href="#/listes-view/{{l.numListe}}" class="on-editing cancel-row"><i class="fa fa-barcode "></i></a>
-                                                                  <a href="#/listes/{{l.numListe}}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                                                                  <button class="on-default remove-row" ng-click="DeleteListe(l.numListe)"><i class="fa fa-trash-o"></i></button>
+                                                                  <a href="#/listes/{{l.numListe}}" class="on-default edit-row" ng-hide="l.statut=='soumis'"><i class="fa fa-pencil"></i></a>
+                                                                  <button class="on-default remove-row" ng-hide="l.statut=='soumis'"  ng-click="DeleteListe(l.numListe)"><i class="fa fa-trash-o"></i></button>
                                                               </center>
                                                             </td>
                                                         </tr>
@@ -141,8 +149,6 @@
 
             </div>
         </div>
-
-
 
     </div>
 </div>
