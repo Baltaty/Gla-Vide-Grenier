@@ -8,7 +8,11 @@ header('Content-Type:application/json');
 
 
 include '../dbconnexion.php';
-if(isset($_GET)){
+
+
+//print_r($_POST);
+//die();
+if(isset($_GET) && !empty($_GET)){
 
 
     if($_GET['action']=="all"){
@@ -173,7 +177,8 @@ if(isset($_GET)){
     }
 }
 
-if(isset($_POST)){
+
+if(isset($_POST) && !empty($_POST)){
 
     if($_POST['action']=="add"){
 
@@ -193,15 +198,15 @@ if(isset($_POST)){
                         "message"=> "Ajout réussi",
                         "valide"=>true
                   ];
-            
-            
+
+
         }catch(PDOException $ex){
             echo $ex->getMessage();
             die();
         }
         echo json_encode($response);
 
-    
+
     }
     if($_POST['action']=="adddetail"){
 
@@ -225,15 +230,15 @@ if(isset($_POST)){
                         "message"=> "Ajout réussi",
                         "valide"=>true
                   ];
-            
-            
+
+
         }catch(PDOException $ex){
             echo $ex->getMessage();
             die();
         }
         echo json_encode($response);
 
-    
+
     }
     if($_POST['action']=="editdetail"){
 
@@ -257,14 +262,14 @@ if(isset($_POST)){
                         "message"=> "Modification réussie ",
                         "valide"=>true
                   ];
-            
-            
+
+
         }catch(PDOException $ex){
             echo $ex->getMessage();
             die();
         }
         echo json_encode($response);
 
-    
+
     }
 }

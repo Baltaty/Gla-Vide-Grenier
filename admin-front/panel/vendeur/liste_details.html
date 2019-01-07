@@ -1,80 +1,201 @@
 <div class="content">
     <div class="container">
-        <br></br>
-        <h4 class="header-title m-t-0">Articles de la liste</h4>
+
+        <!-- breadcrumbs -->
         <div class="row">
-                <div class="col-sm-6">
-                    <div class="m-b-30">
-                        <a href="#/addlistedetails/{{num_liste}}" id="addToTable" class="btn btn-success waves-effect waves-light">  Ajouter un article <i class="mdi mdi-plus-circle-outline"></i></a>
-                    </div>
+            <div class="col-xs-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Vendeur/Liste</h4>
+
+                    <ol class="breadcrumb p-0 m-0">
+                        <li>
+                            <a href="#/">Home</a>
+                        </li>
+                        <li class="active">
+                            liste/articles
+                        </li>
+                    </ol>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-        <div class="col-md-8">
-            <div class="property-card property-horizontal">
-                <div class="row">
-                    <!-- <div class="col-sm-4">
-                        <div class="property-image" style="background: url('assets/images/properties/1.jpg') center center / cover no-repeat;">
-                            <span class="property-label label label-danger">For Sale</span>
-                        </div>
-                    </div> -->
-                    <!-- /col 4 -->
-                    <div class="col-sm-8">
-                        <div class="property-content" ng-repeat="d in listesdetails">
-                            <div class="listingInfo">
-                                <div class="">
-                                <h4 class="text-success m-t-0">$ {{d.prix}}</h4>
-                                </div>
-                                <div class="">
-                                    <h3><a href="#" class="text-dark">{{d.description}}</a></h3>
-                                    <p class="text-muted">TAILLE: {{d.taille}}       STATUT: {{d.statut}}</p>
-        
-                                    <p class="font-13 text-muted m-b-0">{{d.commentaire}}</p>
-                                </div>
-                            </div>
-                            <div class="property-action">
-                                <div class="pull-right">
-                                        <button  class="btn btn-default" ng-click="DeleteListeDetails(d.codeA)"><i class="fa fa-trash-o"></i></button>
-                                </div>
-                                <div class="pull-right">
-                                        <a href="#/editlistedetails/{{d.codeA}}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                                </div>
-                            </div>
-                            <!-- end. Card actions -->
-                        </div>
-                    </div>
-                    <!-- /col 8 -->
-                </div>
-                <!-- /inner row -->
-            </div>
-            <!-- End property item -->    
-        
-            <div class="text-right">
-                <ul class="pagination">
-                    <li class="disabled">
-                        <a href="#"><i class="fa fa-angle-left"></i></a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-angle-right"></i></a>
-                    </li>
-                </ul>
-            </div>
-        
         </div>
+
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card-box">
+                        <h4 class="header-title m-t-0 m-b-30">Articles de la liste </h4>
+
+                        <h4 class="header-title m-t-0 m-b-30 pull-right" >
+
+                            <a href="#/addlistedetails/{{num_liste}}" ng-class="{'hidden':burnOut}"
+                               id="addToTable" class="btn btn-success waves-effect waves-light">
+                                Ajouter un article <i class="mdi mdi-plus-circle-outline"></i>
+                            </a>
+                        </h4>
+
+
+                        <ul class="nav nav-tabs">
+
+                            <li class="active">
+                                <a href="#in-wait"  id="recharger" title=" juste a test" ng-click="$event.preventDefault()" data-toggle="tab" aria-expanded="false">
+                                    <span class=""><i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs">Articles</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#in-done" ng-click="$event.preventDefault()" data-toggle="tab" aria-expanded="false">
+                                    <span class=""><i class="fa fa-calendar-check-o"></i></span>
+                                    <span class="hidden-xs">Bon à savoir</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="in-wait">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="panel panel-border panel-danger">
+                                            <div class="panel-body">
+
+                                                <!--&lt;!&ndash; article liste&ndash;&gt;-->
+                                                  <!--<div class="col-sm-12 col-lg-12 col-md-12">-->
+                                                    <!--<div class="property-content" ng-repeat="d in listesdetails">-->
+                                                        <!--<div class="listingInfo">-->
+                                                            <!--<div class="">-->
+                                                                <!--<h4 class="text-success m-t-0">$ {{d.prix}}</h4>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="">-->
+                                                                <!--<h3><a href="#" class="text-dark">{{d.description}}</a></h3>-->
+                                                                <!--<p class="text-muted">TAILLE: {{d.taille}}       STATUT: {{d.statut}}</p>-->
+
+                                                                <!--<p class="font-13 text-muted m-b-0">{{d.commentaire}}</p>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="property-action">-->
+                                                            <!--<div class="pull-right">-->
+                                                                <!--<button  class="btn btn-default" ng-click="DeleteListeDetails(d.codeA)"><i class="fa fa-trash-o"></i></button>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="pull-right">-->
+                                                                <!--<a href="#/editlistedetails/{{d.codeA}}" class="btn btn-default"><i class="fa fa-pencil"></i></a>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--&lt;!&ndash; end. Card actions &ndash;&gt;-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                                <!--&lt;!&ndash; &ndash;&gt;-->
+
+
+                                                <div class="property-card property-horizontal">
+                                                    <div class="row" ng-repeat="d in listesdetails" >
+                                                        <div class="col-sm-4">
+                                                            <div class="property-image" style="background: url('../public/images/icon-standard.png') center center / cover no-repeat;">
+                                                                <span class="property-label label label-danger">A vendre </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /col 4 -->
+                                                        <div class="col-sm-8">
+                                                            <div class="property-content">
+                                                                <div class="listingInfo">
+                                                                    <div class="">
+                                                                        <h4 class="text-success m-t-0">Prix : - $ {{d.prix}}</h4>
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <h3><a href="#" class="text-dark">{{d.description}}</a></h3>
+                                                                        <p class="text-muted"><i class="mdi mdi-map-marker-radius m-r-5"></i>Glazyk gym vide dressing, France,</p>
+
+                                                                        <p class="font-13 text-muted m-b-0 lead">TAILLE: {{d.taille}}  STATUT: {{d.statut}}</p>
+                                                                        <p class="font-13 text-muted m-b-0"> {{d.commentaire}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="property-action">
+
+                                                                    <div class="pull-right">
+                                                                        <button  class="btn btn-default" ng-click="DeleteListeDetails(d.codeA)"><i class="fa fa-trash-o"></i></button>
+                                                                    </div>
+                                                                    <div class="pull-right">
+                                                                        <a href="#/editlistedetails/{{d.codeA}}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- end. Card actions -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- /col 8 -->
+                                                    </div>
+                                                    <!-- /inner row -->
+                                                </div>
+                                                <!-- End property item -->
+
+
+
+
+
+                                                <div class="text-right">
+
+                                                    <ul class="pagination">
+                                                        <li class="disabled">
+                                                            <a href="#"><i class="fa fa-angle-left"></i></a>
+                                                        </li>
+                                                        <li class="active">
+                                                            <a href="#">1</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">2</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">3</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="fa fa-angle-right"></i></a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="in-done">
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="panel panel-border panel-success">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title"> Information sur les parametres </h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+        </div>
+
+
+
+
+
 
     </div>
 </div>

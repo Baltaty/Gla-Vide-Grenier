@@ -43,6 +43,10 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'vendeur/liste_details.html',
             controller: 'listesCtrl'
         })
+        .when('/parametres', {
+            templateUrl: 'admin/parametre.html',
+            controller: 'parameterCtrl'
+        })
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

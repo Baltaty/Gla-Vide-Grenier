@@ -8,7 +8,7 @@ header('Content-Type:application/json');
 
 
 include '../dbconnexion.php';
-if(isset($_GET)){
+if(isset($_GET) && !empty($_GET)){
 
     if($_GET['action']=="latest"){
 
@@ -210,7 +210,7 @@ if(isset($_GET)){
 
 
 }
-if(isset($_POST)){
+if(isset($_POST) && !empty($_POST)){
 
    if($_POST['action']=="addcomment"){
 

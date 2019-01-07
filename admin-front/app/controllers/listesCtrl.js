@@ -1,4 +1,4 @@
-app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
+app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login) {
 
     try {
         $scope.session = JSON.parse(window.localStorage.getItem("user_session"));
@@ -27,8 +27,21 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
      try{
         ListesFactory.LoadListeDetails(num_liste).then(function (response) {
                
-               $scope.listesdetails= response.data;
-               console.log(response.data[0]);
+            $scope.listesdetails= response.data;
+            Login.getParameters().then(function (res) {
+
+                if(res.data.success){
+                    $scope.parameters = res.data.data;
+                    if($scope.listesdetails.length==parseInt($scope.parameters.nombre_article)){
+                        $scope.burnOut=true;
+                    } else {
+                        $scope.burnOut=false;
+                    }
+                } else {
+                    $scope.burnOut=false;
+                }
+
+            });
         });
     }catch (ex){
      console.error(ex)
