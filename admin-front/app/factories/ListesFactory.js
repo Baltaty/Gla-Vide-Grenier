@@ -71,6 +71,15 @@ app.factory("ListesFactory", function ($q, $http) {
             });
             return deferred.promise;
         },
+        MajListeStatut: function (num_liste) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=majlistestatut&num="+num_liste).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
         loadListeDetailsElement: function (codeA) {
             var deferred = $q.defer();
             $http.get(BASE_URL + "listes.php?action=listedetailselement&codeA="+codeA).then(function (data, status) {

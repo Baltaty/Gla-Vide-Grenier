@@ -171,6 +171,32 @@ if(isset($_GET)){
 
     
     }
+    if($_GET['action']=="majlistestatut"){
+
+        $response = [];
+        $num_liste=$_GET['num'];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
+        try{
+            $sql = "UPDATE liste SET statut='soumis'
+            WHERE numListe='$num_liste'";
+            // use exec() because no results are returned
+            //print_r($sql);
+            $bdconnect->exec($sql);
+            $response = [
+                        "message"=> "soumission réussie ",
+                        "valide"=>true
+                  ];
+            
+            
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
 }
 
 if(isset($_POST)){
@@ -212,14 +238,12 @@ if(isset($_POST)){
         $taille=$_POST['taille'];
         $commentaire=$_POST['commentaire'];
         $statut=$_POST['statut'];
-        print_r($_POST);
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
         try{
             $sql = "INSERT INTO article (numListe,prix,taille,description,statut,commentaire)
             VALUES ('$num_liste','$prix', '$taille', '$description','$statut', '$commentaire')";
             // use exec() because no results are returned
-            print_r($sql);
             $bdconnect->exec($sql);
             $response = [
                         "message"=> "Ajout réussi",

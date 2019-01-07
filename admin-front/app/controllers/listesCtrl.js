@@ -67,6 +67,8 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                     // }
                     console.log(response.data);
                     //window.location.href
+                    notif('success','C\'est parfait !','SUPPRESSION DE LISTE','toast-top-full-width');
+                    window.location.href="#/listes";
                 });
         }catch (ex){
          console.error(ex)
@@ -85,7 +87,9 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                     //     });
                     // }
                     console.log(response.data);
-                    //window.location.href
+                    notif('success','Suppression effectuée avec succès !','SUPPRESSION D\'ARTICLE','toast-top-full-width');
+                    //console.log("fksdngksj");
+                    //window.location.href="#/listes/"+num_liste;
                 });
         }catch (ex){
          console.error(ex)
@@ -110,6 +114,8 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                     //     });
                     // }
                     console.log(response.data);
+                    notif('success','Liste ajoutée avec succès !','AJOUT DE LISTE','toast-top-full-width');
+                    window.location.href="#/listes";
                 });
         }catch (ex){
          console.error(ex)
@@ -130,7 +136,9 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                    //         timeout: 1500
                    //     });
                    // }
-                   console.log(response.data);
+                   //console.log(response.data);
+                   notif('success','Article ajouté avec succès !','AJOUT D\'ARTICLE','toast-top-full-width');
+                   window.location.href="#/listes/"+num_liste;
                });
        }catch (ex){
         console.error(ex)
@@ -153,9 +161,35 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                    //     });
                    // }
                    console.log(response.data);
+                   notif('success','Article modifié avec succès !','MODIFICATION D\'ARTICLE','toast-top-full-width');
+
                });
        }catch (ex){
         console.error(ex)
         }
     }
+    $scope.MajListeStatut= function(num_liste){
+        console.log(" Je suis dans la fonction edit liste detail du controller ET NUM LISTE EST xxx");
+
+       try{
+           ListesFactory.MajListeStatut(num_liste).then(function (response) {
+
+                   // if(response.data.valide){
+                   //     toaster.pop({
+                   //         type: 'sucess',
+                   //         title: 'Parfait !',
+                   //         body: response.data.message,
+                   //         timeout: 1500
+                   //     });
+                   // }
+                   console.log(response.data);
+                   notif('success','Soumission faite avec succès !','SOUMISSION DE LISTE','toast-top-full-width');
+                   //window.location.href="#/listes";
+
+               });
+       }catch (ex){
+        console.error(ex)
+        }
+    }
+    
 });

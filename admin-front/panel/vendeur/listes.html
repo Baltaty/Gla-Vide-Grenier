@@ -1,11 +1,17 @@
 <div class="content">
     <div class="container">
-
+            <br></br>
+            <div class="row">
+                    <div class="col-sm-6">
+                        <div class="m-b-30">
+                            <a href="#/addliste" id="addToTable" class="btn btn-success waves-effect waves-light">  Ajouter une liste  <i class="mdi mdi-plus-circle-outline"></i></a>
+                        </div>
+                    </div>
+                </div>
         <div class="panel" ng-controller="listesCtrl">
-
             <div class="panel-body">
 
-        
+                
                 <div class="">
                     <table class="table table-striped add-edit-table table-bordered" id="datatable-editable">
                         <thead>
@@ -23,10 +29,10 @@
                                 </td>
                                 <td>{{l.statut}}</td>
                                 <td class="actions">
-                                    <a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-                                    <a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-                                    <a href="#/listes/{{l.numListe}}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                                    <button class="on-default remove-row" ng-click="DeleteListe(l.numListe)"><i class="fa fa-trash-o"></i></button>
+                                    <button  ng-hide="l.statut=='soumis'">
+                                            <a href="#/listes/{{l.numListe}}"  class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                    </button>
+                                    <button ng-hide="l.statut=='soumis'" class="on-default remove-row" ng-click="DeleteListe(l.numListe)"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                             
