@@ -33,7 +33,7 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
 
     $scope.registerData = function (data) {
           if(verifyData(data)){
-              data.typeUser= "Vendeur";
+              data.typeUser= "vendeur";
               data.action= "ADD";
               delete  data.passconfirm;
               // console.log(data);
