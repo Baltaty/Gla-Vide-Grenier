@@ -21,7 +21,8 @@
         </div>
 
         <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-lg-12">
+
                     <div class="card-box">
                         <h4 class="header-title m-t-0 m-b-30">Articles de la liste </h4>
 
@@ -51,6 +52,7 @@
                             </li>
 
                         </ul>
+
                         <div class="tab-content">
                             <div class="tab-pane active" id="in-wait">
 
@@ -59,33 +61,6 @@
 
                                         <div class="panel panel-border panel-danger">
                                             <div class="panel-body">
-
-                                                <!--&lt;!&ndash; article liste&ndash;&gt;-->
-                                                  <!--<div class="col-sm-12 col-lg-12 col-md-12">-->
-                                                    <!--<div class="property-content" ng-repeat="d in listesdetails">-->
-                                                        <!--<div class="listingInfo">-->
-                                                            <!--<div class="">-->
-                                                                <!--<h4 class="text-success m-t-0">$ {{d.prix}}</h4>-->
-                                                            <!--</div>-->
-                                                            <!--<div class="">-->
-                                                                <!--<h3><a href="#" class="text-dark">{{d.description}}</a></h3>-->
-                                                                <!--<p class="text-muted">TAILLE: {{d.taille}}       STATUT: {{d.statut}}</p>-->
-
-                                                                <!--<p class="font-13 text-muted m-b-0">{{d.commentaire}}</p>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
-                                                        <!--<div class="property-action">-->
-                                                            <!--<div class="pull-right">-->
-                                                                <!--<button  class="btn btn-default" ng-click="DeleteListeDetails(d.codeA)"><i class="fa fa-trash-o"></i></button>-->
-                                                            <!--</div>-->
-                                                            <!--<div class="pull-right">-->
-                                                                <!--<a href="#/editlistedetails/{{d.codeA}}" class="btn btn-default"><i class="fa fa-pencil"></i></a>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
-                                                        <!--&lt;!&ndash; end. Card actions &ndash;&gt;-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                                <!--&lt;!&ndash; &ndash;&gt;-->
 
 
                                                 <div class="property-card property-horizontal">
@@ -100,7 +75,7 @@
                                                             <div class="property-content">
                                                                 <div class="listingInfo">
                                                                     <div class="">
-                                                                        <h4 class="text-success m-t-0">Prix : - $ {{d.prix}}</h4>
+                                                                        <h4 class="text-success m-t-0">Prix :  {{d.prix}} <i class="fa fa-euro"></i></h4>
                                                                     </div>
                                                                     <div class="">
                                                                         <h3><a href="#" class="text-dark">{{d.description}}</a></h3>
@@ -189,9 +164,7 @@
                     </div>
                 </div>
 
-
         </div>
-
 
 
 
