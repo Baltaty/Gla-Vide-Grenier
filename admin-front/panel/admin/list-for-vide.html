@@ -87,13 +87,19 @@
                                                                 Action <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu">
+                                                                <!--<li>-->
+                                                                    <!--<a ng-href="#/listes-view/{{ls.numListe}}" class="btn btn-info waves-effect waves-light">-->
+                                                                        <!--<i class="fa fa-eye m-r-5"></i> Voir-->
+                                                                    <!--</a>-->
+                                                                <!--</li>-->
                                                                 <li>
-                                                                    <a ng-href="#/listes-view/{{ls.numListe}}" class="btn btn-info waves-effect waves-light">
+                                                                    <a ng-href="#/listes/{{ls.numListe}}" class="btn btn-info waves-effect waves-light">
                                                                         <i class="fa fa-eye m-r-5"></i> Voir
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="javascript:void(0);" class="btn btn-success waves-effect waves-light" ng-click="validation(ls)" data-toggle="modal" data-target="#myModal">
+                                                                    <a href="javascript:void(0);" class="btn btn-success waves-effect waves-light"
+                                                                      ng-hide="ls.statut=='acceptee'"  ng-click="validation(ls)" data-toggle="modal" data-target="#myModal">
                                                                         <i class="fa fa-check m-r-5"></i> Valider
                                                                     </a>
                                                                 </li>

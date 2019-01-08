@@ -99,6 +99,16 @@ app.factory("ListesFactory", function ($q, $http) {
             return deferred.promise;
         },
 
+        setUpdateArticle: function (data) {
+            var deferred = $q.defer();
+            $http.post(BASE_URL + "article.php",data).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+
         MajListeStatut: function (num_liste,eventselect) {
             console.log(" Je suis dans la fonction maj statut  du factory ET event EST ");
             console.log(eventselect);

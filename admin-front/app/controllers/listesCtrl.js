@@ -2,15 +2,18 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login
 
     try {
         $scope.session = JSON.parse(window.localStorage.getItem("user_session"));
-        var tri = $scope.session[0]['trigramme'];
+        $scope.session = $scope.session[0];
+        var tri = $scope.session.trigramme;
         var num_liste=$routeParams.num;
         var codeA=$routeParams.codeA;
         $scope.num_liste=$routeParams.num;
 
-        console.log("le codeA trouve est ");
-        console.log(codeA);
-    } catch (error) {
+        // console.log($scope.session);
+        // console.log("le codeA trouve est ");
+        // console.log(codeA);
 
+    } catch (error) {
+            console.log(error)
     }
 
 
@@ -220,5 +223,25 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login
         console.error(ex)
         }
     }
+
+    $scope.changeStatus = function (data) {
+        data.action="UPDATE";
+        data.critere="statut";
+        data.statut="FOURNI";
+
+        ListesFactory.setUpdateArticle(data).then(function (response) {
+
+            if(response.data.success){
+                notif('success',response.data.message,'Article','toast-top-full-width');
+            }else{
+                notif('error',response.data.message,'Article','toast-top-full-width')
+            }
+        });
+
+        console.log("effectuer req pour fournir");
+        console.log(data);
+    };
+
+
     
 });

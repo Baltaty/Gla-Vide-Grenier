@@ -28,12 +28,12 @@
 
                         <h4 class="header-title m-t-0 m-b-30 pull-right" >
 
-                            <a href="#/addlistedetails/{{num_liste}}" ng-class="{'hidden':burnOut}"
+                            <a href="#/addlistedetails/{{num_liste}}" ng-class="{'hidden':burnOut}" ng-hide="session.type=='organisateur'"
                                 class="btn btn-success waves-effect waves-light">
                                 Ajouter un article <i class="mdi mdi-plus-circle-outline"></i>
                             </a>
                         </h4>
-                        <h4 class="header-title m-t-0 m-b-30 pull-right" ng-hide="empty">
+                        <h4 class="header-title m-t-0 m-b-30 pull-right" ng-hide="empty || session.type=='organisateur'">
                             <div class="m-b-30 m-r-5">
                                 <button class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#myModal">Soummettre ma liste <i class="fa fa-send"></i></button>
                             </div>
@@ -92,11 +92,18 @@
                                                                 </div>
                                                                 <div class="property-action">
 
-                                                                    <div class="pull-right">
+                                                                    <div class="pull-right" ng-hide="session.type=='organisateur'" >
                                                                         <button  class="btn btn-default" ng-click="DeleteListeDetails(d.codeA)"><i class="fa fa-trash-o"></i></button>
                                                                     </div>
-                                                                    <div class="pull-right">
+                                                                    <div class="pull-right" ng-hide="session.type=='organisateur'" >
                                                                         <a href="#/editlistedetails/{{d.codeA}}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                                                                    </div>
+
+                                                                    <div class="pull-right" ng-if="session.type=='organisateur' && d.statut !='FOURNI' " >
+                                                                        <button  class="btn btn-warning btn-block" ng-click="changeStatus(d)">
+                                                                            <i class="fa fa-exchange"></i>
+                                                                            Vêtement livré
+                                                                        </button>
                                                                     </div>
 
                                                                 </div>
