@@ -23,6 +23,15 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login
     }catch (ex){
      console.error(ex)
      }
+     try{
+        ListesFactory.LoadEvents().then(function (response) {
+               
+               $scope.events= response.data;
+               console.log(response.data);
+        });
+    }catch (ex){
+     console.error(ex)
+     }
 
      try{
         ListesFactory.LoadListeDetails(num_liste).then(function (response) {
@@ -188,12 +197,12 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login
         console.error(ex)
         }
     }
-    $scope.MajListeStatut= function(num_liste){
-        console.log(" Je suis dans la fonction edit liste detail du controller ET NUM LISTE EST xxx");
-
+    $scope.MajListeStatut= function(num_liste,eventselect){
+        console.log(" Je suis dans la fonction maj  du controller ET event EST ");
+        console.log(eventselect);
        try{
-           ListesFactory.MajListeStatut(num_liste).then(function (response) {
-
+           ListesFactory.MajListeStatut(num_liste,eventselect).then(function (response) {
+                
                    // if(response.data.valide){
                    //     toaster.pop({
                    //         type: 'sucess',

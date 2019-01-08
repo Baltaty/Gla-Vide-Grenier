@@ -51,6 +51,41 @@ if(isset($_GET) && !empty($_GET)){
 
     
     }
+    if($_GET['action']=="loadevents"){
+
+        $response = [];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql="SELECT * FROM event ORDER BY date DESC LIMIT 1";
+            $result = $bdconnect->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $articleexist = $result->rowCount();
+
+                
+            if($articleexist==0){
+                // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+            } else
+            {
+                foreach ($result as $item){
+                    $response [] = [
+                    "id_event"=>$item['id_event'],
+                    "name_event"=>$item['name_event'],
+                    "date"=>$item['date'],
+                    "lieu"=>$item['lieu'],
+
+                    ] ;
+                }
+            
+            }
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
 
     if($_GET['action']=="listedetails"){
 
@@ -179,10 +214,12 @@ if(isset($_GET) && !empty($_GET)){
 
         $response = [];
         $num_liste=$_GET['num'];
+        $event=$_GET['event'];
+        
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
         try{
-            $sql = "UPDATE liste SET statut='soumis'
+            $sql = "UPDATE liste SET statut='soumis',id_event='$event'
             WHERE numListe='$num_liste'";
             // use exec() because no results are returned
             //print_r($sql);
