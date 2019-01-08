@@ -16,7 +16,7 @@ if(isset($_GET) && !empty($_GET)){
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
         try{
-            $sql="SELECT * FROM event ORDER BY date DESC";
+            $sql="SELECT * FROM event WHERE event_statut='created' ORDER BY date ASC";
             $result = $bdconnect->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $articleexist = $result->rowCount();
@@ -45,6 +45,71 @@ if(isset($_GET) && !empty($_GET)){
 
     
     }
+    if($_GET['action']=="loadabort"){
+
+        $response = [];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql="SELECT * FROM event WHERE event_statut='abort' ORDER BY date ASC";
+            $result = $bdconnect->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $articleexist = $result->rowCount();
+
+                
+            if($articleexist==0){
+                // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+            } else
+            {
+                foreach ($result as $item){
+                    $response [] = [
+                    "id_event"=>$item['id_event'],
+                    "name_event"=>$item['name_event'],
+                    "date"=>$item['date'],
+                    "lieu"=>$item['lieu'],
+
+                    ] ;
+                }
+            
+            }
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
+    if($_GET['action']=="abort"){
+
+        $response = [];
+        $id_event=$_GET['id_event'];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql = "UPDATE event SET event_statut='abort'
+            WHERE id_event='$id_event'";
+            $sql1 = "UPDATE liste SET liste.statut='en cours',liste.id_event='NULL'
+            WHERE liste.id_event='$id_event'";
+            // use exec() because no results are returned
+            //print_r($sql);
+            $bdconnect->exec($sql);
+            $bdconnect->exec($sql1);
+            $response = [
+                        "message"=> "annulation event réussie ",
+                        "valide"=>true
+                  ];
+
+
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
+
     if($_GET['action']=="eventdetailselement"){
 
         $response = [];
@@ -81,6 +146,35 @@ if(isset($_GET) && !empty($_GET)){
     }
 }
 if(isset($_POST) && !empty($_POST)){
+
+    if($_POST['action']=="add"){
+
+        $response = [];
+        $name=$_POST['name'];
+        $date=$_POST['date'];
+        $lieu=$_POST['lieu'];
+        //print_r($_POST);
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
+        try{
+            $sql = "INSERT INTO event (name_event,date,lieu,date_creation,event_statut)
+            VALUES ('$name', '$date', '$lieu',NOW(),'created')";
+            // use exec() because no results are returned
+            $bdconnect->exec($sql);
+            $response = [
+                        "message"=> "Ajout event réussi",
+                        "valide"=>true
+                  ];
+
+
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+
+    }
     
     if($_POST['action']=="editevent"){
 

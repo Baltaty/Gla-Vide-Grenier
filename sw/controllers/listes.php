@@ -57,7 +57,7 @@ if(isset($_GET) && !empty($_GET)){
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
         try{
-            $sql="SELECT * FROM event ORDER BY date DESC LIMIT 1";
+            $sql="SELECT * FROM event WHERE event_statut='created' ORDER BY date ASC LIMIT 1";
             $result = $bdconnect->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $articleexist = $result->rowCount();

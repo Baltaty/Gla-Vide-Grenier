@@ -18,6 +18,15 @@ app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
      console.error(ex)
      }
      try{
+        EventFactory.LoadAbortedEvents().then(function (response) {
+               
+               $scope.loadedabortedevents= response.data;
+               console.log(response.data);
+        });
+    }catch (ex){
+     console.error(ex)
+     }
+     try{
         EventFactory.loadEventDetailsElement(id_event).then(function (response) {
 
                 // if(response.data.valide){
@@ -36,6 +45,52 @@ app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
     }catch (ex){
      console.error(ex)
      }
+     $scope.AddEvent= function(name,date,lieu){
+        console.log(" Je suis dans la fonction edit event  du controller");
+
+
+       try{
+           EventFactory.AddEvent(name,date,lieu).then(function (response) {
+
+                   // if(response.data.valide){
+                   //     toaster.pop({
+                   //         type: 'sucess',
+                   //         title: 'Parfait !',
+                   //         body: response.data.message,
+                   //         timeout: 1500
+                   //     });
+                   // }
+                   console.log(response.data);
+                   notif('success','event ajouté avec succès !','AJOUT D\'EVENT','toast-top-full-width');
+                   window.location.href="#/events";
+               });
+       }catch (ex){
+        console.error(ex)
+        }
+    }
+    $scope.AbortEvent= function(id_event){
+        console.log(" Je suis dans la fonction abortevent  du controller");
+
+
+       try{
+           EventFactory.AbortEvent(id_event).then(function (response) {
+
+                   // if(response.data.valide){
+                   //     toaster.pop({
+                   //         type: 'sucess',
+                   //         title: 'Parfait !',
+                   //         body: response.data.message,
+                   //         timeout: 1500
+                   //     });
+                   // }
+                   console.log(response.data);
+                   notif('success','event annulé avec succès !','ANNULATION D\'EVENT','toast-top-full-width');
+                   window.location.href="#/events";
+               });
+       }catch (ex){
+        console.error(ex)
+        }
+    }
 
      $scope.EditEvent= function(name,date,lieu){
         console.log(" Je suis dans la fonction edit event  du controller");
