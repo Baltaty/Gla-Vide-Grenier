@@ -52,6 +52,51 @@ if(isset($_GET) && !empty($_GET)){
     
     }
 
+
+    if($_GET['action']=="GET"){
+
+    $response = [];
+    $crtiere=$_GET['critere'];
+    $value=$_GET['value'];
+    $bdconnect = connectionToBD();
+    //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC
+    try{
+
+        $sql="SELECT * FROM liste,user WHERE liste.$crtiere='$value' AND user.trigramme=liste.trigramme";
+        $result = $bdconnect->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $articleexist = $result->rowCount();
+
+
+        if($articleexist==0){
+            // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+        } else
+        {
+            foreach ($result as $item){
+                $response [] = [
+                    "numListe"=>$item['numListe'],
+                    "nom_liste"=>$item['nom_liste'],
+                    "statut"=>$item['statut'],
+                    "trigramme"=>$item['trigramme'],
+                    "date_creation"=>$item['date_creation'],
+                    "nom"=>$item['nom'],
+                    "prenom"=>$item['prenom'],
+
+                ] ;
+            }
+//            print_r($response);
+//            die();
+
+        }
+    }catch(PDOException $ex){
+        echo $ex->getMessage();
+        die();
+    }
+    echo json_encode($response);
+
+
+}
+
     if($_GET['action']=="listedetails"){
 
         $response = [];
@@ -175,6 +220,7 @@ if(isset($_GET) && !empty($_GET)){
 
     
     }
+
     if($_GET['action']=="majlistestatut"){
 
         $response = [];
@@ -296,4 +342,42 @@ if(isset($_POST) && !empty($_POST)){
 
 
     }
+
+    if($_POST['action']=="UPDATE"){
+
+
+        if($_POST['type']=="ONLYONE"){
+            $critere=$_POST['critere'];
+            $statut =$_POST['statut'];
+            $num =$_POST['numListe'];
+            $sql = "UPDATE liste SET $critere='$statut' WHERE numListe = '$num'";
+        }
+
+
+        $response = [];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
+        try{
+
+            $bdconnect->exec($sql);
+            $response = [
+                "message"=> "Modification réussie ",
+                "success"=>true
+            ];
+
+
+        }catch(PDOException $ex){
+            $response = [
+                "message"=> $ex->getMessage(),
+                "success"=>false,
+            ];
+            echo json_encode($response);
+            die();
+        }
+        echo json_encode($response);
+
+
+    }
+
+
 }

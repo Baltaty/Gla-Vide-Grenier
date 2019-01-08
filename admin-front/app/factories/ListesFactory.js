@@ -71,6 +71,25 @@ app.factory("ListesFactory", function ($q, $http) {
             });
             return deferred.promise;
         },
+
+        LoadListeBystatus: function (value) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?"+value).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        setUpdate: function (data) {
+            var deferred = $q.defer();
+            $http.post(BASE_URL + "listes.php",data).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
         MajListeStatut: function (num_liste) {
             var deferred = $q.defer();
             $http.get(BASE_URL + "listes.php?action=majlistestatut&num="+num_liste).then(function (data, status) {

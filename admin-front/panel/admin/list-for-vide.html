@@ -32,22 +32,17 @@
                         <li class="active">
                             <a href="#in-wait"  id="recharger" title=" juste a test" ng-click="$event.preventDefault()" data-toggle="tab" aria-expanded="false">
                                 <span class=""><i class="fa fa-balance-scale"></i></span>
-                                <span class="hidden-xs">Demandes en attente</span>
+                                <span class="hidden-xs">Liste à Valider</span>
                             </a>
                         </li>
 
                         <li class="">
                             <a href="#in-done" ng-click="$event.preventDefault()" data-toggle="tab" aria-expanded="false">
                                 <span class=""><i class="fa fa-calendar-check-o"></i></span>
-                                <span class="hidden-xs">Demandes traitées</span>
+                                <span class="hidden-xs">Liste Validée et Information</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="#in-wait-event"  ng-click="$event.preventDefault()" data-toggle="tab" aria-expanded="false">
-                                <span class=""><i class="fa fa-calendar-minus-o"></i></span>
-                                <span class="hidden-xs">Demandes en attente de livraison fournisseur</span>
-                            </a>
-                        </li>
+
 
                     </ul>
                     <div class="tab-content">
@@ -57,45 +52,47 @@
                                 <div class="col-md-12">
 
                                     <div class="panel panel-border panel-danger">
+
                                         <div class="panel-heading">
-                                            <h3 class="panel-title">Demandes en attentes</h3>
+                                            <h3 class="panel-title"> </h3>
                                         </div>
                                         <div class="panel-body">
                                             <table id="datatable-buttons" class="table table-hover table-striped m-0 table-colored-bordered table-bordered-inverse">
                                                 <thead>
                                                 <tr>
                                                     <th>N°</th>
-                                                    <th>N° Demande</th>
-                                                    <th>Agence</th>
-                                                    <th>Destinateur</th>
-                                                    <th>Article</th>
-                                                    <th>Qte</th>
-                                                    <th>Etat</th>
-                                                    <th>Date</th>
+                                                    <th>Libellé Liste</th>
+                                                    <th>Date Creation</th>
+                                                    <th>STATUT</th>
+                                                    <th>Vendeur</th>
                                                     <th>Actions</th>
                                                 </tr>
                                                 </thead>
 
 
                                                 <tbody>
-                                                <tr ng-repeat="dem in waitDemandes">
+                                                <tr ng-repeat="ls in listes">
                                                     <td>{{$index+1}}</td>
-                                                    <td>NQJD03KOQQ {{$index+1}}</td>
-                                                    <td>Treichville Marché</td>
-                                                    <td>Henriette Konan</td>
-                                                    <td>Carton, cofi carte,ordinateur,cable, ....</td>
-                                                    <td>12</td>
-                                                    <td>En attente </td>
-                                                    <td>2011/04/25</td>
+                                                    <td>{{ls.nom_liste}}</td>
+                                                    <td>{{ls.date_creation}}</td>
+                                                    <td>{{ls.statut}}</td>
+                                                    <td>{{ls.nom | uppercase}} {{ls.prenom}}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button type="button" title=" effectuer un operation" class="btn btn-brown btn-sm dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">
                                                                 Action <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a href="#/">Traiter</a></li>
-                                                                <li><a href="#/">Mettre en Attente de Livraison</a></li>
-                                                                <li><a href="#/">Rejetter</a></li>
+                                                                <li>
+                                                                    <a ng-href="#/listes-view/{{ls.numListe}}" class="btn btn-info waves-effect waves-light">
+                                                                        <i class="fa fa-eye m-r-5"></i> Voir
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:void(0);" class="btn btn-success waves-effect waves-light" ng-click="validation(ls)" data-toggle="modal" data-target="#myModal">
+                                                                        <i class="fa fa-check m-r-5"></i> Valider
+                                                                    </a>
+                                                                </li>
                                                             </ul>
                                                         </div></td>
                                                 </tr>
@@ -117,7 +114,7 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-border panel-success">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title">Demandes traitées</h3>
+                                            <h3 class="panel-title">Recap Validation</h3>
                                         </div>
                                         <div class="panel-body">
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -129,14 +126,6 @@
 
                         </div>
 
-
-                        <div class="tab-pane" id="in-wait-event">
-
-                            <h2 class="lead"> Wait Other Methodes list</h2>
-                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-
-
-                        </div>
                     </div>
 
                 </div>
@@ -150,3 +139,25 @@
 
 </div>
 <!-- content -->
+
+
+<!-- sample modal content -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Validation de Liste </h4>
+            </div>
+            <div class="modal-body">
+                <h4>Attention vous vous appretez à valider une liste</h4>
+                <p>Aucun retour en arriere ne sera possible apres cette Opération.</p>
+                <hr>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal" ng-click="updateStatus(listeToUpdate)">Oui je Valide</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
