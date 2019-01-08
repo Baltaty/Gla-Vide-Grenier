@@ -55,6 +55,14 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'admin/list-for-vide.html',
             controller: 'WaitDemandeCtrl'
         })
+        .when('/events', {
+            templateUrl: 'admin/events.html',
+            controller: 'eventCtrl'
+        })
+        .when('/editevent/:id', {
+            templateUrl: 'admin/editevent.html',
+            controller: 'eventCtrl'
+        })
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
