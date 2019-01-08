@@ -62,7 +62,9 @@ if(isset($_GET) && !empty($_GET)){
     //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC
     try{
 
-        $sql="SELECT * FROM liste,user WHERE liste.$crtiere='$value' AND user.trigramme=liste.trigramme";
+        $sql="SELECT * FROM liste,user,event WHERE liste.$crtiere='$value' 
+              AND user.trigramme=liste.trigramme AND liste.id_event=event.id_event
+            ";
         $result = $bdconnect->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $articleexist = $result->rowCount();
@@ -81,6 +83,8 @@ if(isset($_GET) && !empty($_GET)){
                     "date_creation"=>$item['date_creation'],
                     "nom"=>$item['nom'],
                     "prenom"=>$item['prenom'],
+                    "name_event"=>$item['name_event'],
+                    "name_date"=>$item['date'],
 
                 ] ;
             }
