@@ -77,7 +77,12 @@
                                                     <td>{{$index+1}}</td>
                                                     <td>{{ls.nom_liste}}</td>
                                                     <td>{{ls.date_creation}}</td>
-                                                    <td>{{ls.statut}}</td>
+                                                    <td>
+                                                        {{ls.statut}}
+                                                        <span ng-if="ls.statut=='soumis'" class="m-l-5 ">
+                                                            <i class="fa fa-hourglass-1"></i>
+                                                        </span>
+                                                    </td>
                                                     <td>{{ls.nom | uppercase}} {{ls.prenom}}</td>
                                                     <td> {{ls.name_event}}</td>
                                                     <td> {{ls.date_event}}</td>

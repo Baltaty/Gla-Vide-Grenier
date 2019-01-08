@@ -305,10 +305,20 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-folder-open"></i> <span> Listes Articles </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#/listes">Mes Listes</a></li>
+                                    <li><a href="#/listes" ng-if="session.type!='organisateur'">Mes Listes</a></li>
                                     <li><a href="#/listes-for-vide" ng-if="session.type=='organisateur'" >Les Listes</a></li>
                                 </ul>
                             </li>
+
+
+                            <li class="has_sub"  ng-hide="session.type!='organisateur'">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-external-link"></i> <span> Ventes </span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#/articles-sell"> Effectuer une vente</a></li>
+                                    <li><a href="#/listes-for-vide"> <i class="fa fa-bar-chart-o"></i>  Les Stats </a></li>
+                                </ul>
+                            </li>
+
 
                             <!--<li class="has_sub" ng-if="session.type=='organisateur'">-->
                             <li class="has_sub">
@@ -319,7 +329,11 @@
                                 </ul>
                             </li>
 
-                            <li class="menu-title">.......</li>
+
+
+                            <li class="menu-title">
+                                <hr>
+                            </li>
 
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-email"></i><span> Mes Paiemments </span> <span class="menu-arrow"></span></a>
@@ -507,6 +521,7 @@
         <script src="../app/controllers/parameterCtrl.js"></script>
         <script src="../app/controllers/codeCtrl.js"></script>
         <script src="../app/controllers/WaitDemandeCtrl.js"></script>
+        <script src="../app/controllers/vendreArticleCtrl.js"></script>
 
 
 

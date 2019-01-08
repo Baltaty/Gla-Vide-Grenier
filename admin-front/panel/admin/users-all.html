@@ -104,12 +104,19 @@
                                                                                 Action <span class="caret"></span>
                                                                             </button>
                                                                             <ul class="dropdown-menu">
-                                                                                <li ><a ng-href="#/user-detail/{{user.trigramme}}" class="btn btn-success waves-effect waves-light"><i class="fa fa-eye"> </i> Voir </a></li>
-                                                                                <!--<li><a href="#" ng-click="$event.preventDefault()" class="on-default remove-row" ng-disabled="user.type!='vendeur'" >-->
-                                                                                    <!--<i class="fa fa-trash-o"></i> Supprimer </a></li>-->
-                                                                                <button ng-disabled="user.type!='vendeur'" class="btn btn-danger waves-effect waves-light"  ng-click="confirmeDelete(user)" data-toggle="modal" data-target="#myModal">
-                                                                                    <i class="fa fa-trash-o"></i> Suppression
-                                                                                </button>
+                                                                                <center>
+                                                                                    <li ><a ng-href="#/user-detail/{{user.trigramme}}" class="btn btn-block btn-success waves-effect waves-light"><i class="fa fa-eye"> </i> Voir </a></li>
+                                                                                    <li ><a href="javascipt:void(0);" ng-click="confirmeDelete(user)" data-toggle="modal" data-target="#myModal"
+                                                                                            class="btn btn-block btn-danger waves-effect waves-light" ng-disabled="user.type!='vendeur'">
+                                                                                            <i class="fa fa-trash-o"></i> Suppression
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <!--<li><a href="#" ng-click="$event.preventDefault()" class="on-default remove-row" ng-disabled="user.type!='vendeur'" >-->
+                                                                                        <!--<i class="fa fa-trash-o"></i> Supprimer </a></li>-->
+                                                                                    <!--<button ng-disabled="user.type!='vendeur'" class="btn btn-danger waves-effect waves-light"  ng-click="confirmeDelete(user)" data-toggle="modal" data-target="#myModal">-->
+                                                                                        <!--<i class="fa fa-trash-o"></i> Suppression-->
+                                                                                    <!--</button>-->
+                                                                                </center>
                                                                             </ul>
                                                                         </div>
                                                                     </td>

@@ -55,6 +55,10 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'admin/list-for-vide.html',
             controller: 'WaitDemandeCtrl'
         })
+        .when('/articles-sell', {
+            templateUrl: 'admin/vendre.html',
+            controller: 'vendreArticleCtrl'
+        })
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
