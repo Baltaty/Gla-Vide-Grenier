@@ -3,5 +3,5 @@
   "hostname":"localhost",
   "dbname":"glazik_gym",
   "user":"root",
-  "password":"root"
+  "password":""
 }

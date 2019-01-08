@@ -119,7 +119,7 @@ if(isset($_GET) && !empty($_GET)){
                     "nom"=>$item['nom'],
                     "prenom"=>$item['prenom'],
                     "name_event"=>$item['name_event'],
-                    "name_date"=>$item['date'],
+                    "date_event"=>$item['date'],
 
                 ] ;
             }

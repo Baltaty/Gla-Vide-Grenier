@@ -66,6 +66,7 @@
                                                     <th>STATUT</th>
                                                     <th>Vendeur</th>
                                                     <th>VIDE DRESSING</th>
+                                                    <th>Date Du VIDE DRESSING</th>
                                                     <th>Actions</th>
                                                 </tr>
                                                 </thead>
@@ -78,7 +79,8 @@
                                                     <td>{{ls.date_creation}}</td>
                                                     <td>{{ls.statut}}</td>
                                                     <td>{{ls.nom | uppercase}} {{ls.prenom}}</td>
-                                                    <td> a gerer</td>
+                                                    <td> {{ls.name_event}}</td>
+                                                    <td> {{ls.date_event}}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button type="button" title=" effectuer un operation" class="btn btn-brown btn-sm dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">
