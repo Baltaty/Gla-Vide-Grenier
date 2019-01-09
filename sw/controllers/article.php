@@ -15,10 +15,19 @@ if(isset($_POST) && !empty($_POST)){
     if($_POST["action"]=="UPDATE"){
         updateArticle($_POST);
     }
+    if($_POST["action"]=="ADD_VENTE"){
+         addVente($_POST);
+    }
+
+
 
 } elseif (isset($_GET)  && !empty($_GET)){
 
 }
+
+
+
+
 
 
 
@@ -56,23 +65,20 @@ function deleteUser($data){
 
 
 //Tout les users
-function getAllUsers($data){
+function addVente($data){
     $bdconnect = connectionToBD();
     $resuldata = [];
 
     try{
+        
+        print_r($data);
+        die();
+
+
         $sql="";
-        if($data['action']=="ALL"){
-            $sql = "SELECT * FROM user ";
-        } else{
-            $critere = $data['critere'];
-            $value = $data['value'];
-            $sql = "SELECT * FROM user WHERE user.$critere = '$value' ;";
-        }
-
-
+        $sql = "SELECT * FROM user WHERE user.$critere = '$value' ;";
         $result = $bdconnect->query($sql);
-        $result->setFetchMode(PDO::FETCH_ASSOC);
+//        $result->setFetchMode(PDO::FETCH_ASSOC);
         foreach ($result as $item) {
             $resuldata [] = [
                 "nom" => $item['nom'],

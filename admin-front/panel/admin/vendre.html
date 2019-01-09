@@ -25,7 +25,7 @@
 
             <div class="row">
 
-                <div class="col-sm-8 col-md-8 card-box">
+                <div class="col-sm-7 col-md-7 card-box">
 
                     <div class="row">
 
@@ -71,8 +71,8 @@
                                             </div>
                                             <div class="property-action">
 
-                                                <div class="pull-right" ng-if="d.statut=='FOURNI' " >
-                                                    <button  class="btn btn-success waves-effect waves-light btn-block" ng-click="acheterArticle(d)">
+                                                <div class="pull-right" ng-if="d.statut=='FOURNI' && !d.isPut" >
+                                                    <button  class="btn btn-success waves-effect waves-light btn-block" ng-click="addToPanier(d)">
                                                         Ajouter au panier
                                                         <i class="fa fa-caret-right"></i>
                                                     </button>
@@ -84,6 +84,34 @@
                                     </div>
                                     <!-- /col 8 -->
                                 </div>
+
+                                <div class="row m-t-5 m-l-5" ng-if="articles.length==0" >
+
+                                    <div class="col-sm-12 col-lg-12">
+                                        <div class="property-content">
+                                            <div class="listingInfo">
+                                                <div class="">
+                                                    <h3>
+                                                        Aucun résultat trouvé..
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div class="property-action">
+
+                                                <div class="pull-right" ng-if="d.statut=='FOURNI' && !d.isPut" >
+                                                    <button  class="btn btn-success waves-effect waves-light btn-block" ng-click="addToPanier(d)">
+                                                        Ajouter au panier
+                                                        <i class="fa fa-caret-right"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <!-- end. Card actions -->
+                                        </div>
+                                    </div>
+                                    <!-- /col 8 -->
+                                </div>
+
                                 <!-- /inner row -->
                             </div>
 
@@ -94,10 +122,11 @@
                     </div>
                 </div> <!-- end col -->
 
-                <div class="col-sm-4 col-md-4 col-xs-12 card-box">
+                <div class="col-sm-5 col-md-5 col-xs-12 card-box">
 
 
-                    <div class="m-t-20">
+                    <div class="m-t-20 p-30">
+
                         <div class="">
 
                             <div class="row">
@@ -107,13 +136,12 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
+
                             <div class="card-box">
 
                                 <div class="row m-b-10">
-                                    <button class="btn-xs btn btn-warning waves-light waves-effect">
-                                        Retirer
-                                    </button>
-                                    <button class="btn-xs pull-right btn btn-primary waves-light waves-effect">
+                                    <button ng-hide="toBuys.length==0" data-toggle="modal" data-target="#myModal"
+                                            class="btn-xs pull-left m-l-10 btn btn-primary waves-light waves-effect">
                                         Valider
                                         <i class="fa fa-check"></i>
                                     </button>
@@ -122,50 +150,20 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered m-b-0">
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">Price:</th>
-                                            <td>$390,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Contract type: </th>
-                                            <td><span class="label label-danger">For Sale</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Bathrooms:</th>
-                                            <td>1.5</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Square ft:</th>
-                                            <td>468</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Garage Spaces:</th>
-                                            <td>2</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Land Size:</th>
-                                            <td>721 m²</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Floors:</th>
-                                            <td>2</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Listed for:</th>
-                                            <td>15 days</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Available:</th>
-                                            <td>Immediately</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Pets:</th>
-                                            <td>Pets Allowed</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Bedrooms:</th>
-                                            <td>3</td>
-                                        </tr>
+                                            <tr ng-repeat="art in toBuys">
+                                                <th scope="row">{{art.description}}</th>
+                                                <th>prix: {{art.prix}} <i class="fa fa-euro"></i></th>
+                                                <td>Code: {{art.codeA}}</td>
+                                                <td>
+                                                    <div>
+                                                        <button class="btn-xs btn-block btn btn-danger waves-light
+                                                        waves-effect" ng-click="retirerArticle(art)">
+                                                            retirer
+                                                            <i class="fa fa-remove"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -185,3 +183,78 @@
 
     </div>
 </div>
+
+
+
+<!-- sample modal content -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Opération de vente <i class="fa fa-shopping-basket"></i></h4>
+            </div>
+            <div class="modal-body">
+                <h4>Condition de suppression</h4>
+                <p>Aucun retour en arriere ne sera possible apres cette suppression.</p>
+                <hr>
+
+                <form class="form-horizontal" >
+                    <div class="form-group">
+                        <label>Nom </label>
+                        <input type="text" class="form-control" required ng-model="acheteur.nom"
+                               placeholder="Type something"/>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Prenom</label>
+                        <div>
+                            <input type="text" ng-model="acheteur.prenom" class="form-control" required
+                                   placeholder="text"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Numero</label>
+                        <div>
+                            <input data-parsley-type="number" type="text"
+                                   ng-model="acheteur.numero"
+                                   class="form-control" required
+                                   placeholder="00 00 00 00 00 "/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adresse</label>
+                        <div>
+                            <input type="text"
+                                   ng-model="acheteur.adresse"
+                                   class="form-control" required
+                                   placeholder="i.e 20 avenue ..."/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="pull-right">
+                            <button type="submit" ng-click="validerAchat()" class="btn btn-primary waves-effect waves-light">
+                               Terminer
+                            </button>
+                            <button type="reset" class="btn btn-default waves-effect m-l-5">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="pull-right btn btn-danger waves-effect" data-dismiss="modal">Annuler</button>
+                <!--<button type="button" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" ng-click="">Oui je supprime</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
