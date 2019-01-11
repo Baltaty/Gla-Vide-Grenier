@@ -411,12 +411,21 @@
 }(jQuery));
 
 
-var HomecompteARebour =  function(){
+// var HomecompteARebour =  function(){
+//     $('[data-countdown]').each(function() {
+//         var $this = $(this),
+//             finalDate = $(this).data('countdown');
+//         $this.countdown(finalDate, function(event) {
+//             $this.html(event.strftime('<span class="cdown days"><span class="time-count">%-D</span> <p>Days</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>Hour</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>Min</p></span> <span class="cdown second"> <span><span class="time-count">%S</span> <p>Sec</p></span>'));
+//         });
+//     });
+// };
+var HomecompteARebour =  function(date){
     $('[data-countdown]').each(function() {
         var $this = $(this),
-            finalDate = $(this).data('countdown');
+            finalDate = date;
         $this.countdown(finalDate, function(event) {
-            $this.html(event.strftime('<span class="cdown days"><span class="time-count">%-D</span> <p>Days</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>Hour</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>Min</p></span> <span class="cdown second"> <span><span class="time-count">%S</span> <p>Sec</p></span>'));
+            $this.html(event.strftime('<span class="cdown days"><span class="time-count">%-D</span> <p>Jours</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>Heures</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>Minutes</p></span> <span class="cdown second"> <span><span class="time-count">%S</span> <p>Secondes</p></span>'));
         });
     });
 };

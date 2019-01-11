@@ -47,6 +47,25 @@ app.factory("Login", function ($q, $http) {
             });
             return deferred.promise;
         },
+        getParameters: function(){
+            var deferred = $q.defer();
+            $http.get(BASE_URL+ "parameter.php?action=ALL").then(function(data, status){
+                deferred.resolve(data);
+            }).catch(function(data, status){
+                deferred.reject("impossible de recevoir les data");
+            });
+            return deferred.promise;
+        },
+
+        updateParametre: function(data){
+            var deferred = $q.defer();
+            $http.post(BASE_URL+ "parameter.php",data).then(function(data, status){
+                deferred.resolve(data);
+            }).catch(function(data, status){
+                deferred.reject("impossible de recevoir les data");
+            });
+            return deferred.promise;
+        },
 
     };
 

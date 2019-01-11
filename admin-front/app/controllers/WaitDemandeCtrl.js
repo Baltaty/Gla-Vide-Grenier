@@ -1,4 +1,4 @@
-app.controller("WaitDemandeCtrl", function ($scope,$location,$interval,$timeout) {
+app.controller("WaitDemandeCtrl", function ($scope,$location,$interval,$timeout,ListesFactory, Login) {
     try {
         $scope.session=JSON.parse(window.localStorage.getItem("user_session"));
     }catch (error){ }
@@ -8,14 +8,35 @@ app.controller("WaitDemandeCtrl", function ($scope,$location,$interval,$timeout)
     }
     $scope.user = $scope.session.user;
 
-    var testdemande =[];
 
-    for(var i=0  ; i<=16 ; i++ ){
-        var obj = { indice:i};
-        testdemande.push(obj);
-    }
 
-    $scope.waitDemandes = testdemande;
+    var critere = "statut" , value="soumis" ;
+    var req = "action=GET&critere="+critere+"&value="+value;
+    ListesFactory.LoadListeBystatus(req).then(function (response) {
+        if(response.data.length !=0){
+            $scope.listes = response.data;
+            // console.log($scope.listes);
+        }
+    });
+
+    $scope.validation=function (data) {
+        $scope.listeToUpdate = data;
+    };
+
+    $scope.updateStatus = function (data) {
+        data.action = "UPDATE";
+        data.critere = "statut";
+        data.type = "ONLYONE";
+        data.statut = "acceptee";
+      ListesFactory.setUpdate(data).then(function (response) {
+          if(response.data.success){
+              notif('success',response.data.message,'Liste','toast-top-full-width');
+          }else{
+              notif('error',response.data.message,'Liste','toast-top-full-width')
+          }
+
+      })
+    };
 
     $timeout(function(){
         $("#datatable-buttons").DataTable({

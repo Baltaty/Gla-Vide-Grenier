@@ -43,9 +43,35 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'vendeur/liste_details.html',
             controller: 'listesCtrl'
         })
+<<<<<<< HEAD
         .when('/edit', {
             templateUrl: 'admin/edit.html',
             controller: 'editCtrl'
+=======
+        .when('/parametres', {
+            templateUrl: 'admin/parametre.html',
+            controller: 'parameterCtrl'
+        })
+        .when('/listes-view/:idListe', {
+            templateUrl: 'vendeur/etiquette.html',
+            controller: 'codeCtrl'
+        })
+        .when('/listes-for-vide', {
+            templateUrl: 'admin/list-for-vide.html',
+            controller: 'WaitDemandeCtrl'
+        })
+        .when('/events', {
+            templateUrl: 'admin/events.html',
+            controller: 'eventCtrl'
+        })
+        .when('/addevent', {
+            templateUrl: 'admin/addevent.html',
+            controller: 'eventCtrl'
+        })
+        .when('/editevent/:id', {
+            templateUrl: 'admin/editevent.html',
+            controller: 'eventCtrl'
+>>>>>>> c394587081a000f17e6afef5c0013ec8e8b61753
         })
         .otherwise({ redirectTo: '/'});
 

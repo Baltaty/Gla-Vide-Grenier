@@ -8,7 +8,11 @@ header('Content-Type:application/json');
 
 
 include '../dbconnexion.php';
-if(isset($_GET)){
+
+
+//print_r($_POST);
+//die();
+if(isset($_GET) && !empty($_GET)){
 
 
     if($_GET['action']=="all"){
@@ -47,6 +51,90 @@ if(isset($_GET)){
 
     
     }
+    if($_GET['action']=="loadevents"){
+
+        $response = [];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql="SELECT * FROM event WHERE event_statut='created' ORDER BY date ASC LIMIT 1";
+            $result = $bdconnect->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $articleexist = $result->rowCount();
+
+                
+            if($articleexist==0){
+                // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+            } else
+            {
+                foreach ($result as $item){
+                    $response [] = [
+                    "id_event"=>$item['id_event'],
+                    "name_event"=>$item['name_event'],
+                    "date"=>$item['date'],
+                    "lieu"=>$item['lieu'],
+
+                    ] ;
+                }
+            
+            }
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
+
+
+    if($_GET['action']=="GET"){
+
+    $response = [];
+    $crtiere=$_GET['critere'];
+    $value=$_GET['value'];
+    $bdconnect = connectionToBD();
+    //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC
+    try{
+
+        $sql="SELECT * FROM liste,user,event WHERE liste.$crtiere='$value' 
+              AND user.trigramme=liste.trigramme AND liste.id_event=event.id_event
+            ";
+        $result = $bdconnect->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $articleexist = $result->rowCount();
+
+
+        if($articleexist==0){
+            // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+        } else
+        {
+            foreach ($result as $item){
+                $response [] = [
+                    "numListe"=>$item['numListe'],
+                    "nom_liste"=>$item['nom_liste'],
+                    "statut"=>$item['statut'],
+                    "trigramme"=>$item['trigramme'],
+                    "date_creation"=>$item['date_creation'],
+                    "nom"=>$item['nom'],
+                    "prenom"=>$item['prenom'],
+                    "name_event"=>$item['name_event'],
+                    "date_event"=>$item['date'],
+
+                ] ;
+            }
+//            print_r($response);
+//            die();
+
+        }
+    }catch(PDOException $ex){
+        echo $ex->getMessage();
+        die();
+    }
+    echo json_encode($response);
+
+
+}
 
     if($_GET['action']=="listedetails"){
 
@@ -171,9 +259,39 @@ if(isset($_GET)){
 
     
     }
+
+    if($_GET['action']=="majlistestatut"){
+
+        $response = [];
+        $num_liste=$_GET['num'];
+        $event=$_GET['event'];
+        
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
+        try{
+            $sql = "UPDATE liste SET statut='soumis',id_event='$event'
+            WHERE numListe='$num_liste'";
+            // use exec() because no results are returned
+            //print_r($sql);
+            $bdconnect->exec($sql);
+            $response = [
+                        "message"=> "soumission réussie ",
+                        "valide"=>true
+                  ];
+            
+            
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
 }
 
-if(isset($_POST)){
+
+if(isset($_POST) && !empty($_POST)){
 
     if($_POST['action']=="add"){
 
@@ -193,15 +311,15 @@ if(isset($_POST)){
                         "message"=> "Ajout réussi",
                         "valide"=>true
                   ];
-            
-            
+
+
         }catch(PDOException $ex){
             echo $ex->getMessage();
             die();
         }
         echo json_encode($response);
 
-    
+
     }
     if($_POST['action']=="adddetail"){
 
@@ -212,28 +330,26 @@ if(isset($_POST)){
         $taille=$_POST['taille'];
         $commentaire=$_POST['commentaire'];
         $statut=$_POST['statut'];
-        print_r($_POST);
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
         try{
             $sql = "INSERT INTO article (numListe,prix,taille,description,statut,commentaire)
             VALUES ('$num_liste','$prix', '$taille', '$description','$statut', '$commentaire')";
             // use exec() because no results are returned
-            print_r($sql);
             $bdconnect->exec($sql);
             $response = [
                         "message"=> "Ajout réussi",
                         "valide"=>true
                   ];
-            
-            
+
+
         }catch(PDOException $ex){
             echo $ex->getMessage();
             die();
         }
         echo json_encode($response);
 
-    
+
     }
     if($_POST['action']=="editdetail"){
 
@@ -257,14 +373,52 @@ if(isset($_POST)){
                         "message"=> "Modification réussie ",
                         "valide"=>true
                   ];
-            
-            
+
+
         }catch(PDOException $ex){
             echo $ex->getMessage();
             die();
         }
         echo json_encode($response);
 
-    
+
     }
+
+    if($_POST['action']=="UPDATE"){
+
+
+        if($_POST['type']=="ONLYONE"){
+            $critere=$_POST['critere'];
+            $statut =$_POST['statut'];
+            $num =$_POST['numListe'];
+            $sql = "UPDATE liste SET $critere='$statut' WHERE numListe = '$num'";
+        }
+
+
+        $response = [];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
+        try{
+
+            $bdconnect->exec($sql);
+            $response = [
+                "message"=> "Modification réussie ",
+                "success"=>true
+            ];
+
+
+        }catch(PDOException $ex){
+            $response = [
+                "message"=> $ex->getMessage(),
+                "success"=>false,
+            ];
+            echo json_encode($response);
+            die();
+        }
+        echo json_encode($response);
+
+
+    }
+
+
 }

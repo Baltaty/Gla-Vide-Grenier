@@ -1,4 +1,4 @@
-app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
+app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory , Login) {
 
     try {
         $scope.session = JSON.parse(window.localStorage.getItem("user_session"));
@@ -23,12 +23,41 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
     }catch (ex){
      console.error(ex)
      }
+     try{
+        ListesFactory.LoadEvents().then(function (response) {
+               
+               $scope.events= response.data;
+               console.log(response.data);
+        });
+    }catch (ex){
+     console.error(ex)
+     }
 
      try{
         ListesFactory.LoadListeDetails(num_liste).then(function (response) {
                
-               $scope.listesdetails= response.data;
-               console.log(response.data[0]);
+            $scope.listesdetails= response.data;
+            Login.getParameters().then(function (res) {
+
+                if(res.data.success){
+                    $scope.parameters = res.data.data;
+                    if($scope.listesdetails.length==parseInt($scope.parameters.nombre_article)){
+                        $scope.burnOut=true;
+                    } else {
+                        $scope.burnOut=false;
+                    }
+
+                    if($scope.listesdetails.length==0){
+                        $scope.empty = true;
+                    } else {
+                        $scope.empty = false;
+                    }
+                } else {
+                    $scope.burnOut=false;
+                }
+
+
+            });
         });
     }catch (ex){
      console.error(ex)
@@ -67,6 +96,8 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                     // }
                     console.log(response.data);
                     //window.location.href
+                    notif('success','C\'est parfait !','SUPPRESSION DE LISTE','toast-top-full-width');
+                    window.location.href="#/listes";
                 });
         }catch (ex){
          console.error(ex)
@@ -85,7 +116,9 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                     //     });
                     // }
                     console.log(response.data);
-                    //window.location.href
+                    notif('success','Suppression effectuée avec succès !','SUPPRESSION D\'ARTICLE','toast-top-full-width');
+                    //console.log("fksdngksj");
+                    //window.location.href="#/listes/"+num_liste;
                 });
         }catch (ex){
          console.error(ex)
@@ -110,6 +143,8 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                     //     });
                     // }
                     console.log(response.data);
+                    notif('success','Liste ajoutée avec succès !','AJOUT DE LISTE','toast-top-full-width');
+                    window.location.href="#/listes";
                 });
         }catch (ex){
          console.error(ex)
@@ -130,7 +165,9 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                    //         timeout: 1500
                    //     });
                    // }
-                   console.log(response.data);
+                   //console.log(response.data);
+                   notif('success','Article ajouté avec succès !','AJOUT D\'ARTICLE','toast-top-full-width');
+                   window.location.href="#/listes/"+num_liste;
                });
        }catch (ex){
         console.error(ex)
@@ -153,9 +190,35 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory) {
                    //     });
                    // }
                    console.log(response.data);
+                   notif('success','Article modifié avec succès !','MODIFICATION D\'ARTICLE','toast-top-full-width');
+
                });
        }catch (ex){
         console.error(ex)
         }
     }
+    $scope.MajListeStatut= function(num_liste,eventselect){
+        console.log(" Je suis dans la fonction maj  du controller ET event EST ");
+        console.log(eventselect);
+       try{
+           ListesFactory.MajListeStatut(num_liste,eventselect).then(function (response) {
+                
+                   // if(response.data.valide){
+                   //     toaster.pop({
+                   //         type: 'sucess',
+                   //         title: 'Parfait !',
+                   //         body: response.data.message,
+                   //         timeout: 1500
+                   //     });
+                   // }
+                   console.log(response.data);
+                   notif('success','Soumission faite avec succès !','SOUMISSION DE LISTE','toast-top-full-width');
+                   window.location.href="#/listes";
+
+               });
+       }catch (ex){
+        console.error(ex)
+        }
+    }
+    
 });
