@@ -82,54 +82,52 @@ function addVente($data){
     try{
 
 //        print_r($data);
-        if(empty($data["lastIdVente"])){
-            echo " c'est le premier ";
-        } else {
-            echo " c'est le deuxieme ";
-        }
+//        if(empty($data["lasteIdVente"])){
+//            echo " c'est le premier ";
+//        } else {
+//            echo " c'est le deuxieme ";
+//        }
 
 //        die();
 
         //si c'est une premiere sent pour la data
-        if( empty($data["lastIdVente"]) ) {
+        if( empty($data["lasteIdVente"]) ) {
 
-//            $preStatment->execute(array(
-//                "acheteur"=>$data["acheteur_name"],
-//                "acheteur_numero"=>$data["acheteur_numero"],
-//                "acheteur_adresse"=>$data["acheteur_adresse"],
-//            ));
-//
-//            $lastIDVente = $bdconnect->lastInsertId();
-//
-//            $preStatment2->execute(array(
-//                "codeV"=>$lastIDVente,
-//                "codeA"=>$data['codeA'],
-//            ));
-//            $resuldata = [
-//                "lastIdVente"=>$lastIDVente,
-//                "success" => true,
-//                "message"=>"premier article inserer",
-//            ];
+            $preStatment->execute(array(
+                "acheteur"=>$data["acheteur_name"],
+                "acheteur_numero"=>$data["acheteur_numero"],
+                "acheteur_adresse"=>$data["acheteur_adresse"],
+            ));
 
+            $lastIDVente = $bdconnect->lastInsertId();
+
+            $preStatment2->execute(array(
+                "codeV"=>$lastIDVente,
+                "codeA"=>$data['codeA'],
+            ));
             $resuldata = [
-                "lastIdVente"=>33,
+                "lasteIdVente"=>$lastIDVente,
                 "success" => true,
                 "message"=>"premier article inserer",
-                "echo"=>$data,
             ];
+
+//            $resuldata = [
+//                "lasteIdVente"=>33,
+//                "success" => true,
+//                "message"=>"premier article inserer sans idLAste",
+//                "echo"=>$data,
+//            ];
 
         } else {
 
-//            $preStatment2->execute(array(
-//                "codeV"=>$data['lastIdVente'],
-//                "codeA"=>$data['codeA'],
-//            ));
+            $preStatment2->execute(array(
+                "codeV"=>$data['lasteIdVente'],
+                "codeA"=>$data['codeA'],
+            ));
 
             $resuldata = [
-                "lastIdVente"=>$data['lastIdVente'],
-                "message"=>"sql insert executed with sucess",
+                "message"=>" c'est les suivants articles",
                 "success" => true,
-                "echo"=>$data,
             ];
 
         }

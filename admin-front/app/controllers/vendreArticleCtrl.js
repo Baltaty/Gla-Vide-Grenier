@@ -58,40 +58,40 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
 
     $scope.validerAchat = function () {
 
-
         for( var i = 0; i < $scope.toBuys.length; i++) {
             $scope.toBuys[i].action ="ADD_VENTE";
             $scope.toBuys[i].acheteur_name =$scope.acheteur.nom;
             $scope.toBuys[i].acheteur_adresse =$scope.acheteur.adresse;
             $scope.toBuys[i].acheteur_numero =$scope.acheteur.numero;
-
-
-            // debogage
-            ListesFactory.setVente($scope.toBuys[i]).then(function (response) {
-                if(response.data.success){
-
-                    if(response.data.lastIdVente){
-                        if( i !== $scope.toBuys.length-1){
-                            $scope.toBuys[i+1].lastIdVente = response.data.lastIdVente;
-                        }
-                        console.log(" data inserer");
-                        console.log($scope.toBuys);
-                    }
-                    // notif('success',response.data.message,'Vente','toast-top-full-width');
-                } else {
-                    notif('error',response.data.message,'Vente','toast-top-full-width');
-                }
-            });
-
         }
 
-        // ListesFactory.setVente($scope.toBuys).then(function (response) {
-        //     if(response.data.success){
-        //         notif('success',response.data.message,'Vente','toast-top-full-width');
-        //     } else {
-        //         notif('error',response.data.message,'Vente','toast-top-full-width');
-        //     }
-        // });
+
+        ListesFactory.setVente($scope.toBuys[0]).then(function (response) {
+            $scope.isDone = false;
+            if(response.data.success){
+                $scope.lasteIdVente = response.data.lasteIdVente;
+                for(var i = 1; i < $scope.toBuys.length; i++ ){
+                    $scope.toBuys[i].lasteIdVente = $scope.lasteIdVente;
+                        ListesFactory.setVente($scope.toBuys[i]).then(function( resp){
+
+                            if(resp.data.success){
+                                $scope.isDone =true;
+                            } else {
+                                $scope.isDone =false;
+                            }
+                        });
+                }
+            }
+            if($scope.isDone){
+                console.log(" C'est genial");
+            }
+        });
+
+
+
+        console.log("----- le laste id Recu hors boucle------ ");
+        console.log($scope.lasIdvente);
+
 
 
     };
