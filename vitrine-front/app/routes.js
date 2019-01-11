@@ -39,6 +39,7 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'panel/contacts.html',
             controller: 'contactCtrl'
         })
+        
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

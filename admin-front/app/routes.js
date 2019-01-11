@@ -22,7 +22,7 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'admin/user-details.html',
             controller: 'userDetailsCtrl'
         })
-
+        
         .when('/listes', {
             templateUrl: 'vendeur/listes.html',
             controller: 'listesCtrl'
@@ -42,6 +42,10 @@ app.config(function($routeProvider, $httpProvider) {
         .when('/listes/:num', {
             templateUrl: 'vendeur/liste_details.html',
             controller: 'listesCtrl'
+        })
+        .when('/edit', {
+            templateUrl: 'admin/edit.html',
+            controller: 'editCtrl'
         })
         .otherwise({ redirectTo: '/'});
 
