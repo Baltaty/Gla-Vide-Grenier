@@ -66,33 +66,74 @@ function deleteUser($data){
 
 //Tout les users
 function addVente($data){
+
+
     $bdconnect = connectionToBD();
     $resuldata = [];
+    $sql =  " INSERT INTO vente (dateV, acheteur, acheteur_numero, acheteur_adresse)
+              VALUES (NOW(), :acheteur, :acheteur_numero, :acheteur_adresse);";
+
+
+    $sql2 =  " INSERT INTO detailvente (codeV, codeA)
+              VALUES (:codeV, :codeA);";
+    $preStatment = $bdconnect->prepare($sql);
+    $preStatment2 = $bdconnect->prepare($sql2);
 
     try{
-        
-        print_r($data);
-        die();
 
-
-        $sql="";
-        $sql = "SELECT * FROM user WHERE user.$critere = '$value' ;";
-        $result = $bdconnect->query($sql);
-//        $result->setFetchMode(PDO::FETCH_ASSOC);
-        foreach ($result as $item) {
-            $resuldata [] = [
-                "nom" => $item['nom'],
-                "prenom" => $item['prenom'],
-                "trigramme" => $item['trigramme'],
-                "adresse" => $item['adresse'],
-                "civilite" => $item['civilite'],
-                "email" => $item['email'],
-                "actif" => $item['actif'],
-                "numero" => $item['numero'],
-                "type" => $item['typeUser'],
-                "dateNaissance" => $item['dateNaissance'],
-            ];
+//        print_r($data);
+        if(empty($data["lastIdVente"])){
+            echo " c'est le premier ";
+        } else {
+            echo " c'est le deuxieme ";
         }
+
+//        die();
+
+        //si c'est une premiere sent pour la data
+        if( empty($data["lastIdVente"]) ) {
+
+//            $preStatment->execute(array(
+//                "acheteur"=>$data["acheteur_name"],
+//                "acheteur_numero"=>$data["acheteur_numero"],
+//                "acheteur_adresse"=>$data["acheteur_adresse"],
+//            ));
+//
+//            $lastIDVente = $bdconnect->lastInsertId();
+//
+//            $preStatment2->execute(array(
+//                "codeV"=>$lastIDVente,
+//                "codeA"=>$data['codeA'],
+//            ));
+//            $resuldata = [
+//                "lastIdVente"=>$lastIDVente,
+//                "success" => true,
+//                "message"=>"premier article inserer",
+//            ];
+
+            $resuldata = [
+                "lastIdVente"=>33,
+                "success" => true,
+                "message"=>"premier article inserer",
+                "echo"=>$data,
+            ];
+
+        } else {
+
+//            $preStatment2->execute(array(
+//                "codeV"=>$data['lastIdVente'],
+//                "codeA"=>$data['codeA'],
+//            ));
+
+            $resuldata = [
+                "lastIdVente"=>$data['lastIdVente'],
+                "message"=>"sql insert executed with sucess",
+                "success" => true,
+                "echo"=>$data,
+            ];
+
+        }
+
 
     }catch (PDOException $ex){
         $resuldata=[

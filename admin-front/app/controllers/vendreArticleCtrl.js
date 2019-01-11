@@ -4,8 +4,8 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
 
         $scope.session = JSON.parse(window.localStorage.getItem("user_session"));
         $scope.session = $scope.session[0];
-        console.log("hello seller article");
-        console.log($scope.session);
+        // console.log("hello seller article");
+        // console.log($scope.session);
     } catch (error) {
 
         console.log(error)
@@ -57,20 +57,27 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
     };
 
     $scope.validerAchat = function () {
-        // $scope.dataForAchat = $scope.toBuys
-        console.log("Afficher popup da");
-        console.log($scope.toBuys);
 
 
         for( var i = 0; i < $scope.toBuys.length; i++) {
             $scope.toBuys[i].action ="ADD_VENTE";
-            $scope.toBuys[i].acheteur_name =$scope.acheteur.nom +" "+$scope.acheteur.prenom;
+            $scope.toBuys[i].acheteur_name =$scope.acheteur.nom;
             $scope.toBuys[i].acheteur_adresse =$scope.acheteur.adresse;
             $scope.toBuys[i].acheteur_numero =$scope.acheteur.numero;
 
+
+            // debogage
             ListesFactory.setVente($scope.toBuys[i]).then(function (response) {
                 if(response.data.success){
-                    notif('success',response.data.message,'Vente','toast-top-full-width');
+
+                    if(response.data.lastIdVente){
+                        if( i !== $scope.toBuys.length-1){
+                            $scope.toBuys[i+1].lastIdVente = response.data.lastIdVente;
+                        }
+                        console.log(" data inserer");
+                        console.log($scope.toBuys);
+                    }
+                    // notif('success',response.data.message,'Vente','toast-top-full-width');
                 } else {
                     notif('error',response.data.message,'Vente','toast-top-full-width');
                 }
