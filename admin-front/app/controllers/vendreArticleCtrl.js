@@ -14,19 +14,26 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
 
     $scope.toBuys = [];
     $scope.articles=[];
+
     $scope.searchArticle = function (article) {
-        console.log(" code de l'article ");
-        console.log(article);
 
+        $scope.articles=[];
         ListesFactory.loadListeDetailsElement(article.codeA).then(function (response) {
-            $scope.articles=response.data;
 
+            console.log("resultat de recherche");
+            console.log(response.data);
+            for(var i=0 ; i < response.data.length; i++){
+                if(response.data[i].statut != "VENDU"){
+                    $scope.articles=response.data;
+                }
+            }
+
+
+            //
             for(var i =0 ; i < $scope.articles.length ; i++){
                 isAlreadyCheck($scope.toBuys, $scope.articles[i])
             }
 
-            console.log("le this article trouve est ");
-            console.log(response.data);
         });
 
     };
@@ -67,12 +74,12 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
 
 
         ListesFactory.setVente($scope.toBuys[0]).then(function (response) {
-            $scope.isDone = false;
+            $scope.isDone = true;
             if(response.data.success){
                 $scope.lasteIdVente = response.data.lasteIdVente;
                 for(var i = 1; i < $scope.toBuys.length; i++ ){
                     $scope.toBuys[i].lasteIdVente = $scope.lasteIdVente;
-                        ListesFactory.setVente($scope.toBuys[i]).then(function( resp){
+                        ListesFactory.setVente($scope.toBuys[i]).then(function(resp){
 
                             if(resp.data.success){
                                 $scope.isDone =true;
@@ -83,17 +90,28 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
                 }
             }
             if($scope.isDone){
-                console.log(" C'est genial");
+                notif('success','le compte à été créer avec succès','VENTE','toast-top-full-width');
             }
         });
 
 
-
-        console.log("----- le laste id Recu hors boucle------ ");
-        console.log($scope.lasIdvente);
+    };
 
 
+    $scope.retirer = function (data) {
+        $scope.toRetrait = data;
+    };
 
+    $scope.retirerArticle = function (data) {
+        data.action="RETRAIT";
+        data.statut="RETIRE";
+        ListesFactory.setRetrait(data).then(function(response){
+            if(response.data.success){
+                notif('success','l\'article n\'est plus vendable vous pouver continuer','RETRAIT','toast-top-full-width');
+            }else {
+                notif('error',response.data.message,'ERREUR SUR RETRAIT','toast-top-full-width');
+            }
+        });
     };
 
 

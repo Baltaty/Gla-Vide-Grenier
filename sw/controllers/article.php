@@ -18,6 +18,9 @@ if(isset($_POST) && !empty($_POST)){
     if($_POST["action"]=="ADD_VENTE"){
          addVente($_POST);
     }
+    if($_POST["action"]=="RETRAIT"){
+         updateArticle($_POST);
+    }
 
 
 
@@ -76,19 +79,18 @@ function addVente($data){
 
     $sql2 =  " INSERT INTO detailvente (codeV, codeA)
               VALUES (:codeV, :codeA);";
+
+    $sql3 = " UPDATE article SET statut='VENDU' WHERE article.codeA = :codeA";
+
     $preStatment = $bdconnect->prepare($sql);
     $preStatment2 = $bdconnect->prepare($sql2);
+    $preStatment3 = $bdconnect->prepare($sql3);
+
+//    print_r($data);
+//    die();
 
     try{
 
-//        print_r($data);
-//        if(empty($data["lasteIdVente"])){
-//            echo " c'est le premier ";
-//        } else {
-//            echo " c'est le deuxieme ";
-//        }
-
-//        die();
 
         //si c'est une premiere sent pour la data
         if( empty($data["lasteIdVente"]) ) {
@@ -105,23 +107,27 @@ function addVente($data){
                 "codeV"=>$lastIDVente,
                 "codeA"=>$data['codeA'],
             ));
+
+            $preStatment3->execute(array(
+                "codeA"=>$data['codeA'],
+            ));
+
+
             $resuldata = [
                 "lasteIdVente"=>$lastIDVente,
                 "success" => true,
                 "message"=>"premier article inserer",
             ];
 
-//            $resuldata = [
-//                "lasteIdVente"=>33,
-//                "success" => true,
-//                "message"=>"premier article inserer sans idLAste",
-//                "echo"=>$data,
-//            ];
 
         } else {
 
             $preStatment2->execute(array(
                 "codeV"=>$data['lasteIdVente'],
+                "codeA"=>$data['codeA'],
+            ));
+
+            $preStatment3->execute(array(
                 "codeA"=>$data['codeA'],
             ));
 
@@ -151,19 +157,20 @@ function addVente($data){
 
 // mise a jour  d'un utilisqteur
 function updateArticle($data){
+
+
+    $response =[];
     $bdconnect = connectionToBD();
-
-
     try{
 
-        $critere=$data['critere'];
-        $value=$data['statut'];
-        $codeArt=$data['codeA'];
 
-        $sql= "UPDATE article SET article.$critere='$value' WHERE codeA='$codeArt' ;";
-
+        $sql= "UPDATE article SET article.statut=:statut, article.commentaire=:commentaire WHERE codeA=:codeA ";
         $pst =  $bdconnect->prepare($sql);
-        $pst->execute();
+        $pst->execute(array(
+            "statut"=>$data['statut'],
+            "commentaire"=>$data['motif'],
+            "codeA"=>$data['codeA'],
+        ));
 
         $response= [
             "success"=>true,
