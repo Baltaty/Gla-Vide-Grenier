@@ -148,8 +148,8 @@ if(isset($_GET) && !empty($_GET)){
         try{
             $sql = "UPDATE event SET event_statut='close'
             WHERE id_event='$id_event'";
-            $sql1 = "UPDATE article SET article.statut='in'
-            WHERE liste.id_event='$id_event'";
+            $sql1 = "UPDATE article SET article.statut='INVENDU'
+            WHERE article.statut='RETIRE'";
             // use exec() because no results are returned
             //print_r($sql);
             $bdconnect->exec($sql);
