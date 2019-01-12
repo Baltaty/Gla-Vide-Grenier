@@ -12,11 +12,8 @@ app.controller("editCtrl", function($scope, $http) {
     $scope.modifyText = function(texte){
       try {
         //light *_*
-        texte=texte.replace(/'/g,"/'");
-        console.log(texte.replace(/\\'/g,"."));
         $http.get(BASE_URL+"edit.php?action=change&&texte="+texte).then(function(response){
           //console.log(response.data);
-          notif('success','texte de presenation modifié avec succès !','MODIFICATION DE LA PRESENTATION','toast-top-full-width');
 
         });
       } catch (error) {
