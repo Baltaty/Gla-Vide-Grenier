@@ -1,8 +1,5 @@
 app.controller("parameterCtrl" , function ($scope , $location, Login) {
-
-    console.log("hello parametre control");
-
-
+    
     Login.getParameters().then(function (response) {
 
         if(response.data.success){

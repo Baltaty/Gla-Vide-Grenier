@@ -20,8 +20,6 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
         $scope.articles=[];
         ListesFactory.loadListeDetailsElement(article.codeA).then(function (response) {
 
-            console.log("resultat de recherche");
-            console.log(response.data);
             for(var i=0 ; i < response.data.length; i++){
                 if(response.data[i].statut != "VENDU"){
                     $scope.articles=response.data;

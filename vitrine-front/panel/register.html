@@ -61,7 +61,7 @@
 
                                     <div class="uic-user-name">
                                         <label>Date de Naissance<i class="fa fa-calendar"></i></label>
-                                        <input type="date"  ng-model="user.dateNaissance">
+                                        <input type="date"  ng-model="user.dateNaissance" required>
                                     </div>
 
                                     <div class="uic-user-name">
@@ -69,8 +69,18 @@
                                         <input type="text" placeholder="ex : 0761842960" ng-model="user.numero" required>
                                     </div>
 
+                                    <div class="uic-user-name">
+                                        <label>Code Postal<i class="fa fa-home"></i></label>
+                                        <input type="number" placeholder="ie : 35700" ng-model="user.cp" required>
+                                    </div>
+
+                                    <div class="uic-user-name">
+                                        <label>Adresse<i class="fa fa-home"></i></label>
+                                        <input type="text" placeholder="i.e: 12 avenue la rue triomphe" ng-model="user.adresse" required>
+                                    </div>
+
                                     <div class="pic-have-coupon">
-                                        <a href="" class="hover-bs" ng-disabled="userInfo.$invalid"
+                                        <a href="javascript:void(0);" class="hover-bs" ng-hide="userInfo.$invalid" ng-disabled="userInfo.$invalid"
                                            ng-click="NavigationForm(user);" > Continuer <i class="fa fa-arrow-right"></i></a>
                                     </div>
                                 </div>

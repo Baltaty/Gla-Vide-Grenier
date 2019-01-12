@@ -11,11 +11,25 @@ app.controller("codeCtrl" , function ($scope, $routeParams , Login , ListesFacto
     $scope.listeId = $routeParams.idListe;
 
 
+    Login.getParameters().then(function (response) {
+
+        if(response.data.success){
+            $scope.parameters = response.data.data;
+        }
+    });
+
+
     ListesFactory.LoadListeDetails($scope.listeId).then(function (response) {
         if(response.data){
             $scope.articles = response.data;
         }
 
     });
+
+
+    $scope.percent = function (prix) {
+        var assoPercent = ( (parseInt(prix) * parseInt($scope.parameters.pourcentage)) /100);
+        return assoPercent;
+    }
 
 });

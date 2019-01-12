@@ -61,14 +61,19 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 my-shut" ng-repeat="article in articles">
                                         <div class="card-box widget-box-three">
                                             <div class="row m-b-5 m-t-5 ">
-                                                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
+                                                <div class="col-lg-7 col-sm-6 col-md-7 col-xs-7">
                                                     {{session.trigramme}}
                                                     <br>
                                                     Article-code : ( {{article.codeA}} )
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-                                                    <span data-plugin="counterup">{{article.prix}}</span>
-                                                    <i class="fa fa-euro"></i>
+                                                <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5">
+                                                    <div class="pull-right">
+                                                        <span data-plugin="counterup">{{article.prix}}</span>
+                                                        <i class="fa fa-euro"></i>
+                                                    </div>
+
+                                                    <hr>
+                                                   <small>Soit {{percent(article.prix)}} <i class="fa fa-euro"></i> pour l'assocation Glazik</small>
                                                 </div>
                                             </div>
                                             <hr>
@@ -76,8 +81,10 @@
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                                                     ( Taille : {{article.taille}} )
                                                 </div>
-                                                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-8 pull-right">
-                                                    {{article.description}}
+                                                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-8 ">
+                                                    <div class="pull-right">
+                                                        {{article.description}}
+                                                    </div>
                                                 </div>
                                             </div>
 

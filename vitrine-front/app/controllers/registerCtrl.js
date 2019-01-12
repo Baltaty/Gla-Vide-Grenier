@@ -1,11 +1,10 @@
-app.controller("registerCtrl", function ($scope,toaster,Login) {
-
-    // console.log(" hello RegisterContro");
+app.controller("registerCtrl", function ($scope,toaster,Login,$timeout,$location) {
 
 
     $scope.userInfo = true;
     $scope.DataLogin = false;
     $scope.NavigationForm = function (data) {
+
 
         if($scope.userInfo){
             $scope.userInfo = false;
@@ -16,8 +15,6 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
             $scope.DataLogin = false;
         }
 
-        // console.log("---- data for format ----");
-        // console.log(data);
         $scope.readTerms=false;
 
     };
@@ -35,8 +32,9 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
           if(verifyData(data)){
               data.typeUser= "vendeur";
               data.action= "ADD";
+              data.dateNaissance = moment(data.dateNaissance).format('YYYY-MM-DD');
               delete  data.passconfirm;
-              // console.log(data);
+
               Login.userRegister(data).then(function (response) {
                   if(response.data.exist){
                       toaster.pop({
@@ -49,11 +47,15 @@ app.controller("registerCtrl", function ($scope,toaster,Login) {
                  else{
                       toaster.pop({
                           type: 'success',
-                          title: 'Inscription',
+                          title:'Inscription',
                           body: 'Votre inscription a bien été prise en compte, vous recevrez un mail de confirmation',
                           timeout: 5000
                       });
                   }
+                  $timeout(function () {
+                      $location.path("/");
+                  }, 3000);
+
 
               });
           }

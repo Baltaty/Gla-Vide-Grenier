@@ -10,9 +10,6 @@ include '../dbconnexion.php';
 
 #... verif iic apres on mettra des tockens de connexions de sessions mais actu boff pas trop le temps
 $response = [];
-//print_r($_POST);
-//print_r($_GET);
-//die();
 if(isset($_POST) && !empty($_POST)){
     // Ajouter un utilisateur // Vendeur en occurence
     if($_POST['action']=="ADD"){
@@ -165,7 +162,6 @@ function updateUser($data){
 function addUser($data){
 
 
-
     $response=[];
     $bdconnect = connectionToBD();
     if(userExist($data['email'], $bdconnect)){
@@ -213,8 +209,8 @@ function addUser($data){
 
 
 
-        $sql =" INSERT INTO user (nom, prenom, dateNaissance, civilite, numero, email, password, typeUser, trigramme, cle, adresse)
-                VALUES (:nom, :prenom, :dateNaissance, :civilite, :numero, :email, :password, :typeUser, :trigramme, :cle, :adresse) ";
+        $sql =" INSERT INTO user (nom, prenom, dateNaissance, civilite, numero, email, password, typeUser, trigramme, cle, adresse, cp)
+                VALUES (:nom, :prenom, :dateNaissance, :civilite, :numero, :email, :password, :typeUser, :trigramme, :cle, :adresse, :cp) ";
 
         // Ajouter un trigramme dans la data;
         $data['trigramme'] = $trigram;
@@ -238,7 +234,11 @@ function addUser($data){
         ];
 
     }catch (PDOException $ex){
-        echo $ex->getMessage();
+        $response =[
+            "status"=>false,
+            "message"=>$ex->getMessage(),
+        ];
+        echo  json_encode($response);
     }
     echo json_encode($response);
 }
