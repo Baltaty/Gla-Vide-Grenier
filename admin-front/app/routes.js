@@ -43,11 +43,6 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'vendeur/liste_details.html',
             controller: 'listesCtrl'
         })
-<<<<<<< HEAD
-        .when('/edit', {
-            templateUrl: 'admin/edit.html',
-            controller: 'editCtrl'
-=======
         .when('/parametres', {
             templateUrl: 'admin/parametre.html',
             controller: 'parameterCtrl'
@@ -71,7 +66,6 @@ app.config(function($routeProvider, $httpProvider) {
         .when('/editevent/:id', {
             templateUrl: 'admin/editevent.html',
             controller: 'eventCtrl'
->>>>>>> c394587081a000f17e6afef5c0013ec8e8b61753
         })
         .when('/edit', {
             templateUrl: 'admin/edit.html',
