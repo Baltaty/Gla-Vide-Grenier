@@ -21,7 +21,7 @@ if(isset($_GET) && !empty($_GET)){
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $articleexist = $result->rowCount();
 
-                
+
             if($articleexist==0){
                 // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
             } else
@@ -32,6 +32,9 @@ if(isset($_GET) && !empty($_GET)){
                     "name_event"=>$item['name_event'],
                     "date"=>$item['date'],
                     "lieu"=>$item['lieu'],
+                    "event_statut"=>$item['event_statut'],
+                    "current_date"=>date("Y-m-d"),
+
 
                     ] ;
                 }
@@ -126,7 +129,7 @@ if(isset($_GET) && !empty($_GET)){
             $bdconnect->exec($sql);
             $bdconnect->exec($sql1);
             $response = [
-                        "message"=> "annulation event réussie ",
+                        "message"=> "demarrage event réussie ",
                         "valide"=>true
                   ];
 
