@@ -92,6 +92,54 @@ app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
         }
     }
 
+    $scope.StartEvent= function(id_event){
+        console.log(" Je suis dans la fonction StartEvent  du controller");
+
+
+       try{
+           EventFactory.StartEvent(id_event).then(function (response) {
+
+                   // if(response.data.valide){
+                   //     toaster.pop({
+                   //         type: 'sucess',
+                   //         title: 'Parfait !',
+                   //         body: response.data.message,
+                   //         timeout: 1500
+                   //     });
+                   // }
+                   console.log(response.data);
+                   notif('success','event demarré avec succès, ENJOY !','DEMARRAGE D\'EVENT','toast-top-full-width');
+                   window.location.href="#/events";
+               });
+       }catch (ex){
+        console.error(ex)
+        }
+    }
+    $scope.RemoveEvent= function(id_event){
+        console.log(" Je suis dans la fonction RemoveEvent  du controller");
+
+
+       try{
+           EventFactory.CloseEvent(id_event).then(function (response) {
+
+                   // if(response.data.valide){
+                   //     toaster.pop({
+                   //         type: 'sucess',
+                   //         title: 'Parfait !',
+                   //         body: response.data.message,
+                   //         timeout: 1500
+                   //     });
+                   // }
+                   console.log(response.data);
+                   notif('success','event demarré avec succès, ENJOY !','DEMARRAGE D\'EVENT','toast-top-full-width');
+                   window.location.href="#/events";
+               });
+       }catch (ex){
+        console.error(ex)
+        }
+    }
+
+
      $scope.EditEvent= function(name,date,lieu){
         console.log(" Je suis dans la fonction edit event  du controller");
 

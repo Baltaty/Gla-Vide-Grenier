@@ -16,7 +16,7 @@ if(isset($_GET) && !empty($_GET)){
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
         try{
-            $sql="SELECT * FROM event WHERE event_statut='created' ORDER BY date ASC";
+            $sql="SELECT * FROM event WHERE event_statut='created' or event_statut='start' ORDER BY date ASC";
             $result = $bdconnect->query($sql);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $articleexist = $result->rowCount();
@@ -90,6 +90,65 @@ if(isset($_GET) && !empty($_GET)){
             $sql = "UPDATE event SET event_statut='abort'
             WHERE id_event='$id_event'";
             $sql1 = "UPDATE liste SET liste.statut='en cours',liste.id_event='NULL'
+            WHERE liste.id_event='$id_event'";
+            // use exec() because no results are returned
+            //print_r($sql);
+            $bdconnect->exec($sql);
+            $bdconnect->exec($sql1);
+            $response = [
+                        "message"=> "annulation event réussie ",
+                        "valide"=>true
+                  ];
+
+
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
+
+    if($_GET['action']=="start"){
+
+        $response = [];
+        $id_event=$_GET['id_event'];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql = "UPDATE event SET event_statut='start'
+            WHERE id_event='$id_event'";
+            $sql1 = "UPDATE liste SET liste.statut='en vente'
+            WHERE liste.id_event='$id_event'";
+            // use exec() because no results are returned
+            //print_r($sql);
+            $bdconnect->exec($sql);
+            $bdconnect->exec($sql1);
+            $response = [
+                        "message"=> "annulation event réussie ",
+                        "valide"=>true
+                  ];
+
+
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
+    if($_GET['action']=="close"){
+
+        $response = [];
+        $id_event=$_GET['id_event'];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql = "UPDATE event SET event_statut='close'
+            WHERE id_event='$id_event'";
+            $sql1 = "UPDATE article SET article.statut='in'
             WHERE liste.id_event='$id_event'";
             // use exec() because no results are returned
             //print_r($sql);

@@ -28,7 +28,10 @@
                                                 <p class="timeline-date text-muted"><small>{{l.date}}</small></p>
                                                 <p><i class="mdi mdi-map-marker-radius m-r-5"></i> {{l.lieu}}</p>
                                                 <button  class="btn btn-default" ng-click="AbortEvent(l.id_event)">Annuler<i class="fa fa-trash-o"></i></button>
-                                                <a href="#/editevent/{{l.id_event}}" class="btn btn-default">Modifier   <i class="fa fa-pencil"></i></a>
+                                                <a href="#/editevent/{{l.id_event}}" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                                                <!-- <button  class="btn btn-default"  ng-hide="l.event_statut!=start" ng-click="StartEvent(l.id_event)">DEMMARER LA VENTE<i class="fa fa-start"></i></button> -->
+                                                <!-- <button  class="btn btn-default" ng-hide="l.event_statut==created" ng-click="CloseEvent(l.id_event)">CLOTURER LA VENTE<i class="fa fa-start"></i></button> -->
+                                                
 
                                             </div>
                                         </div>

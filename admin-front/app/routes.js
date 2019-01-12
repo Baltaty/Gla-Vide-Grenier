@@ -67,6 +67,10 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'admin/editevent.html',
             controller: 'eventCtrl'
         })
+        .when('/edit', {
+            templateUrl: 'admin/edit.html',
+            controller: 'editCtrl'
+        })
         .otherwise({ redirectTo: '/'});
 
     $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

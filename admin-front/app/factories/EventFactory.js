@@ -30,6 +30,24 @@ app.factory("EventFactory", function ($q, $http) {
             });
             return deferred.promise;
         },
+        StartEvent: function (id_event) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "events.php?action=start&id_event="+id_event).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
+        CloseEvent: function (id_event) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "events.php?action=close&id_event="+id_event).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
         AddEvent: function (name,date,lieu) {
             console.log(" Je suis dans la fonction addEVENT du factory ");
             // console.log(nom_liste);
