@@ -312,7 +312,7 @@
                             <li class="has_sub"  ng-hide="session.type!='organisateur'">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-external-link"></i> <span> Ventes </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#/articles-sell"> Effectuer une vente</a></li>
+                                    <li><a href="#/articles-sell"  ng-hide="!isDayVente"> Effectuer une vente</a></li>
                                     <li><a href="#/listes-for-vide"> <i class="fa fa-bar-chart-o"></i>  Les Stats </a></li>
                                 </ul>
                             </li>

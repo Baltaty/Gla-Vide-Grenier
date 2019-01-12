@@ -8,11 +8,24 @@ header('Content-Type:application/json');
 include '../dbconnexion.php';
 
 if(isset($_GET) && !empty($_GET)){
-
     getParameters($_GET);
-} elseif (isset($_POST) && !empty($_POST)){
-    updateParameter($_POST);
 }
+
+if(isset($_POST) && !empty($_POST)){
+
+    if($_POST['action']=="UPDATE"){
+        updateParameter($_POST);
+    } elseif ($_POST['action']=="ALL"){
+
+        getParameters($_POST);
+
+    } elseif ($_POST['action']=="CHECK_VENTE_DAY"){
+        activeVente($_POST);
+    }
+
+}
+
+
 
 
 
@@ -98,3 +111,37 @@ function copyArray($tableau, $exceptItem){
     }
     return $toExecute;
 }
+
+function activeVente($data){
+
+    $resuldata=[];
+    $bdconnect = connectionToBD();
+    if($data['action']=="CHECK_VENTE_DAY" ){
+
+        $today = date("Y-m-d");
+
+
+        try{
+            $sql=" SELECT * FROM event WHERE event_statut='start' AND event.date='$today'";;
+            $result = $bdconnect->query($sql);
+            foreach ($result as $item) {
+                $resuldata = [
+                    "id_event" => $item['id_event'],
+                    "name_event" => $item['name_event'],
+                    "is_dayVente" => true,
+                    "date" => $item['date'],
+
+                ];
+            }
+
+        }catch (PDOException $ex){
+            $resuldata=[
+                "success"=>false,
+                "error"=>$ex->getMessage(),
+            ];
+            echo  json_encode($resuldata);
+        }
+
+        echo json_encode($resuldata);
+    }
+};

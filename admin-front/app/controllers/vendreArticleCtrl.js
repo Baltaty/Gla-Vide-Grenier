@@ -1,4 +1,4 @@
-app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , ListesFactory ) {
+app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , ListesFactory,$location) {
 
     try {
 
@@ -10,6 +10,14 @@ app.controller("vendreArticleCtrl", function ($scope, $routeParams, Login , List
 
         console.log(error)
     }
+
+    // verify si c'est le jour d'une vente alors on peut acceder a cet espace
+    Login.checkControl({action:"CHECK_VENTE_DAY"}).then(function (response) {
+        if(response.data.is_dayVente){
+        } else {
+            $location.path("/");
+        }
+    });
 
 
     $scope.toBuys = [];
