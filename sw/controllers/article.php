@@ -34,39 +34,6 @@ if(isset($_POST) && !empty($_POST)){
 
 
 
-
-
-
-
-
-function deleteUser($data){
-    $bdconnect = connectionToBD();
-    $resuldata = [];
-
-    try{
-
-        $value=$data['value'];
-        $sql=" DELETE FROM user WHERE user.trigramme='$value'";
-        $bdconnect->query($sql);
-        $resuldata= [
-            "success"=>true,
-            "message"=>"supprimer avec sucess",
-        ];
-
-    }catch (PDOException $ex){
-        $resuldata=[
-            "success"=>false,
-            "error"=>$ex->getMessage(),
-        ];
-        echo  json_encode($resuldata);
-    }
-
-    echo json_encode($resuldata);
-
-
-};
-
-
 //Tout les users
 function addVente($data){
 
@@ -155,7 +122,7 @@ function addVente($data){
 
 
 
-// mise a jour  d'un utilisqteur
+// mise a jour  d'un utilisateur
 function updateArticle($data){
 
 
@@ -168,7 +135,7 @@ function updateArticle($data){
         $pst =  $bdconnect->prepare($sql);
         $pst->execute(array(
             "statut"=>$data['statut'],
-            "commentaire"=>$data['motif'],
+            "commentaire"=>isset($data['motif'])?$data['motif']:$data['commentaire'],
             "codeA"=>$data['codeA'],
         ));
 
