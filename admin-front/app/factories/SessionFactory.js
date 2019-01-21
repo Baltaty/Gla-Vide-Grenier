@@ -15,8 +15,11 @@ app.factory("Session" , function($q, $http, $location){
             } catch (error) {
                 console.log(error)
             }
-
         },
+
+        uploadFile:function (files , object) {
+
+        }
 
 
     };
