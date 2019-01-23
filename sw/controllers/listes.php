@@ -123,8 +123,6 @@ if(isset($_GET) && !empty($_GET)){
 
                 ] ;
             }
-//            print_r($response);
-//            die();
 
         }
     }catch(PDOException $ex){
@@ -162,6 +160,7 @@ if(isset($_GET) && !empty($_GET)){
                     "commentaire"=>$item['commentaire'],
                     "description"=>$item['description'],
                     "numListe"=>$item['numListe'],
+                    "photo"=>$item['photo'],
                     ] ;
                 }
             

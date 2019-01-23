@@ -17,7 +17,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         ListesFactory.LoadListes(tri).then(function (response) {
                
                $scope.listes= response.data;
-               console.log(response.data);
+               // console.log(response.data);
         });
     }catch (ex){
      console.error(ex)
@@ -26,7 +26,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         ListesFactory.LoadEvents().then(function (response) {
                
                $scope.events= response.data;
-               console.log(response.data);
+               // console.log(response.data);
         });
     }catch (ex){
      console.error(ex)
@@ -36,6 +36,16 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         ListesFactory.LoadListeDetails(num_liste).then(function (response) {
                
             $scope.listesdetails= response.data;
+
+            for(var k =0 ;  k < $scope.listesdetails.length ; ++k){
+                if( $scope.listesdetails[k].photo !== null){
+                    $scope.listesdetails[k].photo = BASE_FILE +""+$scope.listesdetails[k].photo
+                }else{
+                    $scope.listesdetails[k].photo = BASE_FILE +"icon-standard.png";
+                }
+
+            }
+            console.log($scope.listesdetails);
             Login.getParameters().then(function (res) {
 
                 if(res.data.success){
@@ -57,6 +67,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
 
 
             });
+
         });
     }catch (ex){
      console.error(ex)
@@ -166,6 +177,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
      $scope.verifyData = function (data) {
          var regex = /[X S M L]/g ;
          var regexcom = /'|"/g;
+         data.taille = data.taille.toUpperCase();
          data.commentaire = data.commentaire.replace(regexcom," ");
          if(isNaN(parseInt(data.prix)) || parseInt(data.prix)=== undefined ||  ! matchXly(data.taille ,regex)){
              notif('error','Veuillez renseigner les champs recquis','Form','toast-top-right');

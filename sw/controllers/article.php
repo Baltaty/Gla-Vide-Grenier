@@ -35,7 +35,7 @@ function addArticle($data){
 
     $response =[];
     try{
-        
+
 
         $bdconnect = connectionToBD();
         $sql =  " INSERT INTO article (numListe, prix, taille, description, commentaire, statut, photo)

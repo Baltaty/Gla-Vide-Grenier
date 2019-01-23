@@ -72,7 +72,9 @@
 
                                                     <div class="row m-t-5 m-l-5" ng-repeat="d in listesdetails" >
                                                         <div class="col-sm-4">
-                                                            <div class="property-image" style="background: url('../public/images/icon-standard.png') center center / cover no-repeat;">
+                                                            <!--<div class="property-image" style="background: url('../public/images/icon-standard.png') center center / cover no-repeat;">-->
+                                                            <div class="property-image" ng-style="{'background-image':'url({{d.photo}})'} "
+                                                                 style="background: center center; background-size: contain; background-repeat: no-repeat; " >
                                                                 <span class="property-label label label-danger">A vendre </span>
                                                             </div>
                                                         </div>
@@ -117,31 +119,6 @@
                                                 </div>
                                                 <!-- End property item -->
 
-
-
-
-
-                                                <div class="text-right">
-
-                                                    <ul class="pagination">
-                                                        <li class="disabled">
-                                                            <a href="#"><i class="fa fa-angle-left"></i></a>
-                                                        </li>
-                                                        <li class="active">
-                                                            <a href="#">1</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">3</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fa fa-angle-right"></i></a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
 
                                             </div>
                                         </div>
