@@ -17,11 +17,6 @@ app.factory("Session" , function($q, $http, $location){
             }
         },
 
-        uploadFile:function (files , object) {
-
-        }
-
-
     };
     return factory;
 });

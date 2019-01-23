@@ -1,5 +1,5 @@
 <div class="content">
-        <div class="container" ng-controller="listesCtrl">
+        <div class="container">
 
             <div class="row card-box">
 
@@ -12,13 +12,10 @@
 
 
                             <div class="thumb-xl member-thumb m-b-10 center-block">
-                                <img src="../public/assets/images/users/avatar-1.jpg" id="blah" class="img-thumbnail"
-                                    height="300" width="auto" alt="profile-image">
+                                <img src="../public/assets/images/users/avatar-1.jpg" id="blah" class="img-thumbnail img-responsive"
+                                    height="300px" width="400px" alt="profile-image">
                             </div>
 
-                            <!--<div class="property-image" id="blah" style="background: url('../public/assets/images/properties/1.jpg') center center / cover no-repeat;">-->
-                                <!--<span class="property-label label label-warning">A vendre</span>-->
-                            <!--</div>-->
 
                             <div class="property-content">
                                 <div class="listingInfo">
@@ -40,16 +37,6 @@
                                                </div>
                                             </div>
 
-                                            <!--<div class="p-20">-->
-                                                <!--<div class="form-group clearfix">-->
-                                                    <!--<input type="file" class="btn btn-teal btn-small col-sm-12 padding-left-0 padding-right-0 " ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"-->
-                                                           <!--ngf-accept="'png',jpeg" ngf-max-size="20MB" ngf-min-height="100"-->
-                                                           <!--ngf-resize="{width: 100, height: 100}"> Choisir image-->
-                                                    <!--</input>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-
-                                        </div>
 
                                     </div>
                                 </div>
@@ -61,43 +48,39 @@
 
                     <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                         <div class="p-20">
-                            <form action="#" data-parsley-validate novalidate>
+                            <form name="form" data-parsley-validate novalidate>
                                 <div class="form-group">
                                     <label >Nom de l'article<span class="text-danger">*</span></label>
-                                    <input type="text"  parsley-trigger="change" required
+                                    <input type="text" required
                                            placeholder="Entrer un nom" class="form-control"  ng-model="art.description">
                                 </div>
                                 <div class="form-group">
                                     <label >Prix<span class="text-danger">*</span></label>
-                                    <input type="text"  parsley-trigger="change" required
+                                    <input type="text"  data-parsley-type="number" required
                                            placeholder="Entrer une somme" class="form-control"  ng-model="art.prix">
                                 </div>
                                 <div class="form-group">
                                     <label >Taille<span class="text-danger">*</span></label>
-                                    <input type="text"  parsley-trigger="change" required
-                                           placeholder="soit XS,S,M,L,XL,XXL,XXXL" class="form-control"  ng-model="art.taille">
+                                    <input type="text"  data-parsley-maxlength="6" required
+                                           placeholder="i.e XS ,S , M, L, XL, XXL ..." class="form-control"  ng-model="art.taille">
                                 </div>
                                 <div class="form-group">
                                     <label >Commentaire<span class="text-danger">*</span></label>
-                                    <input type="text"  parsley-trigger="change" required
+                                    <input type="text" required
                                            placeholder="plus d'infos sur l'article" class="form-control"  ng-model="art.commentaire">
                                 </div>
 
 
-
-
-
                                 <div class="form-group text-right m-b-0">
-                                    <a class="btn btn-primary waves-effect waves-light" ng-click="AddListeDetails(art)">
+                                    <button class="btn btn-primary waves-effect waves-light" ng-disabled="form.$invalid" type="submit" ng-click="AddListeDetails(art)">
                                         Créer
-                                    </a>
+                                    </button>
                                     <a href="#/listes/{{num_liste}}" class="btn btn-default waves-effect m-l-5">
                                         Annuler
                                     </a>
                                 </div>
 
                             </form>
-
 
 
                         </div>

@@ -4,7 +4,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
     $scope.session =  Session.isLogged();
     try {
         var tri = $scope.session.trigramme;
-        var num_liste=$routeParams.num;
+        var num_liste = $routeParams.num;
         var codeA=$routeParams.codeA;
         $scope.num_liste=$routeParams.num;
 
@@ -145,10 +145,34 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
      };
 
      $scope.AddListeDetails= function(data){
-         data.num_liste=num_liste;
-         $scope.upload($scope.file, data);
+         data.num_liste = num_liste;
+         console.clear();
+         data.prix= parseInt(data.prix);
+         if($scope.verifyData(data)){
+             $scope.upload($scope.file, data);
+         }
 
     };
+
+      function matchXly(data , regex) {
+         for(var k=0 ; k < data.length ; ++k){
+             if(data[k].match(regex) === null){
+                    return false ;
+             }
+         }
+         return true;
+     };
+
+     $scope.verifyData = function (data) {
+         var regex = /[X S M L]/g ;
+         var regexcom = /'|"/g;
+         data.commentaire = data.commentaire.replace(regexcom," ");
+         if(isNaN(parseInt(data.prix)) || parseInt(data.prix)=== undefined ||  ! matchXly(data.taille ,regex)){
+             notif('error','Veuillez renseigner les champs recquis','Form','toast-top-right');
+             return false;
+         }
+         return true;
+     };
 
     function readURL(input) {
 
@@ -240,5 +264,9 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         });
     };
 
-    
+    $(document).ready(function() {
+        $('form').parsley();
+    });
+
+
 });

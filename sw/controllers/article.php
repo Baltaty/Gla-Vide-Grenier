@@ -35,10 +35,7 @@ function addArticle($data){
 
     $response =[];
     try{
-
-        print_r($_FILES);
-        print_r($data);
-        die();
+        
 
         $bdconnect = connectionToBD();
         $sql =  " INSERT INTO article (numListe, prix, taille, description, commentaire, statut, photo)
@@ -48,13 +45,16 @@ function addArticle($data){
         $data['statut']="NON FOURNI";
         $data['photo'] = null;
         if(isset($_FILES) && !empty($_FILES)){
-            $data['photo'] = $filename = $_FILES['file']['name'];
+            $destination = $_FILES['file']['name'];
+            $data['photo'] = $destination;
         }
 
         $preStatment->execute($data);
-        $filename = $_FILES['file']['name'];
-        $destination = "../files/". $filename;
-        move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
+
+        if(isset($_FILES) && !empty($_FILES)){
+            $destination = "../files/". $destination;
+            move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
+        }
         $response = [
             "success"=>true,
             "message"=>"nouvel article enregistre"
