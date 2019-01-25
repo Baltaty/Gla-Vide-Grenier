@@ -32,4 +32,9 @@ app.controller("codeCtrl" , function ($scope, $routeParams , Login , ListesFacto
         return assoPercent;
     }
 
+    $scope.calculated_price = function (prix) {
+        var assoPercent = ( parseInt(prix) + (parseInt(prix) * parseInt($scope.parameters.pourcentage))/100);
+        return assoPercent;
+    }
+
 });

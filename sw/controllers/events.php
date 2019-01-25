@@ -151,14 +151,20 @@ if(isset($_GET) && !empty($_GET)){
         try{
             $sql = "UPDATE event SET event_statut='close'
             WHERE id_event='$id_event'";
-            $sql1 = "UPDATE article SET article.statut='INVENDU'
-            WHERE article.statut='RETIRE'";
+            // $sql1 = "UPDATE article SET article.statut='INVENDU'
+            // WHERE article.statut='RETIRE'";
+            // $sql1="UPDATE article SET article.statut='INVENDU' WHERE article.statut='RETIRE'
+            // OR article.codeA=(SELECT DISTINCT codeA FROM event,liste WHERE liste.id_event='$id_event' and article.numListe=liste.numListe)";
+            $sql1="UPDATE article SET article.statut='INVENDU' WHERE article.codeA=(SELECT DISTINCT codeA FROM event,liste WHERE liste.id_event='$id_event' AND article.numListe=liste.numListe AND (article.statut<>'VENDU' AND article.statut<>'RETIRE') )";
+            $sql2="UPDATE liste SET statut='vendue'
+            WHERE liste.id_event='$id_event'";
             // use exec() because no results are returned
             //print_r($sql);
             $bdconnect->exec($sql);
             $bdconnect->exec($sql1);
+            $bdconnect->exec($sql2);
             $response = [
-                        "message"=> "annulation event réussie ",
+                        "message"=> "fermetture event réussie ",
                         "valide"=>true
                   ];
 

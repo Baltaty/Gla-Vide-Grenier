@@ -40,8 +40,10 @@ if(isset($_GET)&& !empty($_GET)){
             die();
         }
         echo json_encode($response);
-    }
-    if($_GET['action']=="change"){
+    }  
+}
+if(isset($_POST) && !empty($_POST)){
+    if($_POST['action']=="change"){
 
         $response = [];
         $texte=$_GET['texte'];
@@ -61,6 +63,5 @@ if(isset($_GET)&& !empty($_GET)){
         }
         echo json_encode($response);
     }
-    
 }
 
