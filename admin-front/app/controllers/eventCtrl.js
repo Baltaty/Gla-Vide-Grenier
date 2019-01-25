@@ -1,4 +1,4 @@
-app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
+app.controller("eventCtrl", function($scope,$routeParams,EventFactory,Session) {
 
     try {
         // $scope.session = JSON.parse(window.localStorage.getItem("user_session"));

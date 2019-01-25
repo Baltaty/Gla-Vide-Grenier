@@ -2,14 +2,14 @@ var app = angular.module('App', ['ngRoute','ngFileUpload']);
 
 app.config(function($routeProvider, $httpProvider) {
     $routeProvider
-        // .when('/', {
-        //     templateUrl: 'accueil.html',
-        //     controller: 'HomeCtrl'
-        // })
         .when('/', {
-            templateUrl: 'vendeur/listes.html',
-            controller: 'listesCtrl'
+            templateUrl: 'accueil.html',
+            controller: 'HomeCtrl'
         })
+        // .when('/', {
+        //     templateUrl: 'vendeur/listes.html',
+        //     controller: 'listesCtrl'
+        // })
         .when('/user-profile', {
             templateUrl: 'user-profile.html',
             controller: 'userProfilCtrl'
