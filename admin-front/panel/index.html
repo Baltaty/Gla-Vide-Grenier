@@ -326,20 +326,20 @@
 
 
                             <!--<li class="has_sub" ng-if="session.type=='organisateur'">-->
-                            <li class="has_sub">
+                            <li class="has_sub" ng-if="session.type=='organisateur'">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users"></i><span> Utilisateurs </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="#/users-all">Liste</a></li>
                                     <li><a href="#/user-create">Créer un organisateur</a></li>
                                 </ul>
                             </li>
-                            <li class="has_sub">
+                            <li class="has_sub" ng-if="session.type=='organisateur'">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-folder-open"></i> <span> Modifier textes</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="#/edit">Modifier la présentation</a></li>
                                 </ul>
                             </li>
-                            <li class="has_sub">
+                            <li class="has_sub" ng-if="session.type=='organisateur'">
                                     <a href="#/events" class="waves-effect"><i class="mdi mdi-view-dashboard"></i><span> Gla'Vides Dressing </span> </a>
                             </li>
 
