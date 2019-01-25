@@ -8,6 +8,8 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         var codeA=$routeParams.codeA;
         $scope.num_liste=$routeParams.num;
 
+
+
     } catch (error) {
             console.log(error)
     }
