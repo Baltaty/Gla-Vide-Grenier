@@ -280,5 +280,8 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         $('form').parsley();
     });
 
+    // for(var i=0;i=5;i++){
+    //     console.log(i);
+    // }
 
 });
