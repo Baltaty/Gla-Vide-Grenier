@@ -1,4 +1,4 @@
-app.controller("NavbarCtrl", function ($scope,Session) {
+app.controller("NavbarCtrl", function ($scope,Session,$location) {
 
 
     $scope.session =  Session.isLogged();
