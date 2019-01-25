@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ngRoute']);
+var app = angular.module('App', ['ngRoute','ngFileUpload']);
 
 app.config(function($routeProvider, $httpProvider) {
     $routeProvider

@@ -1,10 +1,10 @@
-app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,Session) {
+app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,Session,$http,Upload) {
 
 
     $scope.session =  Session.isLogged();
     try {
         var tri = $scope.session.trigramme;
-        var num_liste=$routeParams.num;
+        var num_liste = $routeParams.num;
         var codeA=$routeParams.codeA;
         $scope.num_liste=$routeParams.num;
 
@@ -17,7 +17,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         ListesFactory.LoadListes(tri).then(function (response) {
                
                $scope.listes= response.data;
-               console.log(response.data);
+               // console.log(response.data);
         });
     }catch (ex){
      console.error(ex)
@@ -26,7 +26,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         ListesFactory.LoadEvents().then(function (response) {
                
                $scope.events= response.data;
-               console.log(response.data);
+               // console.log(response.data);
         });
     }catch (ex){
      console.error(ex)
@@ -36,6 +36,16 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         ListesFactory.LoadListeDetails(num_liste).then(function (response) {
                
             $scope.listesdetails= response.data;
+
+            for(var k =0 ;  k < $scope.listesdetails.length ; ++k){
+                if( $scope.listesdetails[k].photo !== null){
+                    $scope.listesdetails[k].photo = BASE_FILE +""+$scope.listesdetails[k].photo
+                }else{
+                    $scope.listesdetails[k].photo = BASE_FILE +"icon-standard.png";
+                }
+
+            }
+            console.log($scope.listesdetails);
             Login.getParameters().then(function (res) {
 
                 if(res.data.success){
@@ -57,6 +67,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
 
 
             });
+
         });
     }catch (ex){
      console.error(ex)
@@ -65,14 +76,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
      try{
         ListesFactory.loadListeDetailsElement(codeA).then(function (response) {
 
-                // if(response.data.valide){
-                //     toaster.pop({
-                //         type: 'sucess',
-                //         title: 'Parfait !',
-                //         body: response.data.message,
-                //         timeout: 1500
-                //     });
-                // }
+
                 $scope.thisarticle=response.data[0];
                 console.log("le thisarticle trouve est ");
                 console.log(response.data[0]);
@@ -81,6 +85,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
     }catch (ex){
      console.error(ex)
      }
+
      $scope.DeleteListe= function(num_liste){
         try{
             ListesFactory.DeleteListe(num_liste).then(function (response) {
@@ -148,30 +153,58 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
         }catch (ex){
          console.error(ex)
          }
-     }
-     $scope.AddListeDetails= function(description,prix,taille,commentaire){
-        console.log(" Je suis dans la fonction add liste detail du controller ET NUM LISTE EST");
-        console.log(num_liste);
+     };
 
-       try{
-           ListesFactory.AddListeDetails(num_liste,description,prix,taille,commentaire).then(function (response) {
+     $scope.AddListeDetails= function(data){
+         data.num_liste = num_liste;
+         console.clear();
+         data.prix= parseInt(data.prix);
+         if($scope.verifyData(data)){
+             $scope.upload($scope.file, data);
+         }
 
-                   // if(response.data.valide){
-                   //     toaster.pop({
-                   //         type: 'sucess',
-                   //         title: 'Parfait !',
-                   //         body: response.data.message,
-                   //         timeout: 1500
-                   //     });
-                   // }
-                   //console.log(response.data);
-                   notif('success','Article ajouté avec succès !','AJOUT D\'ARTICLE','toast-top-full-width');
-                   window.location.href="#/listes/"+num_liste;
-               });
-       }catch (ex){
-        console.error(ex)
+    };
+
+      function matchXly(data , regex) {
+         for(var k=0 ; k < data.length ; ++k){
+             if(data[k].match(regex) === null){
+                    return false ;
+             }
+         }
+         return true;
+     };
+
+     $scope.verifyData = function (data) {
+         var regex = /[X S M L]/g ;
+         var regexcom = /'|"/g;
+         data.taille = data.taille.toUpperCase();
+         data.commentaire = data.commentaire.replace(regexcom," ");
+         if(isNaN(parseInt(data.prix)) || parseInt(data.prix)=== undefined ||  ! matchXly(data.taille ,regex)){
+             notif('error','Veuillez renseigner les champs recquis','Form','toast-top-right');
+             return false;
+         }
+         return true;
+     };
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+                $('#blah').css('background-image',  e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("#imgInp").change(function() {
+        readURL(this);
+        console.log("on change");
+    });
+
     $scope.EditListeDetails= function(description,prix,taille,commentaire){
         console.log(" Je suis dans la fonction edit liste detail du controller ET NUM LISTE EST xxx");
 
@@ -180,14 +213,6 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
        try{
            ListesFactory.EditListeDetails(codeA,description,prix,taille,commentaire).then(function (response) {
 
-                   // if(response.data.valide){
-                   //     toaster.pop({
-                   //         type: 'sucess',
-                   //         title: 'Parfait !',
-                   //         body: response.data.message,
-                   //         timeout: 1500
-                   //     });
-                   // }
                    console.log(response.data);
                    notif('success','Article modifié avec succès !','MODIFICATION D\'ARTICLE','toast-top-full-width');
 
@@ -195,21 +220,13 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
        }catch (ex){
         console.error(ex)
         }
-    }
+    };
+
     $scope.MajListeStatut= function(num_liste,eventselect){
         console.log(" Je suis dans la fonction maj  du controller ET event EST ");
         console.log(eventselect);
        try{
            ListesFactory.MajListeStatut(num_liste,eventselect).then(function (response) {
-                
-                   // if(response.data.valide){
-                   //     toaster.pop({
-                   //         type: 'sucess',
-                   //         title: 'Parfait !',
-                   //         body: response.data.message,
-                   //         timeout: 1500
-                   //     });
-                   // }
                    console.log(response.data);
                    notif('success','Soumission faite avec succès !','SOUMISSION DE LISTE','toast-top-full-width');
                    window.location.href="#/listes";
@@ -218,7 +235,7 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
        }catch (ex){
         console.error(ex)
         }
-    }
+    };
 
     $scope.changeStatus = function (data) {
         data.action="UPDATE";
@@ -233,18 +250,35 @@ app.controller("listesCtrl", function ($scope,$routeParams,ListesFactory, Login,
                 notif('error',response.data.message,'Article','toast-top-full-width')
             }
         });
-        
+
     };
 
 
-    $('#filer_input2').filer({
-        limit: 3,
-        maxSize: 3,
-        extensions: ['jpg', 'jpeg', 'png',],
-        changeInput: true,
-        showThumbs: true,
-        addMore: true
+
+
+    $scope.upload = function (file , object) {
+        Upload.upload({
+            url:  BASE_URL +'article.php',
+            data: {file: file, action:'FILE', data:object}
+        }).then(function (resp) {
+
+            if(resp.data.success){
+                notif('success','Article ajouté avec succès !','AJOUT D\'ARTICLE','toast-top-full-width');
+                window.location.href="#/listes/"+num_liste;
+            } else {
+                notif('error','Erreur d\'ajout ','AJOUT D\'ARTICLE','toast-top-full-width');
+            }
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+    $(document).ready(function() {
+        $('form').parsley();
     });
 
-    
+
 });

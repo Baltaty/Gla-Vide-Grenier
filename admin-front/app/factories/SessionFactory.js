@@ -15,9 +15,7 @@ app.factory("Session" , function($q, $http, $location){
             } catch (error) {
                 console.log(error)
             }
-
         },
-
 
     };
     return factory;

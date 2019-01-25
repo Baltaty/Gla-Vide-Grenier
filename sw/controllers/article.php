@@ -21,12 +21,55 @@ if(isset($_POST) && !empty($_POST)){
     if($_POST["action"]=="RETRAIT"){
          updateArticle($_POST);
     }
+    if($_POST["action"]=="FILE"){
+            addArticle($_POST['data']);
+    }
 
 
 
 } elseif (isset($_GET)  && !empty($_GET)){
 
 }
+
+function addArticle($data){
+
+    $response =[];
+    try{
+
+
+        $bdconnect = connectionToBD();
+        $sql =  " INSERT INTO article (numListe, prix, taille, description, commentaire, statut, photo)
+              VALUES (:num_liste, :prix, :taille, :description, :commentaire, :statut, :photo );";
+        $preStatment = $bdconnect->prepare($sql);
+
+        $data['statut']="NON FOURNI";
+        $data['photo'] = null;
+        if(isset($_FILES) && !empty($_FILES)){
+            $destination = $_FILES['file']['name'];
+            $data['photo'] = $destination;
+        }
+
+        $preStatment->execute($data);
+
+        if(isset($_FILES) && !empty($_FILES)){
+            $destination = "../files/". $destination;
+            move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
+        }
+        $response = [
+            "success"=>true,
+            "message"=>"nouvel article enregistre"
+        ];
+
+    }catch (PDOException $ex){
+        $response = [
+            "success"=>false,
+            "message"=>$ex->getMessage(),
+        ];
+        echo json_encode($response);
+    }
+
+    echo json_encode($response);
+};
 
 
 
