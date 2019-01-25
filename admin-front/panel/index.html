@@ -333,7 +333,7 @@
                                 </ul>
                             </li>
                             <li class="has_sub" ng-if="session.type=='organisateur'">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-folder-open"></i> <span> Modifier textes</span> <span class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);" class="waves-effect" ng-if="session.type=='organisateur'" ><i class="fa fa-folder-open"></i> <span> Modifier textes</span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="#/edit">Modifier la présentation</a></li>
                                 </ul>
