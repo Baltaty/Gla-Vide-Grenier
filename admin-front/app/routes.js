@@ -47,6 +47,10 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'vendeur/liste_details.html',
             controller: 'listesCtrl'
         })
+        .when('/listes/:num/true', {
+            templateUrl: 'vendeur/liste_details_true.html',
+            controller: 'listesCtrl'
+        })
         .when('/parametres', {
             templateUrl: 'admin/parametre.html',
             controller: 'parameterCtrl'
