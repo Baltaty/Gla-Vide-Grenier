@@ -12,6 +12,8 @@
         <!-- App title -->
         <title>GlaZyk Gym </title>
 
+        <link href="../public/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
         <!--Morris Chart CSS -->
 		<link rel="stylesheet" href="../public/plugins/morris/morris.css">
 
@@ -348,9 +350,7 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-email"></i><span> Mes Paiemments </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="email-inbox.html">Mes vides Dressing Recap </a></li>
-                                    <li><a href="email-read.html"></a></li>
-                                    <li><a href="email-compose.html"></a></li>
+                                    <li><a href="#/recap">Mes vides Dressing Recap </a></li>
                                 </ul>
                             </li>
 
@@ -513,7 +513,11 @@
         <script src="../public/plugins/jquery.filer/js/jquery.filer.min.js"></script>
 
 
-
+        <script type="text/javascript">
+			$(document).ready(function() {
+				$('form').parsley();
+			});
+		</script>
 
         <!--Angular routes-->
         <script src="../app/routes.js"></script>
@@ -543,6 +547,7 @@
         <script src="../app/controllers/vendreArticleCtrl.js"></script>
         <script src="../app/controllers/eventCtrl.js"></script>
         <script src="../app/controllers/editCtrl.js"></script>
+        <script src="../app/controllers/recapCtrl.js"></script>
 
 
 

@@ -51,6 +51,10 @@ app.config(function($routeProvider, $httpProvider) {
             templateUrl: 'vendeur/etiquette.html',
             controller: 'codeCtrl'
         })
+        .when('/recap', {
+            templateUrl: 'vendeur/recap.html',
+            controller: 'recapCtrl'
+        })
         .when('/listes-for-vide', {
             templateUrl: 'admin/list-for-vide.html',
             controller: 'WaitDemandeCtrl'

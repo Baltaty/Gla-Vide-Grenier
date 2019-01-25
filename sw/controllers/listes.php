@@ -51,6 +51,42 @@ if(isset($_GET) && !empty($_GET)){
 
     
     }
+    if($_GET['action']=="allGain"){
+
+        $response = [];
+        $tri=$_GET['tri'];
+        $bdconnect = connectionToBD();
+        //EXECUTION DE LA REQUETE DE SELECTION DES ARTICLES AVEC 
+        try{
+            $sql="SELECT liste.numListe, nom_liste, date_creation, SUM(prix) as gain FROM liste, article WHERE liste.trigramme='$tri' and liste.statut='vendue' and liste.numListe=article.numListe and article.statut='VENDU'";
+            $result = $bdconnect->query($sql);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+            $articleexist = $result->rowCount();
+
+                
+            if($articleexist==0){
+                // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+            } else
+            {
+                foreach ($result as $item){
+                    $response [] = [
+                    "numListe"=>$item['numListe'],
+                    "nom_liste"=>$item['nom_liste'],
+                    "gain"=>$item['gain'],
+                    "date_creation"=>$item['date_creation'],
+
+                    ] ;
+                }
+            
+            }
+        }catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
+        echo json_encode($response);
+
+    
+    }
     if($_GET['action']=="loadevents"){
 
         $response = [];
@@ -333,8 +369,27 @@ if(isset($_POST) && !empty($_POST)){
         $bdconnect = connectionToBD();
         //EXECUTION DE LA REQUETE DE SUPRESSION D'UNE LISTE
         try{
-            $sql = "INSERT INTO article (numListe,prix,taille,description,statut,commentaire)
-            VALUES ('$num_liste','$prix', '$taille', '$description','$statut', '$commentaire')";
+            
+            $req=$bdconnect->query("SELECT z FROM parametre limit 1");
+            $req->setFetchMode(PDO::FETCH_ASSOC);
+            $articleexist = $req->rowCount();
+            $para = [];
+                
+            if($articleexist==0){
+                // ACTION A FAIRE AU CAS OU IL N'Y A PAS D'ARTICLE
+            } else
+            {
+                foreach ($req as $item){
+                    $para [] = [
+                    "z"=>$item['z'],
+                    ] ;
+                }
+            }
+            $a=$para[0];
+            $z=$a['z'];
+
+            $sql = "INSERT INTO article (numListe,prix,pourcentage,taille,description,statut,commentaire)
+            VALUES ('$num_liste','$prix','$z','$taille', '$description','$statut', '$commentaire')";
             // use exec() because no results are returned
             $bdconnect->exec($sql);
             $response = [

@@ -13,8 +13,10 @@ app.controller("editCtrl", function($scope, $http) {
       try {
         //light *_*
         $http.get(BASE_URL+"edit.php?action=change&&texte="+texte).then(function(response){
-          //console.log(response.data);
-
+        //console.log(response.data);
+        // $http.post(BASE_URL+"edit.php",{action:change,texte=texte}).then(function(response){
+        //console.log(response.data);
+        // });
         });
       } catch (error) {
   

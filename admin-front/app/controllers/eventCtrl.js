@@ -92,16 +92,16 @@ app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
         console.error(ex)
         }
     };
-    $scope.RemoveEvent= function(id_event){
-        console.log(" Je suis dans la fonction RemoveEvent  du controller");
-
+    $scope.CloseEvent= function(id_event){
+        console.log(" Je suis dans la fonction CloseEvent  du controller");
+        
 
        try{
            EventFactory.CloseEvent(id_event).then(function (response) {
 
 
                    console.log(response.data);
-                   notif('success','event demarré avec succès, ENJOY !','DEMARRAGE D\'EVENT','toast-top-full-width');
+                   notif('success','event arrêté avec succès, ENJOY !','FERMETTURE D\'EVENT','toast-top-full-width');
                    window.location.href="#/events";
                });
        }catch (ex){

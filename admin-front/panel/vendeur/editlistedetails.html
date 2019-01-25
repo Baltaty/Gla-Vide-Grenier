@@ -12,12 +12,24 @@
                         <div class="form-group">
                                 <label for="userName">Prix<span class="text-danger">*</span></label>
                                 <input type="text"  parsley-trigger="change" required
-                                       placeholder="Entrer une somme" class="form-control" id="listename" ng-model="thisarticle.prix">
+                                       placeholder="Entrer une somme" class="form-control" name="prix" id="listename" ng-model="thisarticle.prix">
                         </div>
                         <div class="form-group">
                                 <label for="userName">Taille<span class="text-danger">*</span></label>
-                                <input type="text"  parsley-trigger="change" required
-                                       placeholder="soit XS,S,M,L,XL,XXL,XXXL" class="form-control" id="listename" ng-model="thisarticle.taille">
+                                <!-- <input type="text"  parsley-trigger="change" required
+                                       placeholder="soit XS,S,M,L,XL,XXL,XXXL" class="form-control" id="listename" ng-model="thisarticle.taille"> -->
+                                       <select class="form-control" parsley-trigger="change" required name="Taille" id="Taille" ng-model="thisarticle.taille">
+
+                                           <option value="XXS">XXS</option>
+                                           <option value="XS">XS</option>
+                                           <option value="S">S</option>
+                                           <option value="M">M</option>
+                                           <option value="L">L</option>
+                                           <option value="XL">XL</option>
+                                           <option value="XXL">XXL</option>
+                                           <option value="XXXL">XXXL</option>
+
+                                       </select>
                         </div>
                         <div class="form-group">
                                 <label for="userName">Commentaire<span class="text-danger">*</span></label>

@@ -11,6 +11,16 @@ app.factory("ListesFactory", function ($q, $http) {
             });
             return deferred.promise;
         },
+        
+        LoadListesGain: function (trigramme) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + "listes.php?action=allGain&tri="+trigramme).then(function (data, status) {
+                deferred.resolve(data);
+            }).catch(function (data) {
+                deferred.reject("Impossible de recupere les donnees");
+            });
+            return deferred.promise;
+        },
         LoadEvents: function () {
             var deferred = $q.defer();
             $http.get(BASE_URL + "listes.php?action=loadevents").then(function (data, status) {
