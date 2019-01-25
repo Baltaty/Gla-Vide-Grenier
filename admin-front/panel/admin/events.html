@@ -4,7 +4,7 @@
                 <div class="row">
                         <div class="col-sm-6">
                             <div class="m-b-30">
-                                <a href="#/addevent" id="addToTable" class="btn btn-success waves-effect waves-light">  Ajouter une vide dressing  <i class="mdi mdi-plus-circle-outline"></i></a>
+                                <a href="#/addevent" id="addToTable" class="btn btn-success waves-effect waves-light" ng-if="session.type=='organisateur'">  Ajouter une vide dressing  <i class="mdi mdi-plus-circle-outline"></i></a>
                             </div>
                         </div>
                 </div>
@@ -27,10 +27,10 @@
                                                 <h4 class="text-success">{{l.name_event}}</h4>
                                                 <p class="timeline-date text-muted"><small>{{l.date}}</small></p>
                                                 <p><i class="mdi mdi-map-marker-radius m-r-5"></i> {{l.lieu}}</p>
-                                                <button  class="btn btn-danger" ng-click="AbortEvent(l.id_event)" ng-if="l.event_statut!='start'">Annuler <i class="fa fa-trash-o"></i></button>
-                                                <a href="#/editevent/{{l.id_event}}" ng-if="l.event_statut!='start'" class="btn btn-default "> <i class="fa fa-pencil"></i></a>
-                                                <button  class="btn btn-success"  ng-if="l.date==l.current_date && l.event_statut!='start'" ng-click="StartEvent(l)">Demarrer la vente<i class="fa fa-start"></i></button>
-                                                <button  class="btn btn-warning" ng-show="l.event_statut=='start'" ng-click="CloseEvent(l.id_event)">Cloturer le vide<i class="fa fa-start"></i></button>
+                                                <button  class="btn btn-danger" ng-click="AbortEvent(l.id_event)" ng-if="l.event_statut!='start' && session.type=='organisateur'">Annuler <i class="fa fa-trash-o"></i></button>
+                                                <a href="#/editevent/{{l.id_event}}" ng-if="l.event_statut!='start' && session.type=='organisateur'" class="btn btn-default "> <i class="fa fa-pencil"></i></a>
+                                                <button  class="btn btn-success"  ng-if="l.date==l.current_date && l.event_statut!='start' && session.type=='organisateur' " ng-click="StartEvent(l)">Demarrer la vente<i class="fa fa-start"></i></button>
+                                                <button  class="btn btn-warning" ng-show="l.event_statut=='start' && session.type=='organisateur' " ng-click="CloseEvent(l.id_event)">Cloturer le vide<i class="fa fa-start"></i></button>
                                                 
 
                                             </div>

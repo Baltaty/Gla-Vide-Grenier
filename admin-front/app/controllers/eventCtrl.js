@@ -1,8 +1,9 @@
 app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
 
     try {
-        $scope.session = JSON.parse(window.localStorage.getItem("user_session"));
-        $scope.session = $scope.session[0];
+        // $scope.session = JSON.parse(window.localStorage.getItem("user_session"));
+        // $scope.session = $scope.session[0];
+        $scope.session =  Session.isLogged();
         $scope.id_event=$routeParams.id;
         var id_event=$routeParams.id;
     } catch (error) {
@@ -62,8 +63,6 @@ app.controller("eventCtrl", function($scope,$routeParams,EventFactory) {
 
     $scope.AbortEvent= function(id_event){
         console.log(" Je suis dans la fonction abortevent  du controller");
-
-
        try{
            EventFactory.AbortEvent(id_event).then(function (response) {
                    console.log(response.data);
